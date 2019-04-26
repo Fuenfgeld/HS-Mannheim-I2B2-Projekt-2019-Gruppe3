@@ -14,6 +14,18 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 age_stuff=[0,10,20,30,40,50,60,70,80,90,100]
 
+def generate_table(dataframe, max_rows=133):
+    return html.Table(
+        # Header
+        [html.Tr([html.Th(col) for col in dataframe.columns])] +
+
+        # Body
+        [html.Tr([
+            html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+        ]) for i in range(min(len(dataframe), max_rows))]
+    )
+
+
 app.layout = html.Div([
 	html.H1(
 		children="I2B2 Data Demo Dash"
@@ -44,12 +56,19 @@ app.layout = html.Div([
 	figure={
 		'data': [
 			go.Scatter(
-				x=[10,20,30,40,50,60,70,80,90,100],
-				y=[]
+				x=[0,10,20,30,40,50,60,70,80,90,100],
+				y=df['AGE']
+
 			)
 			
 		], 
 	}),
+	html.H3(
+		children="Table of Data",
+	),
+	html.Div(
+		generate_table(df)
+	)
 ])
 
 
