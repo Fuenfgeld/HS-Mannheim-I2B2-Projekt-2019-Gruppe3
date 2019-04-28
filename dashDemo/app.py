@@ -8,12 +8,6 @@ import plotly.graph_objs as go
 
 df = pd.read_csv('PatientenI2B2.csv')
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
-age_stuff=[0,10,20,30,40,50,60,70,80,90,100]
-
 def generate_table(dataframe, max_rows=133):
     return html.Table(
         # Header
@@ -26,15 +20,42 @@ def generate_table(dataframe, max_rows=133):
     )
 
 
+trace_age = go.Histogram(
+				x=list(df.AGE),
+				name='age')
+
+trace_ageM = go.Histogram(
+				x=list(df.AGE[df.SEX == "M"]),
+				name = "Male",
+				opacity=0.75)
+
+trace_ageF = go.Histogram(
+				x=list(df.AGE[df.SEX == "F"]),
+				name = "Female",
+				opacity=0.75)
+
+dataAge1 = [trace_age]
+dataAge2 = [trace_ageM,trace_ageF]
+
+layoutAge2 = go.Layout(barmode='overlay')
+
+figAge2 = go.Figure(data = dataAge2,layout = layoutAge2)
+
+layout = dict(title="Alters Verteilung",schowlegend=False)
+
+figAge1 = dict(data=dataAge1,layout=layout)
+
+app = dash.Dash(__name__)
+
 app.layout = html.Div([
 	html.H1(
 		children="I2B2 Data Demo Dash"
 	),
 	html.H3(
-		children="Male vs Female"
+		children="Maenlich vs Weiblich"
 	),
 	html.Div(
-		children="I2B2 Dataset Male vs Female Demograpic"
+		children="Maenlich vs Weiblich Demographie"
 	),
     dcc.Graph(id='male-vs-female',
 	figure={
@@ -47,22 +68,23 @@ app.layout = html.Div([
 		], 
 	}),
 	html.H3(
-		children="Age"
+		children="Alter"
 	),
    html.Div(
-		children="I2B2 Dataset Age Demograpic"
+		children="Alters Demographie"
 	),
-	dcc.Graph(id='age',
-	figure={
-		'data': [
-			go.Scatter(
-				x=[0,10,20,30,40,50,60,70,80,90,100],
-				y=df['AGE']
-
-			)
-			
-		], 
-	}),
+	dcc.Graph(id='age1',
+	figure=figAge1
+	),
+	html.H3(
+		children="Alters Verteilung F vs. M",
+	),
+	html.Div(
+		children="Alters Demographie beider geschlechter"
+	),
+	dcc.Graph(id='age2',
+	figure=figAge2
+	),
 	html.H3(
 		children="Table of Data",
 	),
