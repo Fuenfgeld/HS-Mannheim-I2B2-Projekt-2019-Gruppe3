@@ -341,18 +341,11 @@
         success: function (data) {
             let labels = data.labels;
             let defaultData = data.default;
+            let freqData=[];
+            for(let i = 0; i<labels.length;i++) {
+                freqData[i] ={Age: labels[i], freq: {male: defaultData[i], female: defaultData[i+1]}}
 
-            let freqData = [
-                {Age: labels[0], freq: {male: defaultData[0], female: defaultData[1]}}
-                , {Age: labels[1], freq: {male: defaultData[2], female: defaultData[3]}}
-                , {Age: labels[2], freq: {male: defaultData[4], female: defaultData[5]}}
-                , {Age: labels[3], freq: {male: defaultData[6], female: defaultData[7]}}
-                , {Age: labels[4], freq: {male: defaultData[8], female: defaultData[9]}}
-                , {Age: labels[5], freq: {male: defaultData[10], female: defaultData[11]}}
-                , {Age: labels[6], freq: {male: defaultData[12], female: defaultData[13]}}
-                , {Age: labels[7], freq: {male: defaultData[14], female: defaultData[15]}}
-            ];
-
+            }
             dashboard('#dashboard', freqData);
 
         },
