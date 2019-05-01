@@ -1,0 +1,195 @@
+{% extends 'chart/base.html' %}
+
+<script>
+    {% block jquery %}
+
+        let myChart = null;
+        let defaultData = [];
+        let labels = [];
+
+        function onSelectChange() {
+            let dropdown = document.getElementById("select1");
+            let index = dropdown.selectedIndex;
+            let val = dropdown.options[index].value;
+
+            if (val == '1') {
+                $.ajax({
+                    method: "GET",
+                    url: '/api/chartAge/data/',
+                    success: function (data) {
+                        labels = data.labels;
+                        defaultData = data.default;
+                        setLineChart()
+                    },
+                    error: function (error_data) {
+                        console.log("error");
+                        console.log(error_data)
+                    }
+                });
+            }
+            if (val == '2') {
+                $.ajax({
+                    method: "GET",
+                    url: '/api/chartLanguage/data/',
+                    success: function (data) {
+                        labels = data.labels;
+                        defaultData = data.default;
+                        setPieChart()
+                    },
+                    error: function (error_data) {
+                        console.log("error");
+                        console.log(error_data)
+                    }
+                });
+            }
+            if (val == '3') {
+                $.ajax({
+                    method: "GET",
+                    url: '/api/chartSex/data/',
+                    success: function (data) {
+                        labels = data.labels;
+                        defaultData = data.default;
+                        setBarChart()
+                    },
+                    error: function (error_data) {
+                        console.log("error");
+                        console.log(error_data)
+                    }
+                });
+            }
+        }
+
+        function setLineChart() {
+            let ctx = document.getElementById("myChart");
+
+            if (myChart != null) {
+                myChart.destroy();
+            }
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Patient',
+                        data: defaultData,
+                        backgroundColor: 'blue',
+                        borderColor: 'grey',
+                        borderWidth: 1,
+                        fill: false,
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Alter'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Anzahl'
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            });
+        }
+
+
+        function setPieChart() {
+            let ctx = document.getElementById("myChart");
+            if (myChart != null) {
+                myChart.destroy();
+            }
+            myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: defaultData,
+                        backgroundColor: [
+                            'red', 'blue', 'orange'
+                        ],
+                        label: 'Dataset 1'
+                    }],
+                    labels: labels
+                },
+                options: {
+                    responsive: true
+                }
+
+            })
+        }
+
+        function setBarChart() {
+            let ctx = document.getElementById("myChart");
+
+            if (myChart != null) {
+                myChart.destroy();
+            }
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Patient',
+                        data: defaultData,
+                        backgroundColor: ['blue', 'red'],
+                        borderColor: 'grey',
+                        borderWidth: 1,
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Geschlecht'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Anzahl'
+                            },
+                            ticks: {
+                                beginAtZero: true,
+                                stepValue: 10
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            });
+        }
+    {% endblock %}
+</script>
+
+{% block content %}
+    <div class="row">
+        <div class='col-sm-12'>
+            <div class='col-sm-6'>
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-sm-6">
+                <select id="select1" onchange="onSelectChange();">
+                    <option value="0" selected="selected" disabled="disabled">Bitte wählen</option>
+                    <option value="1">Alter</option>
+                    <option value="2">Sprache</option>
+                    <option value="3">Geschlecht</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
