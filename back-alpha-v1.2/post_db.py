@@ -1,15 +1,11 @@
 import psycopg2
-
+from databaseconfigfile import i2b2_demo_config
 active = False
 
 
 # Anmeldnung an die Datanbank
 def config():
-    user = "i2b2"
-    password = "demouser"
-    host = "129.206.7.75"
-    db = "i2b2"
-    pg_config = "user='{}' password='{}' host='{}' dbname='{}'".format(user, password, host, db)
+    pg_config = i2b2_demo_config()
     return pg_config
 
 

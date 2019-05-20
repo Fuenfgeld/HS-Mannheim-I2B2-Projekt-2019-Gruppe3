@@ -2,7 +2,7 @@ import unittest
 from statistic import get_all_patient
 
 
-class TestGetAllPatient(unittest.TestCase):
+class GetAllPatientTestCase(unittest.TestCase):
 
     def test_equal(self):
         self.assertEqual(get_all_patient(), 134)
