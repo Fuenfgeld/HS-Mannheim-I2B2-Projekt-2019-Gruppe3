@@ -40,7 +40,22 @@ def icd10_tree_diagnose_count_first_hierachielvl(like):
     return results
 
 def all_patient():
-    sql_query = """SELECT COUNT(patient_num) FROM i2b2demodata.patient_fact;"""
+    sql_query = """SELECT COUNT(patient_num) FROM i2b2demodata.patient_dimension;"""
+    results = select(sql_query)
+    return results[0][0]
+
+def gender_equal_male():
+    sql_query = """SELECT COUNT(patient_num) FROM i2b2demodata.patient_dimension WHERE sex_cd = 'M';"""
+    results = select(sql_query)
+    return results[0][0]
+
+def gender_equal_female():
+    sql_query = """SELECT COUNT(patient_num) FROM i2b2demodata.patient_dimension WHERE sex_cd = 'F';"""
+    results = select(sql_query)
+    return results[0][0]
+
+def age_distribution(beginn,end):
+    sql_query = """SELECT COUNT(patient_num) FROM i2b2demodata.patient_dimension WHERE age_in_years_num >= {} and age_in_years_num < {} ;""".format(beginn, end)
     results = select(sql_query)
     return results[0][0]
 
