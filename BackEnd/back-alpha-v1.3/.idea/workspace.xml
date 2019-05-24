@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="221">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -39,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GraphData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="38" column="3" selection-start-line="38" selection-start-column="3" selection-end-line="41" selection-end-column="42" />
+            <state relative-caret-position="181">
+              <caret line="40" column="82" selection-start-line="40" selection-start-column="82" selection-end-line="40" selection-end-column="82" />
               <folding>
                 <element signature="e#0#95#0" expanded="true" />
               </folding>
@@ -49,37 +49,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DB_Connector.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <entry file="file://$PROJECT_DIR$/data/data.json">
+          <provider selected="true" editor-type-id="LargeFileEditor">
+            <state relative-caret-position="190">
+              <caret column="1279606" selection-start-column="1279606" selection-end-column="1279606" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/list_into_tree_converter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tree_node.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/navigation_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="52" lean-forward="true" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
+            <state relative-caret-position="211">
+              <caret line="45" selection-start-line="45" selection-end-line="45" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -87,17 +69,30 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tree_node.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="48" column="28" lean-forward="true" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sql_templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-748">
-              <caret line="42" column="75" selection-start-line="42" selection-start-column="75" selection-end-line="42" selection-end-column="75" />
+            <state relative-caret-position="20">
+              <caret line="5" column="74" selection-start-line="5" selection-start-column="74" selection-end-line="5" selection-end-column="74" />
               <folding>
-                <element signature="e#28#442#0" />
                 <element signature="e#486#745#0" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/data1.json">
+          <provider selected="true" editor-type-id="LargeFileEditor" />
         </entry>
       </file>
     </leaf>
@@ -154,9 +149,9 @@
         <option value="$PROJECT_DIR$/DB_Connector.py" />
         <option value="$PROJECT_DIR$/statistic.py" />
         <option value="$PROJECT_DIR$/GraphData.py" />
-        <option value="$PROJECT_DIR$/tree_node.py" />
         <option value="$PROJECT_DIR$/navigation_data.py" />
         <option value="$PROJECT_DIR$/sql_templates.py" />
+        <option value="$PROJECT_DIR$/tree_node.py" />
       </list>
     </option>
   </component>
@@ -168,7 +163,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-12" />
+    <option name="x" value="610" />
+    <option name="y" value="-29" />
     <option name="width" value="981" />
     <option name="height" value="1032" />
   </component>
@@ -204,7 +200,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -416,7 +412,7 @@
       <workItem from="1558523252435" duration="12000" />
       <workItem from="1558533455258" duration="477000" />
       <workItem from="1558598507919" duration="11849000" />
-      <workItem from="1558683533833" duration="10539000" />
+      <workItem from="1558683533833" duration="12827000" />
     </task>
     <servers />
   </component>
@@ -453,7 +449,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="258363000" />
+    <option name="totallyTimeSpent" value="260651000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -473,7 +469,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.2783688" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35992908" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35460994" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5567376" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -511,7 +507,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Flask_Data$flare_dict__1_.coverage" NAME="flare_dict (1) Coverage Results" MODIFIED="1557965866739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Flask_Data$navigation_data.coverage" NAME="navigation_data Coverage Results" MODIFIED="1558697099434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Flask_Data$navigation_data.coverage" NAME="navigation_data Coverage Results" MODIFIED="1558700501972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Flask_Data$Unittests_in_test_icicleData_unittest_py.coverage" NAME="Unittests in test_icicleData_unittest.py Coverage Results" MODIFIED="1558002515873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Flask_Data$Unittests_in_test_list_into_tree_converter_py.coverage" NAME="Unittests in test_list_into_tree_converter.py Coverage Results" MODIFIED="1558386199560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Flask_Data$navigation_data__1_.coverage" NAME="navigation_data (1) Coverage Results" MODIFIED="1558689325791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -695,10 +691,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/list_into_tree_converter.py">
+    <entry file="file://$PROJECT_DIR$/venv/Scripts/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+        <state relative-caret-position="221">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/data1.json">
+      <provider selected="true" editor-type-id="LargeFileEditor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GraphData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="40" column="82" selection-start-line="40" selection-start-column="82" selection-end-line="40" selection-end-column="82" />
+          <folding>
+            <element signature="e#0#95#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -709,58 +724,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/list_into_tree_converter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data/data.json">
       <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="162">
-          <caret column="1280000" lean-forward="true" selection-start-column="1280000" selection-end-column="1280000" />
+        <state relative-caret-position="190">
+          <caret column="1279606" selection-start-column="1279606" selection-end-column="1279606" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GraphData.py">
+    <entry file="file://$PROJECT_DIR$/navigation_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="38" column="3" selection-start-line="38" selection-start-column="3" selection-end-line="41" selection-end-column="42" />
+        <state relative-caret-position="211">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
           <folding>
-            <element signature="e#0#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tree_node.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sql_templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-748">
-          <caret line="42" column="75" selection-start-line="42" selection-start-column="75" selection-end-line="42" selection-end-column="75" />
+        <state relative-caret-position="20">
+          <caret line="5" column="74" selection-start-line="5" selection-start-column="74" selection-end-line="5" selection-end-column="74" />
           <folding>
-            <element signature="e#28#442#0" />
             <element signature="e#486#745#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/navigation_data.py">
+    <entry file="file://$PROJECT_DIR$/tree_node.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="52" lean-forward="true" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="180">
+          <caret line="48" column="28" lean-forward="true" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
         </state>
       </provider>
     </entry>

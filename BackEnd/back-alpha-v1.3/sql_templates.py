@@ -3,7 +3,7 @@ def icd10_tree_root():
     sql_query = """SELECT DISTINCT  c_hlevel, c_name,
        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
         WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)),
-        c_fullname,c_facttablecolumn,c_tablename,c_operator FROM i2b2metadata.icd10_icd9
+        c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.icd10_icd9
         WHERE c_hlevel = 0
         order by c_fullname;"""
     return sql_query
@@ -37,7 +37,8 @@ def icd10_tree_patient_count_first_hierachielvl(like, selection=None):
     if selection is not None:
         sql_query = """SELECT DISTINCT  c_hlevel, c_name,
                    (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-                    WHERE {}),
+                    WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)
+                    AND {} ),
                     c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.icd10_icd9
                     WHERE c_fullname LIKE '{}%' 
                     order by c_fullname;""".format(selection_data(selection), like)

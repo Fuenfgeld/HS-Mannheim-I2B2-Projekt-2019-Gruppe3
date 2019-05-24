@@ -4,7 +4,7 @@ class TreeStructure:
         self.h_lvl = list_element[0]
         self.name = list_element[1]
         self.value = list_element[2]
-        self.search_element = [list_element[4], list_element[5], list_element[6], list_element[3]]
+        self.search_element = [list_element[3], list_element[4], list_element[5], list_element[6], list_element[7]]
         self.children = []
         if children is not None:
             for child in children:
@@ -46,5 +46,5 @@ class TreeStructure:
 
     def save(self):
         import json
-        with open('data/data1.json', 'w') as outfile:
+        with open('data/data.json', 'w') as outfile:
             json.dump(self.build_tree_dict(), outfile)
