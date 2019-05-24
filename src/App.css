@@ -1,26 +1,163 @@
 .App {
-  text-align: center;
+  text-align: right;
+    background-color: #999999;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #ffa500;
+    float: right;
+    padding: 2px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: right;
+    justify-content: right;
+    font-size: calc(5px + 1vmin);
+    color: black;
+}
+
+#Name {
+    font-weight: 700;
+    font-size: 14px;
+    color:white;
+    margin-right:1329px;
+    float: right;
+    padding: 1px;
+}
+
+.App-body{
+    border-top-width: thick;
+    width: 1445px;
+    background-color: white;
+    min-height: 81vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: right;
+    font-size: calc(5px + 1vmin);
+    color: black;
+}
+
+#Parts{
+
+    width: 100%;
+    height:710px;
+    border-color: silver;
+    border-width: 2px;
+    border-style: solid;
+}
+
+#Visualisierung{
+    width: 837px;
+    height:710px;
+    float:right;
+    border-color: silver;
+    border-width: 2px;
+    border-style: solid;
+    background-color: lightgrey;
+
+}
+.Graphen{
+    width: 837px;
+    height:700px;
+    float:right;
+    border-color: silver;
+    border-width: 2px;
+    border-style: solid;
+    background-color: lightgrey;
+
+}
+
+#Suchleiste{
+     width: 600px;
+    height:30px;
+    float:right;
+    border-color: silver;
+    border-width: 2px;
+    border-style: solid;
+}
+
+#Navigation{
+    width: 600px;
+    float:left;
+    height:710px;
+    background-color: lightgrey;
+    border-color: silver;
+    border-width: 2px;
+    border-style: solid;
+}
+
+#Selection{
+    width: 837px;
+    float:left;
+    height:130px;
+    border-color: silver;
+    border-width: 2px;
+    border-style: solid;
+}
+
+#Treemap{
+    width: 600px;
+    height:700px;
+    float:right;
+    border-color: silver;
+    border-width: 2px;
+    border-style: solid;
+}
+
+#tm{
+    width: 600px;
+    max-height: 410px;
+}
+
+#buttons{
+    width: 837px;
+    float:left;
+    height:30px;
+    border-color: silver;
+    border-width: 2px;
+    border-style: solid;
+}
+
+#run{
+    width: 50px;
+    float:left;
+    height:30px;
+    border-color: lightgrey;
+    border-width: 2px;
+    border-style: solid;
+}
+
+#edit{
+    width: 100px;
+    float:right;
+    height:30px;
+    border-color: lightgrey;
+    border-width: 2px;
+    border-style: solid;
+}
+
+
+#suche {
+    float:left;
+    border: 2px solid #999;
+    border-radius: 0.5em;;
+    font-size: 1.2em;
+    width: 577px;
+    height: 29px;
+    transition: width 0.5s ease-in-out;
+}
+
+#suche:focus {
+  font-size: 1.5em;
+  width: 50%;
 }
 
 .App-link {
-  color: #61dafb;
+    padding: 2px;
+    color: white;
 }
 
 @keyframes App-logo-spin {

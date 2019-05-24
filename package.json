@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chart.js": "^2.8.0",
     "d3": "^5.9.2",
+    "d3-hierarchy": "^1.1.8",
     "react": "^16.8.6",
+    "react-chartjs-2": "^2.7.6",
     "react-d3-treemap": "^1.0.14",
     "react-dom": "^16.8.6",
     "react-faux-dom": "^4.5.0",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "treemap-multilevel": "0.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
