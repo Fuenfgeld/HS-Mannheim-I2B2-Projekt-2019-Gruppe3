@@ -1,5 +1,5 @@
 import unittest
-from GraphData import get_all_patient
+from graph_data import get_all_patient
 
 
 class GetAllPatientTestCase(unittest.TestCase):

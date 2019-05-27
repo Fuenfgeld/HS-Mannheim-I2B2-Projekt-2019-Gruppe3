@@ -40,6 +40,6 @@ if __name__ == '__main__':
     db = DBConnector()
     c_dimcode = r'\Diagnoses\(M00-M99) Dise~6mvn\(M00-M25) Arth~kgqv\%'
     selection = ['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode]
-    test.change_tree(selection)
-    print("sec Tree")
+    # test.change_tree(selection)
+    # print("sec Tree")
     test.save_as_json()
