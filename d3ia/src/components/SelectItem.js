@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import PropTypes from "prop-types";
-import Selection from "./Selection";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
 
 
 
@@ -18,12 +19,26 @@ export class SelectItem extends Component{
         }
     }
 
+toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  }
 
     render(){
+        const { id, title } = this.props.selection;
         return(
-            <div sytle="{this.getSytle()}">
-                <p>{ this.props.todo.title }</p>
-            </div>
+
+            <Dropdown id="Dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <DropdownToggle caret>
+                  AND
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem > AND </DropdownItem>
+                  <DropdownItem> OR </DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
+
         )
     }
 }
@@ -32,7 +47,9 @@ export class SelectItem extends Component{
 
 //Proptypes
 SelectItem.propTypes={
-    selection: PropTypes.array.isRequired
+    selection: PropTypes.array.isRequired,
+    markComplete: PropTypes.func.isRequired,
+    delSelect: PropTypes.func.isRequired,
 }
 
 const itemStyle ={

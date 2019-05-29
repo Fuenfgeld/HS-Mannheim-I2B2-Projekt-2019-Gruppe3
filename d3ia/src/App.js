@@ -8,6 +8,8 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import {
   Container, Row, Col, Navbar, NavbarBrand, Nav, NavItem, NavLink, Card, CardBody, CardTitle, CardSubtitle, CardText, Button
 } from 'reactstrap';
+import AddSelect from './components/AddSelect';
+import axios from 'axios';
 
 
 let data= require("./data")
@@ -27,7 +29,6 @@ class App extends Component {
 }
 
 
-
     componentDidMount() {
     fetch('http://jsonplaceholder.typicode.com/users')
     .then(res => res.json())
@@ -36,7 +37,11 @@ class App extends Component {
       console.log(this.state.contacts)
     })
     .catch(console.log)
+        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+      .then(res => this.setState({ todos: res.data }))
   }
+
+
 
 
   constructor(props) {
@@ -45,15 +50,16 @@ class App extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: false
-
     };
+
     this.toggle1 = this.toggle1.bind(this);
     this.state = {
       dropdownOpen1: false};
 
     this.toggle2 = this.toggle2.bind(this);
     this.state = {
-      dropdownOpen2: false};
+      dropdownOpen2: false
+    };
   }
 
 
@@ -75,6 +81,20 @@ class App extends Component {
     }));
   }
 
+// Delete Todo
+  delSelect = (id) => {
+    axios.delete(`https://jsonplaceholder.typicode.com/selection/${id}`)
+      .then(res => this.setState({ selection: [...this.state.selection.filter(select => select.id !== id)] }));
+  }
+
+  // Add Todo
+  addSelect = (title) => {
+    axios.post('https://jsonplaceholder.typicode.com/selection', {
+      title,
+      completed: false
+    })
+      .then(res => this.setState({ selection: [...this.state.selection, res.data] }));
+  }
 
     render() {
 
@@ -105,48 +125,9 @@ class App extends Component {
           <Col  id="Selection">Selection
               <Row id="selc">
 
-                  <div></div>
-
-
-                        <Dropdown id="Dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                        <DropdownToggle caret>
-                          AND
-                        </DropdownToggle>
-                        <DropdownMenu>
-                          <DropdownItem > AND </DropdownItem>
-                          <DropdownItem> OR </DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-
-
-                  <div></div>
-
-
-                     <Dropdown id="Dropdown" isOpen={this.state.dropdownOpen1} toggle={this.toggle1}>
-                        <DropdownToggle caret>
-                          AND
-                        </DropdownToggle>
-                        <DropdownMenu>
-                          <DropdownItem > AND </DropdownItem>
-                          <DropdownItem> OR </DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-
-                   <Dropdown id="Dropdown" isOpen={this.state.dropdownOpen2} toggle={this.toggle2}>
-                        <DropdownToggle caret>
-                          AND
-                        </DropdownToggle>
-                        <DropdownMenu>
-                          <DropdownItem > AND </DropdownItem>
-                          <DropdownItem> OR </DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-
-                  <div></div>
-
 
               </Row>
-              <Row ><div id="vl"></div><div id="vl"></div><div id="vl"></div>
+              <Row >
               </Row>
 
           </Col>
@@ -184,8 +165,6 @@ class App extends Component {
         </Row>
     </div>
 
-      <script>
-      </script>
 
         </Fragment>
 
