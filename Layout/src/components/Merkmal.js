@@ -1,20 +1,11 @@
 import React, {Component} from "react";
 
-class Merkmal extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
+function Merkmal(){
 
-        }
-    }
-
-    render() {
         return(
-            <div>Merkmal 1</div>
-
-
+            <div>Merkmal</div>
         )
-    }
+
 }
 
 export default Merkmal;

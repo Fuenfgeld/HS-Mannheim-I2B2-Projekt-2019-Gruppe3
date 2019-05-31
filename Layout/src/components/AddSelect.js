@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-
 class AddSelect extends Component{
     constructor(props) {
         super(props);
@@ -10,8 +9,7 @@ class AddSelect extends Component{
 
     render() {
         return(
-           <button onClick= "myFunction()">Add</button>
-
+           <button id="Add" type="button">Add</button>
         )
     }
 }
