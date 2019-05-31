@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class AddSelect extends Component{
+class Merkmal extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -10,10 +10,11 @@ class AddSelect extends Component{
 
     render() {
         return(
-           <button onClick= "myFunction()">Add</button>
+            <div>Merkmal 1</div>
+
 
         )
     }
 }
 
-export default AddSelect;
+export default Merkmal;

@@ -47,6 +47,24 @@ li a:hover {
     border-width: 2px;
     border-style: solid;
 }
+div.scrollMenu {
+    background-color: #b8c0c7;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollMenu a{
+    height: 82px;
+    display: inline-block;
+    width: 20%;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    border-style: solid;
+    border-color: white;
+}
+
 #Treemap{
     width: 100%;
     height: 400px;
@@ -56,11 +74,12 @@ li a:hover {
     border-width: 2px;
     border-style: solid;
 }
-#add {
+#add{
     float: right;
     text-align: right;
     margin-right: 1%;
     border-radius: 50%;
+
 }
 #tm{
     margin-right: 100px;

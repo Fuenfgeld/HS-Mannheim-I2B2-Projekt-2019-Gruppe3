@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class AddSelect extends Component{
+class Run extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -10,10 +10,9 @@ class AddSelect extends Component{
 
     render() {
         return(
-           <button onClick= "myFunction()">Add</button>
-
+                <button onClick= "myFunction()">Run</button>
         )
     }
 }
 
-export default AddSelect;
+export default Run;

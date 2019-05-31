@@ -1,14 +1,17 @@
 import React,{Component} from 'react';
-import TreeMap from "react-d3-treemap";
 import './App.css';
-import Selection from './components/Selection';
-import { Fragment } from 'react';
-import AddSelect from './components/AddSelect';
 import axios from 'axios';
-import SelectItem from "./components/SelectItem";
+import Navbar from "./components/Navbar"
+import Selektion from "./components/Selektion"
+import Treemap from "./components/Treemap"
+import Suchleiste from "./components/Suchleiste"
+import Graphen from "./components/Graphen"
+import AddSelect from "./components/AddSelect"
+import Buttons from "./components/Buttons"
 
 
-let data= require("./data")
+
+
 
 
 class App extends Component {
@@ -97,48 +100,39 @@ class App extends Component {
         return (
 
         <div className="App">
-              <div id = "Navigation">
-            <ul>
-                <li><a href = "default.asp">IdealGraph</a></li>
-                <li style= {{float:"right"}} ><a class ="active"
-                    href = "#Help">Help</a></li>
-            </ul>
-              </div>
+            <div id = "Navigation">
+              <Navbar>
+              </Navbar>
+            </div>
             <body className="App-body">
               <div id = "Parts">
 
               <div id = "Links">
-                  <div id = "Selektion">Selektion
+                  <div id = "Selektion">
+                      <Selektion>
+                      </Selektion>
                   </div>
                   <div id="Treemap">
-                      <div id="add">
-                      <button onClick= "myFunction()">Add</button>
-                   <TreeMap width={865} height={320} data={data} valueUnit={"MB"} />
-                   </div>
+                      <div id ="add">
+                          <AddSelect></AddSelect>
+                      </div>
+                      <Treemap></Treemap>
                   </div>
               </div>
               <div id ="Rechts">
                   <div id = "Suchleiste">
-                  <label htmlFor="suche"></label>
-                  <input type="search" id="suche" placeholder="Suche"/>
+                  <Suchleiste></Suchleiste>
                   </div>
-                  <div id = "Graphen">Graphen</div>
+                  <div id = "Graphen">
+                      <Graphen></Graphen>
+                  </div>
                   <div id="buttons">
-        <div id="run">
-            <button onClick="myFunction()">Run</button>
-        </div>
-        <div id="edit">
-            <button onClick="myFunction()">Reset</button>
-        </div>
-        <div id ="save">
-            <button onClick="myFunction()">Save</button>
-        </div>
+                <Buttons></Buttons>
                   </div>
               </div>
               </div>
-            </body>
+              </body>
         </div>
-
         );
   }
 }
