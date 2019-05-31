@@ -1,27 +1,22 @@
 import React,{Component} from 'react';
-import SelectItem from 'prop-types';
+import SelectItem from './SelectItem';
 import PropTypes from 'prop-types';
 
 
+function Selection(){
 
-class Selection extends Component{
-    state={
-            contacts:[],
-            selection:[
-                {
-                id: 1,
-                title:'Take out the train'
-                }
-                ]
+    function handleClick(e){
+        e.preventDefault();
+        console.log('The link was clicked.')
     }
 
-    render() {
-        return this.props.selection.map((select) => (
-            <SelectItem key={select.id} select={select} markComplete={this.props.markComplete} delSelect={this.props.delSelect}/>
-            )
-         );
+        return (
+            <SelectItem href="#" onClick={handleClick} />
+    );
     }
-}
+
+
+
 
 //Proptypes
 Selection.propTypes={
@@ -29,6 +24,7 @@ Selection.propTypes={
     markComplete: PropTypes.func.isRequired,
     delSelect: PropTypes.func.isRequired,
 }
+
 
 
 export default Selection;

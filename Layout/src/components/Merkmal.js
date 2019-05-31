@@ -6,10 +6,6 @@ class Merkmal extends Component{
         super(props);
         this.state = {
 
-        }
-    }
-
-    render() {
         return(
             <div>Name
                 <div id="Dropdown">
@@ -21,7 +17,7 @@ class Merkmal extends Component{
                 </div>
             </div>
         )
-    }
+
 }
 
 

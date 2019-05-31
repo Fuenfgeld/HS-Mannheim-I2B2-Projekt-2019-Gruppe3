@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import './App.css';
-import axios from 'axios';
 import Navbar from "./components/Navbar"
 import Selektion from "./components/Selektion"
 import Treemap from "./components/Treemap"
@@ -13,83 +12,9 @@ import Buttons from "./components/Buttons"
 class App extends Component {
         state={
             contacts:[],
-            selection:[
-                {
-                id: 1,
-                title:'Take out the train'
-                }
-                ]
-
+            selection:[ ]
 
 }
-
-
-    componentDidMount() {
-    fetch('http://jsonplaceholder.typicode.com/users')
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({ contacts: data })
-      console.log(this.state.contacts)
-    })
-    .catch(console.log)
-        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-      .then(res => this.setState({ todos: res.data }))
-  }
-
-
-
-
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      dropdownOpen: false
-    };
-
-    this.toggle1 = this.toggle1.bind(this);
-    this.state = {
-      dropdownOpen1: false};
-
-    this.toggle2 = this.toggle2.bind(this);
-    this.state = {
-      dropdownOpen2: false
-    };
-  }
-
-
-  toggle() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }));
-  }
-
-  toggle1() {
-    this.setState(prevState => ({
-      dropdownOpen1: !prevState.dropdownOpen1
-    }));
-  }
-
-  toggle2() {
-    this.setState(prevState => ({
-      dropdownOpen2: !prevState.dropdownOpen2
-    }));
-  }
-
-// Delete Todo
-  delSelect = (id) => {
-    axios.delete(`https://jsonplaceholder.typicode.com/selection/${id}`)
-      .then(res => this.setState({ selection: [...this.state.selection.filter(select => select.id !== id)] }));
-  }
-
-  // Add Todo
-  addSelect = (title) => {
-    axios.post('https://jsonplaceholder.typicode.com/selection', {
-      title,
-      completed: false
-    })
-      .then(res => this.setState({ selection: [...this.state.selection, res.data] }));
-  }
 
     render() {
 
@@ -109,8 +34,8 @@ class App extends Component {
                       </Selektion>
                   </div>
                   <div id="Treemap">
-                      <div id ="add">
-                          <AddSelect></AddSelect>
+                      <div id ="adden">
+                          <AddSelect id="Add"></AddSelect>
                       </div>
                       <Treemap></Treemap>
                   </div>

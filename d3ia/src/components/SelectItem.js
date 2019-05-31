@@ -1,47 +1,33 @@
 import React,{Component} from 'react';
 import PropTypes from "prop-types";
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 
 
 
+function SelectItem (){
 
-export class SelectItem extends Component{
 
-    getStyle = () =>{
-        if(this.props.todo.completed){
-            return{
-                textDocoration:'line-through'
-            }
-        }else{
-            return{
-                textDecoration:'none'
-            }
-        }
-    }
-
-toggle() {
+function toggle() {
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
 
-    render(){
-        const { id, title } = this.props.selection;
-        return(
 
-            <Dropdown id="Dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+        return(
+            <Dropdown id="Dropdown"  toggle={toggle}>
                 <DropdownToggle caret>
                   AND
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem > AND </DropdownItem>
+                  <DropdownItem> AND </DropdownItem>
                   <DropdownItem> OR </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
 
         )
     }
-}
+
 
 
 
@@ -52,8 +38,5 @@ SelectItem.propTypes={
     delSelect: PropTypes.func.isRequired,
 }
 
-const itemStyle ={
-    backgroundColor: '#f4f4f4'
-}
 
 export default SelectItem

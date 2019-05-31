@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Selektion from "./Selektion"
 
 class AddSelect extends Component{
     constructor(props) {
@@ -11,8 +10,7 @@ class AddSelect extends Component{
 
     render() {
         return(
-           <button onClick= "myFunction()">Add</button>
-
+           <button id="Add" type="button">Add</button>
         )
     }
 }
