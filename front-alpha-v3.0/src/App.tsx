@@ -1,15 +1,9 @@
 import * as React from "react";
 import TreeMap from "./components/TreeMap/TreeMap";
-import Navbar from "./components/Layout/Navbar"
-import Selektion from "./components/Layout/Selektion"
-import Treemap from "./components/Layout/Treemap"
-import Suchleiste from "./components/Layout/Suchleiste"
-import Graphen from "./components/Layout/Graphen"
-import AddSelect from "./components/Layout/AddSelect"
-import Buttons from "./components/Layout/Buttons"
-
 import './App.css';
-import { any } from "prop-types";
+import Selection from "./components/Layout/Selection"
+import AddSelect from "./components/Layout/AddSelect"
+import Navbar from "./components/Layout/Navbar"
 
 
 const urlAGE ="http://localhost:5000/data";
@@ -26,7 +20,7 @@ type MyState = {dataTree:any,
                 selectionNameList:any};
 
 
-const data = require("./data/dataAllChild.json");
+const data = require("./data/flareSample.json");
 
 export default class App extends React.Component<{}, MyState> {
 
@@ -110,67 +104,45 @@ export default class App extends React.Component<{}, MyState> {
         .catch(e => console.log("Fetching error NAV", e));
       }
     
-
-      public render() {
-
-        return (
-
-        <div className="App">
-            <div id = "Navigation">
-              <Navbar>
-              </Navbar>
-            </div>
-            <body className="App-body">
-              <div id = "Parts">
-
-              <div id = "Links">
-                  <div id = "Selektion">
-                      <Selektion>
-                      </Selektion>
-                  </div>
-                  <div id="Treemap">
-                      <Treemap></Treemap>
-                  </div>
-              </div>
-              <div id ="Rechts">
-                  <div id = "Suchleiste">
-                  <Suchleiste></Suchleiste>
-                  </div>
-                  <div id = "Graphen">
-                      <Graphen></Graphen>
-                  </div>
-                  <div id="buttons">
-                <Buttons></Buttons>
-                  </div>
-              </div>
-              </div>
-              </body>
-        </div>
-        );
-  }
-
-
-
     
-    /*
     public render() {
         return (
-          <div>
-          <div>
-            <TreeMap
-             height={500}
-             width={800}
-             data={this.state.dataTree}
-             valueUnit={"Patients"}
-             onChangeNode={this.onChangeNode.bind(this)}
+          <div className="App">
+              <div id = "Navigation">
+                <Navbar>
+                </Navbar>
+              </div>
+              <div id = "Parts">
+                <div id = "Links">
+                  <div id = "Selektion">
+                    <Selection></Selection>
+                  </div>
+                  <div id="Treemap">
+                  <TreeMap
+                    height={410}
+                    width={980}
+                    data={this.state.dataTree}
+                    valueUnit={"Patients"}
+                    onChangeNode={this.onChangeNode.bind(this)}
             />
-          </div>
-          <div>
-          <button onClick={this.onButtonAdd.bind(this)}>ADD</button>
-          </div>
+                  </div>
+                </div> 
+           
+                <div id ="Rechts">
+                  <div id = "Suchleiste">
+
+                  </div>
+                  <div id = "Graphen">
+
+                  </div>
+                  <div id="buttons">
+                   
+                  </div>
+                </div>
+              </div>
           </div>
         );
       }
-      */
+      
     }
 
