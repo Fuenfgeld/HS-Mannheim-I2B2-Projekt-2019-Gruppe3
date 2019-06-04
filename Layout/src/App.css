@@ -125,7 +125,10 @@ div.scrollMenu {
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
-
+#xyz{
+    width: 40px;
+    height: 30px;
+}
 #Treemap{
     width: 100%;
     height: 450px;

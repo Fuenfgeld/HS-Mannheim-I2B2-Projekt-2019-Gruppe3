@@ -35,7 +35,7 @@ class App extends Component {
                   </div>
                   <div id="Treemap">
                       <div id ="adden">
-                          <AddSelect id="Add"></AddSelect>
+                          <AddSelect></AddSelect>
                       </div>
                       <Treemap></Treemap>
                   </div>

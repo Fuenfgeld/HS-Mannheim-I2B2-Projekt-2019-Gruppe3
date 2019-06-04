@@ -1,22 +1,28 @@
-import React, {Component} from "react";
-import Merkmal from "./Merkmal";
+import React from "react";
+import Merkmal from './Merkmal';
+import AddSlect from './AddSelect';
+
+
 
 
 function Selection(){
  var list = [ ];
 
+
+
  function handleClick() {
-     var mark =  '<a><Merkmal></Merkmal></a>'
+     var mark ='<a><Merkmal>Merkmal</Merkmal></a>';
      list.push(mark);
      print();
  }
 
- function print() {
-     var i = 0;
-     var selectionLst = list[i];
-     var ausgeben = document.getElementById("ausgabe");
-     ausgeben.innerHTML += list[i]
-     i = i+1;
+
+ function print(){
+       var i=0;
+         var selectionList = list[i];
+         var ausgeben = document.getElementById('ausgabe');
+         ausgeben.innerHTML += selectionList;
+         i=i+1;
  }
 
 
@@ -24,11 +30,11 @@ function Selection(){
 
      <div class = "scrollMenu" >
          <div id="ausgabe"><script>
-         var elem = document.getElmentById(Add);
-         if(elem.addEventListenen){
+             var elem = document.getElementById(Add);
+             if(elem.addEventListener){
              document.addEventListener("click", handleClick, false)
-             }</script></div>
-
+         }
+         </script></div>
      </div>
      );
 
