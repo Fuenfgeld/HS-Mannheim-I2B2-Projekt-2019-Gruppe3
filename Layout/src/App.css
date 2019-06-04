@@ -2,6 +2,9 @@
     background-color: #444444;
     overflow: hidden;
 }
+#not{
+    float:right;
+}
 ul {
     margin:0;
     padding: 0;
@@ -87,6 +90,13 @@ li a:hover {
     border-radius: 20%;
 
 }
+#delete{
+    float: right;
+    text-align: end;
+    margin-right: 1%;
+    border-radius: 20%;
+
+}
 #tm{
     margin-right: 100px;
 }
@@ -150,9 +160,8 @@ li a:hover {
 }
 
 #dropdown{
-    width: 100%;
-    text-align: left;
-    margin-left: 170px;
+    float: right;
+
     overflow: visible;
 }
 

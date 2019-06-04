@@ -15,7 +15,7 @@ class Selektion extends Component {
     };
 
     return (
-      <ParentComponent addChild={this.onAddChild}>
+      <ParentComponent deleteChild={this.onDeleteChild} addChild={this.onAddChild}>
         {children}
       </ParentComponent>
     );
@@ -26,6 +26,11 @@ class Selektion extends Component {
       numChildren: this.state.numChildren + 1
     });
   }
+  onDeleteChild =() =>{
+    this.setState({
+      numChildren:this.state.numChildren -1
+    });
+}
 }
 
 const ParentComponent = props => (
@@ -37,10 +42,11 @@ const ParentComponent = props => (
     </div>
   </div>
     </div>
-        <p><button id = "add" href="#" onClick={props.addChild}>Add</button></p>
+        <p>      <button id = "delete" href="#" onClick={props.deleteChild}>X</button>
+ <button id = "add" href="#" onClick={props.addChild}>Add</button></p>
     </div>
 );
 
-const ChildComponent = props => <Merkmal>Merkmal1</Merkmal>;
+const ChildComponent = props => <Merkmal></Merkmal>;
 
     export default Selektion;

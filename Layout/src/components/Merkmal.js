@@ -1,5 +1,7 @@
 import React, {Component} from "react";
-import Dropdown from 'react-dropdown'
+import Dropdown from 'react-dropdown';
+import Selektion from './Selektion';
+
 const options = [
             "AND", "OR"
         ]
@@ -17,11 +19,15 @@ class Merkmal extends Component {
         return (
 
             <div id="Merkmal">Name
-                <div>
+
+
                 <div >
                     <button type = "buttons" id = "dropdown"><Dropdown options={options} onChange={this.onSelect} value = {selectedOption}  /></button>
-                </div>
-                </div>
+                </div><br/>
+
+                <form id="not">
+                   NOT <input type="checkbox"/>
+                </form>
                 </div>
         )
     }
