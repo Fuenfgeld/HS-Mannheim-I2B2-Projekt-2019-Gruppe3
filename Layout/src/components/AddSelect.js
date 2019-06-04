@@ -1,17 +1,13 @@
-import React, {Component} from "react";
-class AddSelect extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
+import React from "react";
 
-        }
-    }
 
-    render() {
-        return(
-           <button id="Add" type="button">Add</button>
+function  AddSelect(){
+
+
+    return(
+       <button id="Add" type="button" >Add</button>
+
         )
     }
-}
 
 export default AddSelect;

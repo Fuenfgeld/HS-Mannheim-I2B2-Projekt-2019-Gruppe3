@@ -1,33 +1,39 @@
-import React, {Component} from "react";
-import Merkmal from "./Merkmal"
+import React from "react";
+import Merkmal from './Merkmal';
+import AddSlect from './AddSelect';
+
 
 
 function Selection(){
  var list = [ ];
 
- function handleClick(e) {
-     e.preventDefault();
 
-     list.push('<a> <Merkmal href="#" >Merkmal</Merkmal> </a>');
-
-     var i;
-     for (i = 0; i < list.length; i++) {
-         var selectionList = list[i];
-         var ausgabe = document.getElementById('ausgabe');
-         ausgabe.innerHTML = selectionList;
-     }
-
+ function handleClick() {
+     var mark ='<a><Merkmal>Merkmal</Merkmal></a>';
+     list.push(mark);
+     print();
  }
 
-function init() {
-     var elem = document.getElementById('Add');
-     elem.addEventListener('click', handleClick);
-}
+
+ function print(){
+       var i=0;
+         var selectionList = list[i];
+         var ausgeben = document.getElementById('ausgabe');
+         ausgeben.innerHTML += selectionList;
+         i=i+1;
+ }
+
 
  return(
 
      <div class = "scrollMenu" >
-         <script>document.addEventListener('DOMContentLoaded', init);</script>
+
+         <div id="ausgabe"><script>
+             var elem = document.getElementById(Add);
+             if(elem.addEventListener){
+             document.addEventListener("click", handleClick, false)
+         }
+         </script></div>
      </div>
      );
 
