@@ -19,6 +19,7 @@
     "react-container-dimensions": "^1.4.1",
     "react-d3-treemap": "1.0.5",
     "react-dom": "^15.6.1",
+    "react-dropdown": "^1.6.4",
     "typescript": "^3.5.1"
   },
   "devDependencies": {
