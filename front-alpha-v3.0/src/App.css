@@ -1,0 +1,71 @@
+.App {
+    text-align: right;
+      background-color: #999999;
+      color:black;
+  }
+  
+  #container{
+      width:100%;
+  }
+  #Navi{
+  
+  }
+  
+  #Dropdown{
+      margin-left: 200px;
+  }
+  
+  #Visu{
+  
+  
+   }
+  #Selection{
+  
+      height: 150px;
+      color:black;
+  }
+  #SelcTrennung{
+      margin-right: 20px;
+      margin-left:  20px;
+  }
+  #Graphen{
+      height: 763px;
+      margin:auto;
+      color:black;
+  }
+  #selc{
+      background-color: #F0F0F0;
+  }
+  
+  #vl {
+    border-left: 2px solid lightgrey;
+    height: 120px;
+      margin-left: 250px;
+  }
+  
+  #ADD{
+  float:right;
+  }
+  
+  #all{
+      background-color: orange;
+      padding-top: 10px;
+      padding-right:0px;
+      color:black;
+  }
+  #button{
+      margin-left: 5px;
+      margin-right: 5px;
+      color:black;
+  }
+  .col {
+      color:black;
+  
+      padding-top: 5px;
+      padding-bottom: 5px;
+      background-color: #F0F0F0;
+      border: 2px solid #fff;
+  
+      text-align: center;
+  }
+  
