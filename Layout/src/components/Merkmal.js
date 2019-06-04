@@ -1,20 +1,25 @@
 import React, {Component} from "react";
 import Dropdown from 'react-dropdown'
-
-
-
-class Merkmal extends Component {
-    render() {
-        const options = [
+const options = [
             "AND", "OR"
         ]
-        const defaultOption = options[0]
+class Merkmal extends Component {
+    state = {
+        selectedOption: "AND",
+    };
+    onSelect = selectedOption => {
+        this.setState({
+            selectedOption});
+        console.log(selectedOption)
+    };
+    render() {
+        const {selectedOption } = this.state;
         return (
 
             <div id="Merkmal">Name
                 <div>
                 <div >
-                    <button type = "buttons" id = "dropdown"><Dropdown options={options} onChange={this._onSelect} value ={defaultOption} placeholder="AND"/></button>
+                    <button type = "buttons" id = "dropdown"><Dropdown options={options} onChange={this.onSelect} value = {selectedOption}  /></button>
                 </div>
                 </div>
                 </div>
