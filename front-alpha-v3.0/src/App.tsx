@@ -115,7 +115,8 @@ export default class App extends React.Component<{}, MyState> {
               <div id = "Parts">
                 <div id = "Links">
                   <div id = "Selektion">
-                    <Selection></Selection>
+                    <Selection selName = {this.state.selectionNameList}></Selection>
+                    <button onClick = {this.onButtonAdd.bind(this)}>Add</button>
                   </div>
                   <div id="Treemap">
                   <TreeMap

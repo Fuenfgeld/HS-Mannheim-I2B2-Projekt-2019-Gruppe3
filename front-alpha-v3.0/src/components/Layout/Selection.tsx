@@ -1,55 +1,30 @@
 import React, {Component} from "react"
 import AddSelect from "./AddSelect"
-import Merkmal from "./Merkmal";
+import SelectionChild from "./SelectionChild";
 
-type SelState = 
-{
-numChildren:number
-};
+type SelState = {numChildren:number
+                selNames:any};
+type SelProps = {selName:any}
 
+class Selektion extends React.Component<SelProps, SelState> {
 
-class Selektion extends React.Component<{}, SelState> {
-  constructor(){
-    super();
-    this.state = {
-      numChildren : 0
-    };  
-  }
-
-  render () {
-    const children = [];
-
-    for (var i = 0; i < this.state.numChildren; i += 1) {
-      children.push(<ChildComponent key={i} number={i} />);
-    };
-
+  render() {
+    let names = this.props.selName;
+    let elements=[];
+        for(let i=0;i<names.length;i++){
+             // push the component to elements!
+            elements.push(<SelectionChild name={ names[i] } />);
+        }
     return (
-      <ParentComponent addChild={this.onAddChild}>
-        {children}
-      </ParentComponent>
+      <div id = "scrollMenu">
+        <div className="card calculator">
+        <div id="children-pane">
+        {elements}
+      </div>
+      </div>
+      </div>
     );
-  }
-
-  onAddChild = () => {
-    this.setState({
-      numChildren: this.state.numChildren + 1
-    });
   }
 }
 
-const ParentComponent = (props: { children: React.ReactNode; addChild: (event: React.MouseEvent<HTMLButtonElement>) => void; }) => (
-    <div>
-    <div id = "scrollMenu">
-  <div className="card calculator">
-    <div id="children-pane">
-      {props.children}
-    </div>
-  </div>
-    </div>
-        <button id="add"  onClick={props.addChild}>Add</button>
-    </div>
-);
-
-const ChildComponent = (props: any) => <Merkmal>Merkmal1</Merkmal>;
-
-    export default Selektion;
+export default Selektion;
