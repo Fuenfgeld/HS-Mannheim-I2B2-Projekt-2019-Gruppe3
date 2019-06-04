@@ -1,16 +1,24 @@
 from navigation_data import NavigationData
+from graph_data import GraphData
+from observer import Observer
+from db_connector import DBConnector
 from flask import Flask, jsonify, request
-from DB_Connector import DBConnector
 from flask_cors import CORS
 
-# Verbindung zur Datenbank aufbauen
+# connect to i2b2 Database
 DBConnector()
+# init observer
+myObserver = Observer()
+# build navigation tree
+navigation = NavigationData("icd10_icd9")
 
-# Navitgation Baum erstellen
-navigation_tree = NavigationData()
+# register all components
+myObserver.register(navigation)
+# TODO GRapdata erstelle und GRapehn
 
 app = Flask(__name__)
 CORS(app)
+
 
 @app.route('/')
 def index():
@@ -18,19 +26,33 @@ def index():
 
 
 @app.route("/api/navigation/data", methods=['GET'])
-def datatrans():
-        json_data = jsonify(navigation_tree.into_dict())
-        return json_data
+def data_trans():
+    json_data = jsonify(navigation.into_dict())
+    return json_data
 
 
 @app.route("/api/selection/data", methods=['POST'])
-def datachange():
-    data = request.get_json()
-    selection = data['selection']
-    operator = [data['operator']]
-    # TODO aklt. hier alle APIs
+def data_selection():
+    data_change = request.get_json()
+    myObserver.dispatch(data_change)
 
     return jsonify({"State": "Success"})
+
+
+@app.route("/api/graph1/data", methods=['GET'])
+def get_data1():
+    json_data = jsonify(navigation.into_dict())
+    return json_data
+
+
+@app.route("/api/grahp2/data", methods=['GET'])
+def get_data2():
+    pass
+
+
+@app.route("/api/graph3/data", methods=['GET'])
+def get_data3():
+    pass
 
 
 if __name__ == '__main__':

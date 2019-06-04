@@ -1,36 +1,36 @@
 from sql_templates import all_patient, gender_equal_female, gender_equal_male, age_distribution
-from DB_Connector import DBConnector
+from db_connector import DBConnector
 
 
-class GraphDate():
+class GraphData:
 
     def __init__(self):
-        #TODO Graph Classe erstellen
+        self.data = None
+
+    def update(self, data_change=None):
         pass
 
-    def get_all_patient(self,selection=None):
+    def get_all_patient(self, data_change=None):
         db = DBConnector()
-        data = db.query(all_patient(selection))
+        data = db.query(all_patient(data_change))
         result = data[0][0]
         return result
 
-
-    def get_gender_distribution(self,selection=None):
+    def get_gender_distribution(self, data_change=None):
         db = DBConnector()
-        data_male = db.query(gender_equal_male(selection))
-        data_female = db.query(gender_equal_female(selection))
+        data_male = db.query(gender_equal_male(data_change))
+        data_female = db.query(gender_equal_female(data_change))
         data = [data_male[0][0], data_female[0][0]]
         lables = ["Männlich", "Weiblich"]
         result = {"lable": lables, "data": data}
 
         return result
 
-
-    def get_age_distribution(self,selection=None):
+    def get_age_distribution(self, data_change=None):
         db = DBConnector()
         age_data = []
         for i in range(0, 90, 10):
-            sql_query = age_distribution(i, i + 10, selection)
+            sql_query = age_distribution(i, i + 10, data_change)
             data = db.query(sql_query)[0][0]
             age_data.append(data)
 
@@ -42,7 +42,9 @@ class GraphDate():
 
 if __name__ == '__main__':
     db = DBConnector()
+    myGraph = GraphData()
     c_dimcode = r'\Diagnoses\(M00-M99) Dise~6mvn\(M00-M25) Arth~kgqv\%'
-    selection = ['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode]
-    data = get_age_distribution(selection)
-    print(data)
+    data_change = {'selection': [['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode],
+                                 ['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode]],
+                   'operator': ['AND']}
+    print(myGraph.get_all_patient(data_change))

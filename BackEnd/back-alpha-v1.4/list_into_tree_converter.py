@@ -1,13 +1,15 @@
-from tree_node import TreeStructure
+from tree_node import TreeNode
 
 
 def list_into_tree_node(data_list):
-    parent = TreeStructure(data_list.pop(0))
-    stack = []
+    stack = list()
+    parent = TreeNode(data_list.pop(0))
+    stack.append(parent)
     while data_list:
-        child = TreeStructure(data_list.pop(0))
+        parent = stack.pop()
+        child = TreeNode(data_list.pop(0))
         look_for_position(stack, parent, child)
-        parent = child
+        stack.append(child)
 
     for i in range(1, len(stack)):
         add_to_grandparent(stack)
@@ -35,13 +37,19 @@ def have_children(stack, parent):
 
 
 def add_to_parent(stack, child):
-    parent = stack.pop()
-    parent.add_child(child)
-    stack.append(parent)
+    if len(stack) >= 1:
+        parent = stack.pop()
+        parent.add_child(child)
+        stack.append(parent)
+    else:
+        print("ERROR1")
 
 
 def add_to_grandparent(stack):
-    parent = stack.pop()
-    grand_parent = stack.pop()
-    grand_parent.add_child(parent)
-    stack.append(grand_parent)
+    if len(stack) >= 2:
+        parent = stack.pop()
+        grand_parent = stack.pop()
+        grand_parent.add_child(parent)
+        stack.append(grand_parent)
+    else:
+        print("ERROR2")

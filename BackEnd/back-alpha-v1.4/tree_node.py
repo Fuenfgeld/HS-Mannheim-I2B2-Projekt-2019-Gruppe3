@@ -1,4 +1,4 @@
-class TreeStructure:
+class TreeNode:
 
     def __init__(self, list_element, children=None):
         self.h_lvl = list_element[0]
@@ -11,7 +11,7 @@ class TreeStructure:
                 self.add_child(child)
 
     def add_child(self, node):
-        if isinstance(node, TreeStructure):
+        if isinstance(node, TreeNode):
             self.children.append(node)
             return True
         return False
@@ -36,7 +36,6 @@ class TreeStructure:
             for child in self.children:
                 children.append(child.build_tree_dict())
                 dic = self.get_dict_form(children)
-
         else:
             dic = self.get_dict_form()
         return dic
@@ -44,7 +43,11 @@ class TreeStructure:
     def __repr__(self):
         return self.name
 
-    def save(self):
+    def save(self, path):
         import json
-        with open('data/data.json', 'w') as outfile:
-            json.dump(self.build_tree_dict(), outfile)
+        if path is not None:
+            with open(path+'.json', 'w') as outfile:
+                json.dump(self.build_tree_dict(), outfile)
+        else:
+            with open('data/data.json', 'w') as outfile:
+                json.dump(self.build_tree_dict(), outfile)
