@@ -68,7 +68,6 @@ div.scrollMenu {
     border-style: solid;
     overflow: hidden;
     z-index: 0;
-    margin-left: 100px;
 }
 .dropbtn {
   background-color: #4CAF50;
@@ -97,9 +96,9 @@ div.scrollMenu {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 50px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 12px 0px rgba(0,0,0,0.2);
   z-index: 20;
-  margin-left: 100px;
+  margin-left: 70px;
 
 }
 

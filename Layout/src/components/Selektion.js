@@ -1,44 +1,44 @@
-import React from "react";
-import Merkmal from './Merkmal';
-import AddSlect from './AddSelect';
+import React, {Component} from "react"
+import AddSelect from "./AddSelect"
+import Merkmal from "./Merkmal";
 
+class Selektion extends Component {
+    state = {
+        numChildren: 0
+  }
 
+  render () {
+    const children = [];
 
+    for (var i = 0; i < this.state.numChildren; i += 1) {
+      children.push(<ChildComponent key={i} number={i} />);
+    };
 
-function Selection(){
- var list = [ ];
+    return (
+      <ParentComponent addChild={this.onAddChild}>
+        {children}
+      </ParentComponent>
+    );
+  }
 
-
-
- function handleClick() {
-     var mark ='<a><Merkmal>Merkmal</Merkmal></a>';
-     list.push(mark);
-     print();
- }
-
-
- function print(){
-       var i=0;
-         var selectionList = list[i];
-         var ausgeben = document.getElementById('ausgabe');
-         ausgeben.innerHTML += selectionList;
-         i=i+1;
- }
-
-
- return(
-
-     <div class = "scrollMenu" >
-         <div id="ausgabe"><script>
-             var elem = document.getElementById(Add);
-             if(elem.addEventListener){
-             document.addEventListener("click", handleClick, false)
-         }
-         </script></div>
-     </div>
-     );
-
+  onAddChild = () => {
+    this.setState({
+      numChildren: this.state.numChildren + 1
+    });
+  }
 }
 
-export default Selection;
+const ParentComponent = props => (
+    <div id = "scrollMenu">
+  <div className="card calculator">
+    <p><button id = "add" href="#" onClick={props.addChild}>Add</button></p>
+    <div id="children-pane">
+      {props.children}
+    </div>
+  </div>
+    </div>
+);
 
+const ChildComponent = props => <Merkmal></Merkmal>;
+
+    export default Selektion;
