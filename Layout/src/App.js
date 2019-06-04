@@ -9,7 +9,6 @@ import AddSelect from "./components/AddSelect"
 import Buttons from "./components/Buttons"
 
 
-
 class App extends Component {
         state={
             contacts:[],

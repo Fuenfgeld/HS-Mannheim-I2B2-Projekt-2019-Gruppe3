@@ -14,7 +14,7 @@ li a{
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 10px 12px;
     text-decoration: none;
 }
 li a:hover {
@@ -33,10 +33,10 @@ li a:hover {
     border-style: solid;
 }
 #Links {
-    width: 69%;
+    width: 79%;
 }
 #Rechts {
-    width: 30%;
+    width: 20%;
     margin-left: 0.5%;
 }
 #Selektion {
@@ -48,21 +48,76 @@ li a:hover {
     border-style: solid;
 }
 div.scrollMenu {
-    background-color: #b8c0c7;
+    background-color: #f0f8ff;
     overflow: auto;
     white-space: nowrap;
 }
 
 div.scrollMenu a{
-    height: 82px;
+    background-color: #4d4d4d;
+    height: 79px;
     display: inline-block;
-    width: 20%;
+    width: 21%;
     color: white;
     text-align: center;
     padding: 14px;
     text-decoration: none;
+    border-color: white ;
     border-style: solid;
-    border-color: white;
+}
+
+#dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+    margin-left: 155%;
+  font-size: 10px;
+  border: none;
+    width: 100%;
+  cursor: pointer;
+}
+
+#Dropdown {
+  position: relative;
+    width : 30%;
+    height: 5px;
+  display: inline-block;
+}
+
+    #Dropdown-content {
+  display: none;
+  position: absolute;
+  margin-left: 155%;
+  width: 100%;
+  background-color: #f9f9f9;
+  box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+#Dropdown-content a {
+    position: absolute;
+  color: #7c7d74;
+    font-size: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  text-decoration: none;
+  display: block;
+    height: 10px;
+    width: 46%;
+}
+
+#Dropdown-content a:hover {
+    background-color: #f1f1f1}
+
+#Dropdown:hover #Dropdown-content {
+    height: 5px;
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
 }
 #xyz{
     width: 40px;
@@ -70,7 +125,7 @@ div.scrollMenu a{
 }
 #Treemap{
     width: 100%;
-    height: 400px;
+    height: 450px;
     float:left;
     text-align: left;
     border-color: silver;

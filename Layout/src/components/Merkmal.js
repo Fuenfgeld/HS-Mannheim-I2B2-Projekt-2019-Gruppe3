@@ -1,10 +1,11 @@
 import React from "react";
 
-function Merkmal(){
+
+function Merkmal() {
 
         return(
 
-         ( <div>Name
+            <div>Name
                 <div id="Dropdown">
                     <button  id = "dropbtn">AND</button>
                     <div id ="Dropdown-content">
@@ -12,9 +13,12 @@ function Merkmal(){
                     <a href = "#">OR</a>
                     </div>
                 </div>
-            </div>).toString()
+            </div>
+
         )
 
 }
+
+
 
 export default Merkmal;

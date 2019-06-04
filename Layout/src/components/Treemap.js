@@ -15,7 +15,7 @@ class Treemap extends Component{
 
     render() {
         return(
-                   <TreeMap width={865} height={320} data={data} valueUnit={"MB"} />
+                   <TreeMap width={980} height={410} data={data} valueUnit={"MB"} />
         )
     }
 }
