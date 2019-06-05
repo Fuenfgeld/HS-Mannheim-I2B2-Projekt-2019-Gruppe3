@@ -20,7 +20,7 @@ type MyState = {dataTree:any,
                 selectionNameList:any};
 
 
-const data = require("./data/flareSample.json");
+const data = require("./data/dataAllChild.json");
 
 export default class App extends React.Component<{}, MyState> {
 
@@ -72,7 +72,23 @@ export default class App extends React.Component<{}, MyState> {
         console.log(this.state.selectionList);
         this.fetchData();
       };
+      
+     
+      onButtonDelete(){
+        console.log("Delete Pressed");
+        let selectionNameList = this.state.selectionNameList;
+        selectionNameList.pop();
+        let selectionList = this.state.selectionList;
+        selectionList.pop();
+        let operatorList = this.state.operatorList;
+        operatorList.pop();
 
+        this.setState({
+          selectionNameList : selectionNameList,
+          selectionList : selectionList,
+          operatorList : operatorList
+        })
+      }
 
 
       fetchData = () => {
@@ -90,19 +106,24 @@ export default class App extends React.Component<{}, MyState> {
        })
             .then(function (data: any) {
                console.log('Request success: ', data);
-           })
+           }).then(this.fetchNav)
            .catch((e: any) => console.log("Request error NAV", e));
       }
 
      
-      componentDidMount(){
-      
-      fetch(urlI2B2).then(res => {
+      fetchNav(){
+        console.log("FetchNav")
+        fetch(urlI2B2).then(res => {
           return res.json();
         })
         .then(new_data => this.setState({dataTree : new_data}))
         .catch(e => console.log("Fetching error NAV", e));
-      }
+      };
+
+      componentDidMount(){
+        this.fetchNav();
+     
+      };
     
     
     public render() {
@@ -116,7 +137,10 @@ export default class App extends React.Component<{}, MyState> {
                 <div id = "Links">
                   <div id = "Selektion">
                     <Selection selName = {this.state.selectionNameList}></Selection>
-                    <button onClick = {this.onButtonAdd.bind(this)}>Add</button>
+                    <div>
+                      <button onClick = {this.onButtonAdd.bind(this)}>Add</button>
+                      <button onClick = {this.onButtonDelete.bind(this)}>Delete</button>
+                    </div>
                   </div>
                   <div id="Treemap">
                   <TreeMap

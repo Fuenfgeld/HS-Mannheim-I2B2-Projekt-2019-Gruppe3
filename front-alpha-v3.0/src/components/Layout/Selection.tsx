@@ -17,11 +17,9 @@ class Selektion extends React.Component<SelProps, SelState> {
         }
     return (
       <div id = "scrollMenu">
-        <div className="card calculator">
         <div id="children-pane">
-        {elements}
-      </div>
-      </div>
+          {elements}
+        </div>
       </div>
     );
   }
