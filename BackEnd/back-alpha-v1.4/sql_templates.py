@@ -21,38 +21,43 @@ def tree_first_hierachielvl(table_name, navigation_tree):
 
 # Patient Count Tree
 def tree_patient_count(table_name, selection=None):
+    sql_query = """SELECT DISTINCT c_hlevel, c_name,
+       (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+        WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)),
+        c_fullname FROM i2b2metadata.{}
+        order by c_fullname;""".format(table_name)
+
     if selection is not None:
-        sql_query = """SELECT DISTINCT  c_hlevel, c_name,
-                   (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-                    WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)
-                    AND {} ),
-                    c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.{} 
-                    order by c_fullname;""".format(selection_tree_data(selection), table_name)
-    else:
-        sql_query = """SELECT DISTINCT c_hlevel, c_name,
-           (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-            WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)),
-            c_fullname FROM i2b2metadata.{}
-            order by c_fullname;""".format(table_name)
+        pattern = selection_tree_data(selection)
+        if pattern != "":
+            sql_query = """SELECT DISTINCT  c_hlevel, c_name,
+                       (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+                        WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)
+                        AND {} ),
+                        c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.{} 
+                        order by c_fullname;""".format(pattern, table_name)
     return sql_query
 
 
 def tree_patient_count_first_hierachielvl(table_name, like, selection=None):
+    sql_query = """SELECT DISTINCT  c_hlevel, c_name,
+       (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+        WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)),
+        c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.{}
+        WHERE c_fullname LIKE '{}%' 
+        order by c_fullname;""".format(table_name, like)
+
     if selection is not None:
-        sql_query = """SELECT DISTINCT  c_hlevel, c_name,
-                   (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-                    WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)
-                    AND {} ),
-                    c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.{}
-                    WHERE c_fullname LIKE '{}%' 
-                    order by c_fullname;""".format(selection_tree_data(selection), table_name, like)
-    else:
-        sql_query = """SELECT DISTINCT  c_hlevel, c_name,
-           (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-            WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)),
-            c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.{}
-            WHERE c_fullname LIKE '{}%' 
-            order by c_fullname;""".format(table_name, like)
+        pattern = selection_tree_data(selection)
+        if pattern != "":
+            sql_query = """SELECT DISTINCT  c_hlevel, c_name,
+                       (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+                        WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)
+                        AND {} ),
+                        c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.{}
+                        WHERE c_fullname LIKE '{}%' 
+                        order by c_fullname;""".format(pattern, table_name, like)
+
     return sql_query
 
 
@@ -98,3 +103,6 @@ def age_distribution(begin, end, selection=None):
                        WHERE age_in_years_num >= {} and age_in_years_num < {} """.format(begin, end)
     return sql_query
 
+
+def diagnoses_count(selection=None):
+    pass

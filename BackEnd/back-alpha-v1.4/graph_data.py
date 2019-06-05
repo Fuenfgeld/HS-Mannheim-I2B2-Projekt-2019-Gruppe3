@@ -2,13 +2,13 @@ from sql_templates import all_patient, gender_equal_female, gender_equal_male, a
 from db_connector import DBConnector
 
 
-class GraphData:
+class GraphDataPatientNumber:
 
     def __init__(self):
-        self.data = None
+        self.data = self.get_all_patient()
 
     def update(self, data_change=None):
-        pass
+        self.data = self.get_all_patient(data_change)
 
     def get_all_patient(self, data_change=None):
         db = DBConnector()
@@ -42,9 +42,9 @@ class GraphData:
 
 if __name__ == '__main__':
     db = DBConnector()
-    myGraph = GraphData()
+    myGraph = GraphDataPatientNumber()
     c_dimcode = r'\Diagnoses\(M00-M99) Dise~6mvn\(M00-M25) Arth~kgqv\%'
     data_change = {'selection': [['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode],
                                  ['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode]],
-                   'operator': ['AND']}
+                   'operator': ['OR', 'AND']}
     print(myGraph.get_all_patient(data_change))

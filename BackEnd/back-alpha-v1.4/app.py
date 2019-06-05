@@ -1,5 +1,4 @@
 from navigation_data import NavigationData
-from graph_data import GraphData
 from observer import Observer
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
@@ -34,6 +33,7 @@ def data_trans():
 @app.route("/api/selection/data", methods=['POST'])
 def data_selection():
     data_change = request.get_json()
+    print(data_change)
     myObserver.dispatch(data_change)
 
     return jsonify({"State": "Success"})
@@ -45,7 +45,7 @@ def get_data1():
     return json_data
 
 
-@app.route("/api/grahp2/data", methods=['GET'])
+@app.route("/api/graph2/data", methods=['GET'])
 def get_data2():
     pass
 
@@ -56,4 +56,4 @@ def get_data3():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
