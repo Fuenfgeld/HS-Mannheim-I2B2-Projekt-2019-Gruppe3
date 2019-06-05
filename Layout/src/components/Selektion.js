@@ -36,11 +36,11 @@ class Selektion extends Component {
 const ParentComponent = props => (
     <div>
     <div id = "scrollMenu">
-  <div className="card calculator">
+
     <div id="children-pane">
       {props.children}
     </div>
-  </div>
+
     </div>
         <p>
           <button id = "delete"  onClick={props.deleteChild}>X</button>
