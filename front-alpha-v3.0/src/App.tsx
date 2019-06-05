@@ -70,7 +70,7 @@ export default class App extends React.Component<{}, MyState> {
 
         console.log(this.state.selectionNameList);
         console.log(this.state.selectionList);
-        this.fetchData();
+        
       };
       
      
@@ -124,7 +124,13 @@ export default class App extends React.Component<{}, MyState> {
         this.fetchNav();
      
       };
-    
+      
+      componentDidUpdate(){
+        this.fetchNav();
+        if(this.state.currentNode.length !== 0){
+          this.fetchData();
+        }
+      }
     
     public render() {
         return (
@@ -155,7 +161,7 @@ export default class App extends React.Component<{}, MyState> {
            
                 <div id ="Rechts">
                   <div id = "Suchleiste">
-
+                      Patienten Gesamt {this.state.selectionNameList.length}
                   </div>
                   <div id = "Graphen">
 
