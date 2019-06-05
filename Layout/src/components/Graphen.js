@@ -10,7 +10,8 @@ class Graphen extends Component{
 
     render() {
         return(
-            <div>Graphen</div>
+            <div>Graphen
+           </div>
         )
     }
 }

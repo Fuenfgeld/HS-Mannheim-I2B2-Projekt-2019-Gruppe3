@@ -42,8 +42,9 @@ const ParentComponent = props => (
     </div>
   </div>
     </div>
-        <p>      <button id = "delete" href="#" onClick={props.deleteChild}>X</button>
- <button id = "add" href="#" onClick={props.addChild}>Add</button></p>
+        <p>
+          <button id = "delete"  onClick={props.deleteChild}>X</button>
+          <button id = "add"  onClick={props.addChild}>Add</button></p>
     </div>
 );
 

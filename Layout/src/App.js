@@ -25,13 +25,12 @@ class App extends Component {
               <Navbar>
               </Navbar>
             </div>
-            <body className="App-body">
+            <div className="App-body">
               <div id = "Parts">
 
               <div id = "Links">
                   <div id = "Selektion">
-                      <Selektion>
-                      </Selektion>
+                      <Selektion></Selektion>
                   </div>
                   <div id="Treemap">
                       <Treemap></Treemap>
@@ -49,7 +48,7 @@ class App extends Component {
                   </div>
               </div>
               </div>
-              </body>
+              </div>
         </div>
         );
   }
