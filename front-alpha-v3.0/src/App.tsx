@@ -17,7 +17,8 @@ type MyState = {dataTree:any,
                 currentNode:any,
                 selectionList:any,
                 operatorList:any,
-                selectionNameList:any};
+                selectionNameList:any,
+                fetchEnable: Boolean};
 
 
 const data = require("./data/dataAllChild.json");
@@ -35,7 +36,8 @@ export default class App extends React.Component<{}, MyState> {
           currentNode : [],
           selectionList : [],
           operatorList : [],
-          selectionNameList : []
+          selectionNameList : [],
+          fetchEnable : false
         };  
       }
       
@@ -61,7 +63,8 @@ export default class App extends React.Component<{}, MyState> {
             this.setState({
               selectionNameList :  this.state.selectionNameList.concat([this.state.currentNode.data.name]),
               selectionList : this.state.selectionList.concat([this.state.currentNode.data.selection]),
-              operatorList : this.state.operatorList.concat(["AND"])
+              operatorList : this.state.operatorList.concat(["AND"]),
+              fetchEnable : true
             });
           }else{
             console.log("Merkmal schon enthalten")
@@ -126,9 +129,12 @@ export default class App extends React.Component<{}, MyState> {
       };
       
       componentDidUpdate(){
-        this.fetchNav();
-        if(this.state.currentNode.length !== 0){
+        if(this.state.fetchEnable){
           this.fetchData();
+          this.fetchNav();
+          this.setState({
+            fetchEnable : false
+          })
         }
       }
     
