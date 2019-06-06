@@ -10,14 +10,19 @@ const urlAGE ="http://localhost:5000/data";
 const urlFlare ="http://localhost:5000/flaredemo";
 const urlI2B2 ="http://127.0.0.1:5000/api/navigation/data";
 const urlSel = "http://localhost:5000/api/selection/data";
+const urlPCount = "http://localhost:5000/api/patientcount/data";
+const urlDCount = "http://localhost:5000/api/diagnosecount/data";
 
 type MyState = {dataTree:any,
                 dataAge:any,
                 dataFM:any,
+                patientCount : any,
+                diagnoseCount : any,
                 currentNode:any,
                 selectionList:any,
                 operatorList:any,
-                selectionNameList:any};
+                selectionNameList:any,
+                fetchEnable : boolean};
 
 
 const data = require("./data/dataAllChild.json");
@@ -33,10 +38,13 @@ export default class App extends React.Component<{}, MyState> {
           dataTree : data,
           dataAge : {},
           dataFM : {},
+          patientCount : [],
+          diagnoseCount : [],
           currentNode : [],
           selectionList : [],
           operatorList : [],
-          selectionNameList : []
+          selectionNameList : [],
+          fetchEnable : false
         };  
       }
       
@@ -122,14 +130,35 @@ export default class App extends React.Component<{}, MyState> {
         .catch(e => console.log("Fetching error NAV", e));
       };
 
+      fetchPCount(){
+        console.log("fetchPCount")
+        fetch(urlPCount).then(res => {
+          return res.json();
+        })
+        .then(new_data => this.setState({diagnoseCount : new_data}))
+        .catch(e => console.log("Fetching error PCount", e));
+      };
+
+      fetchDCount(){
+        console.log("fetchDCount")
+        fetch(urlPCount).then(res => {
+          return res.json();
+        })
+        .then(new_data => this.setState({patientCount : new_data}))
+        .catch(e => console.log("Fetching error DCount", e));
+      }
+
       componentDidMount(){
         this.fetchNav();
-     
+        this.fetchPCount();
+        this.fetchDCount();
+        console.log(this.state.patientCount.data);
       };
       
       componentWillUpdate(){
         this.fetchNav();
-        if(fetchEnable){
+        this.fetchPCount();
+        if(this.state.fetchEnable){
           this.fetchData();
           fetchEnable = false;
         }
@@ -164,10 +193,10 @@ export default class App extends React.Component<{}, MyState> {
            
                 <div id ="Rechts">
                   <div id = "Suchleiste">
-                      Patienten Gesamt {this.state.selectionNameList.length}
+                      Patienten Gesamt {this.state.patientCount.data}
                   </div>
                   <div id = "Graphen">
-
+                      {this.state.diagnoseCount}
                   </div>
                   <div id="buttons">
                    
