@@ -1,11 +1,10 @@
-# sql_pattern for i2b2 ontology
+# sql_pattern for i2b2 ontology tables
 def selection_tree_data(data_change):
     selections = data_change['selection']
     logical_operator = data_change['operator']
     sql_query = ""
     check_logical_operator = False
     for i in range(len(selections)):
-        print(logical_operator)
         if check_logical_operator:
             sql_query += logical_operator[i]
             check_logical_operator = False
