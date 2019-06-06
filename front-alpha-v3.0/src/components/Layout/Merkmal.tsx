@@ -3,7 +3,7 @@ import Dropdown from 'react-dropdown'
 
 
 
-class Merkmal extends React.Component<{}, {}> {
+class Merkmal extends Component<{}, {}> {
     render() {
         const options = [
             "AND", "OR"
@@ -22,7 +22,5 @@ class Merkmal extends React.Component<{}, {}> {
     }
 
 }
-
-
 
 export default Merkmal;

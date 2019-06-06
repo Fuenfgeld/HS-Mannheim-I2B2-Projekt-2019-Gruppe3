@@ -156,8 +156,8 @@ export default class App extends React.Component<{}, MyState> {
                   </div>
                   <div id="Treemap">
                   <TreeMap
-                    height={410}
-                    width={980}
+                    height={450}
+                    width={1250}
                     data={this.state.dataTree}
                     valueUnit={"Patients"}
                     onChangeNode={this.onChangeNode.bind(this)}
