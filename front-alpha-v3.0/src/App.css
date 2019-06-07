@@ -2,6 +2,9 @@
     background-color: #444444;
     overflow: hidden;
 }
+#not{
+    float:right;
+}
 ul {
     margin:0;
     padding: 0;
@@ -49,7 +52,8 @@ li a:hover {
     border-style: solid;
 }
 #scrollMenu {
-    background-color: #ffae3e;
+    width: 90%;
+    background-color: #f0f8ff;
     overflow: auto;
     position: relative;
     white-space: nowrap;
@@ -59,9 +63,8 @@ li a:hover {
     position: relative;
     width: 20%;
     height :80px;
-    background-color: #63ff90;
+    background-color: #a7aebb;
     display: inline-block;
-    color: white;
     text-align: center;
     padding: 14px;
     text-decoration: none;
@@ -71,22 +74,31 @@ li a:hover {
     z-index: 0;
 }
 
+
 #Treemap{
     width: 100%;
-    height: 450px;
+    height: 505px;
     float:left;
     text-align: left;
     border-color: silver;
     border-width: 2px;
     border-style: solid;
+    color: aliceblue;
 }
 #add{
-    background-color: lightcoral;
-    float: right;
-    text-align: end;
-    margin-right: 1%;
-    border-radius: 50%;
+    float: left;
+    border-radius: 20%;
+    position: absolute;
+    top: 32%;
+    left: 74%;
 
+}
+#delete {
+    float: left;
+    border-radius: 20%;
+    position: absolute;
+    top: 32%;
+    left: 77%;
 }
 #tm{
     margin-right: 100px;
@@ -116,7 +128,7 @@ li a:hover {
 #Graphen{
     width: 100%;
     float:left;
-    height:470px;
+    height:625px;
     border-color: silver;
     border-width: 2px;
     border-style: solid;
@@ -151,9 +163,8 @@ li a:hover {
 }
 
 #dropdown{
-    color: lightcoral;
-    width: 100%;
-    text-align: left;
-    margin-left: 150px;
+    float: right;
+    overflow: visible;
 }
+
 
