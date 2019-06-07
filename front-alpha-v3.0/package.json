@@ -12,10 +12,14 @@
     "start": "set NODE_ENV=development && webpack-dev-server --open --config ./webpack/webpack.config.dev.js"
   },
   "dependencies": {
+    "@types/chart.js": "^2.7.53",
+    "@types/chartjs": "0.0.31",
     "bootstrap": "^4.3.1",
+    "chart.js": "^2.8.0",
     "javascript": "^1.0.0",
     "json": "^9.0.6",
     "react": "^15.6.1",
+    "react-chartjs-2": "^2.7.6",
     "react-container-dimensions": "^1.4.1",
     "react-d3-treemap": "1.0.5",
     "react-dom": "^15.6.1",

@@ -1,9 +1,10 @@
 import * as React from "react";
 import TreeMap from "./components/TreeMap/TreeMap";
 import './App.css';
-import Selection from "./components/Layout/Selection"
-import AddSelect from "./components/Layout/AddSelect"
-import Navbar from "./components/Layout/Navbar"
+import Selection from "./components/Layout/Selection";
+import Navbar from "./components/Layout/Navbar";
+import PatientCount from "./components/Graph/PatienCount";
+//import {Doughnut,Line} from 'react-chartjs-2';
 
 
 const urlAGE ="http://localhost:5000/data";
@@ -17,7 +18,7 @@ type MyState = {dataTree:any,
                 dataAge:any,
                 dataFM:any,
                 patientCount : any,
-                diagnoseCount : any,
+                diagnoseCount : string[],
                 currentNode:any,
                 selectionList:any,
                 operatorList:any,
@@ -38,7 +39,7 @@ export default class App extends React.Component<{}, MyState> {
           dataTree : data,
           dataAge : {},
           dataFM : {},
-          patientCount : [],
+          patientCount : 134,
           diagnoseCount : [],
           currentNode : [],
           selectionList : [],
@@ -70,9 +71,12 @@ export default class App extends React.Component<{}, MyState> {
             this.setState({
               selectionNameList :  this.state.selectionNameList.concat([this.state.currentNode.data.name]),
               selectionList : this.state.selectionList.concat([this.state.currentNode.data.selection]),
-              operatorList : this.state.operatorList.concat(["AND"])
-            });
-            fetchEnable = true;
+              operatorList : this.state.operatorList.concat(["AND"]),
+              fetchEnable : true
+            },() => {
+              this.fetchData();
+            })
+            
           }else{
             console.log("Merkmal schon enthalten")
           };
@@ -80,7 +84,7 @@ export default class App extends React.Component<{}, MyState> {
 
         console.log(this.state.selectionNameList);
         console.log(this.state.selectionList);
-        
+        console.log(this.state.patientCount);
       };
       
      
@@ -97,6 +101,8 @@ export default class App extends React.Component<{}, MyState> {
           selectionNameList : selectionNameList,
           selectionList : selectionList,
           operatorList : operatorList
+        },() => {
+          this.fetchData();
         })
       }
 
@@ -116,11 +122,27 @@ export default class App extends React.Component<{}, MyState> {
        })
             .then(function (data: any) {
                console.log('Request success: ', data);
-           }).then(this.fetchNav)
+
+
+           })
            .catch((e: any) => console.log("Request error NAV", e));
+
+           this.fetchNavBuffer();
       }
 
-     
+      fetchNavBuffer(){
+        for (let i = 0; i < 5; i++) {
+          setTimeout(()=>{
+          for(let t = 0; t < 2; t++){
+            setTimeout(() =>{
+              this.fetchNav();
+              this.fetchPCount();
+            },1000)
+          }
+          },25000)
+        }
+      }
+
       fetchNav(){
         console.log("FetchNav")
         fetch(urlI2B2).then(res => {
@@ -135,7 +157,7 @@ export default class App extends React.Component<{}, MyState> {
         fetch(urlPCount).then(res => {
           return res.json();
         })
-        .then(new_data => this.setState({diagnoseCount : new_data}))
+        .then(new_data => this.setState({patientCount : new_data.data}))
         .catch(e => console.log("Fetching error PCount", e));
       };
 
@@ -144,27 +166,42 @@ export default class App extends React.Component<{}, MyState> {
         fetch(urlPCount).then(res => {
           return res.json();
         })
-        .then(new_data => this.setState({patientCount : new_data}))
+        .then(new_data => this.setState({diagnoseCount : new_data}))
         .catch(e => console.log("Fetching error DCount", e));
       }
 
+      componentWillMount(){
+        this.fetchNav();
+      }
+
+
+
       componentDidMount(){
+        
+        console.log("Component did Mount")
+
         this.fetchNav();
         this.fetchPCount();
         this.fetchDCount();
-        console.log(this.state.patientCount.data);
+
+        console.log(this.state.patientCount);
       };
-      
+
+      /*
       componentWillUpdate(){
         this.fetchNav();
         this.fetchPCount();
         if(this.state.fetchEnable){
           this.fetchData();
-          fetchEnable = false;
+          this.setState({
+            fetchEnable : false
+          });
         }
       }
+      */
     
     public render() {
+      console.log("Render");
         return (
           <div className="App">
               <div id = "Navigation">
@@ -193,10 +230,12 @@ export default class App extends React.Component<{}, MyState> {
            
                 <div id ="Rechts">
                   <div id = "Suchleiste">
-                      Patienten Gesamt {this.state.patientCount.data}
+                      <div>
+                        <PatientCount data = {this.state.patientCount}/>
+                      </div>
                   </div>
                   <div id = "Graphen">
-                      {this.state.diagnoseCount}
+                
                   </div>
                   <div id="buttons">
                    
