@@ -4,6 +4,7 @@ import './App.css';
 import Selection from "./components/Layout/Selection";
 import Navbar from "./components/Layout/Navbar";
 import PatientCount from "./components/Graph/PatienCount";
+import TreeMapWraper from "./components/TreeMapWraper";
 //import {Doughnut,Line} from 'react-chartjs-2';
 
 
@@ -23,15 +24,14 @@ type MyState = {dataTree:any,
                 selectionList:any,
                 operatorList:any,
                 selectionNameList:any,
-                fetchEnable : boolean};
+                keyValue : number,
+                init : boolean};
 
 
 const data = require("./data/dataAllChild.json");
-let fetchEnable = false;
+let keyValueG = 1;
 
 export default class App extends React.Component<{}, MyState> {
-
- 
 
     constructor(){
         super();
@@ -45,8 +45,11 @@ export default class App extends React.Component<{}, MyState> {
           selectionList : [],
           operatorList : [],
           selectionNameList : [],
-          fetchEnable : false
+          keyValue : 0,
+          init : true
         };  
+        this.initNewData = this.initNewData.bind(this);
+        this.resetTree = this.resetTree.bind(this);
       }
       
 
@@ -64,6 +67,7 @@ export default class App extends React.Component<{}, MyState> {
           this.setState({
             selectionNameList :  this.state.selectionNameList.concat(["Diagnoses"])
           });
+          
         };
 
         if(this.state.currentNode.length !== 0){
@@ -71,8 +75,7 @@ export default class App extends React.Component<{}, MyState> {
             this.setState({
               selectionNameList :  this.state.selectionNameList.concat([this.state.currentNode.data.name]),
               selectionList : this.state.selectionList.concat([this.state.currentNode.data.selection]),
-              operatorList : this.state.operatorList.concat(["AND"]),
-              fetchEnable : true
+              operatorList : this.state.operatorList.concat(["AND"])
             },() => {
               this.fetchData();
             })
@@ -85,6 +88,8 @@ export default class App extends React.Component<{}, MyState> {
         console.log(this.state.selectionNameList);
         console.log(this.state.selectionList);
         console.log(this.state.patientCount);
+        console.log(keyValueG);
+        console.log(this.state.keyValue);
       };
       
      
@@ -102,7 +107,7 @@ export default class App extends React.Component<{}, MyState> {
           selectionList : selectionList,
           operatorList : operatorList
         },() => {
-          this.fetchData();
+          this.fetchData.bind(this);
         })
       }
 
@@ -121,35 +126,39 @@ export default class App extends React.Component<{}, MyState> {
            })
        })
             .then(function (data: any) {
-               console.log('Request success: ', data);
+              console.log('Request success: ', data);
+              
 
-
-           })
+           }).then(this.initNewData)
            .catch((e: any) => console.log("Request error NAV", e));
 
-           this.fetchNavBuffer();
+           //this.fetchNavBuffer();
       }
 
       fetchNavBuffer(){
         for (let i = 0; i < 5; i++) {
           setTimeout(()=>{
-          for(let t = 0; t < 2; t++){
-            setTimeout(() =>{
-              this.fetchNav();
-              this.fetchPCount();
-            },1000)
-          }
+            this.fetchNav();
+            this.fetchPCount();
           },25000)
         }
+        setTimeout(() =>{
+          this.setState({
+            keyValue : this.state.keyValue + 1
+          })
+        },50000)
       }
 
       fetchNav(){
-        console.log("FetchNav")
+        console.log("FetchNav");
+
         fetch(urlI2B2).then(res => {
           return res.json();
         })
         .then(new_data => this.setState({dataTree : new_data}))
+        .then(this.resetTree)
         .catch(e => console.log("Fetching error NAV", e));
+        keyValueG = keyValueG +1;
       };
 
       fetchPCount(){
@@ -170,15 +179,28 @@ export default class App extends React.Component<{}, MyState> {
         .catch(e => console.log("Fetching error DCount", e));
       }
 
-      componentWillMount(){
+      initNewData(){
+        console.log("Data Init");
+
+        console.log(this.state.keyValue);
+
         this.fetchNav();
+        this.fetchPCount();
+        this.fetchDCount();
+        
       }
 
+      resetTree(){
+        console.log(this.state.keyValue);
 
+        this.setState({
+          keyValue : this.state.keyValue +1
+        })
 
+        console.log(this.state.keyValue);
+      }
+    
       componentDidMount(){
-        
-        console.log("Component did Mount")
 
         this.fetchNav();
         this.fetchPCount();
@@ -217,14 +239,16 @@ export default class App extends React.Component<{}, MyState> {
                       <button onClick = {this.onButtonDelete.bind(this)}>Delete</button>
                     </div>
                   </div>
-                  <div id="Treemap">
+                  <div id="Treemap" >
                   <TreeMap
-                    height={450}
-                    width={1250}
+                    key = {this.state.keyValue}
+                    height={410}
+                    width={980}
                     data={this.state.dataTree}
-                    valueUnit={"Patients"}
+                    valueUnit={"Diagnoses"}
                     onChangeNode={this.onChangeNode.bind(this)}
-            />
+                  />
+                 
                   </div>
                 </div> 
            
