@@ -4,6 +4,7 @@ import './App.css';
 import Selection from "./components/Layout/Selection";
 import Navbar from "./components/Layout/Navbar";
 import PatientCount from "./components/Graph/PatienCount";
+import Search from "./components/Layout/Search"
 import TreeMapWraper from "./components/TreeMapWraper";
 //import {Doughnut,Line} from 'react-chartjs-2';
 
@@ -44,17 +45,43 @@ export default class App extends React.Component<{}, MyState> {
           operatorList : [],
           selectionNameList : [],
           keyValue : 0
-        };  
+        };
         this.initNewData = this.initNewData.bind(this);
         this.resetTree = this.resetTree.bind(this);
       }
-      
+
 
       onChangeNode(currentNode: any){
         this.setState({
           currentNode: currentNode
         });
       };
+      screenInfoHeightDisplay(){
+        var displayheight= window.screen.availHeight;
+
+        return  displayheight
+      }
+     screenInfoWidthDisplay(){
+        var displaywidth= window.screen.availWidth;
+
+        return displaywidth
+     }
+  screenInfoHeight(){
+        var displayheight= window.screen.availHeight;
+        var height
+        if(displayheight==828){
+            height=450
+        }
+        return  height
+    }
+    screenInfoWidth(){
+        var displaywidth= window.screen.availWidth;
+        var width
+        if(displaywidth==1440){
+            width=1120
+        }
+        return width
+    }
 
       onButtonAdd(){
         console.log("ADD Button Press");
@@ -64,7 +91,7 @@ export default class App extends React.Component<{}, MyState> {
           this.setState({
             selectionNameList :  this.state.selectionNameList.concat(["Diagnoses"])
           });
-          
+
         };
 
         if(this.state.currentNode.length !== 0){
@@ -76,14 +103,14 @@ export default class App extends React.Component<{}, MyState> {
             },() => {
               this.fetchData();
             })
-            
+
           }else{
             console.log("Merkmal schon enthalten")
           };
         };
       };
-      
-     
+
+
       onButtonDelete(){
         console.log("Delete Pressed");
         let selectionNameList = this.state.selectionNameList;
@@ -118,7 +145,7 @@ export default class App extends React.Component<{}, MyState> {
        })
             .then(function (data: any) {
               console.log('Request success: ', data);
-              
+
 
            }).then(this.initNewData)
            .catch((e: any) => console.log("Request error NAV", e));
@@ -160,7 +187,7 @@ export default class App extends React.Component<{}, MyState> {
         this.fetchNav();
         this.fetchPCount();
         this.fetchDCount();
-        
+
       }
 
       resetTree(){
@@ -168,7 +195,7 @@ export default class App extends React.Component<{}, MyState> {
           keyValue : this.state.keyValue +1
         })
       }
-    
+
       componentDidMount(){
 
         this.fetchNav();
@@ -176,7 +203,7 @@ export default class App extends React.Component<{}, MyState> {
         this.fetchDCount();
       };
 
-    
+
     public render() {
       console.log("Render");
         return (
@@ -189,41 +216,57 @@ export default class App extends React.Component<{}, MyState> {
                 <div id = "Links">
                   <div id = "Selektion">
                     <Selection selName = {this.state.selectionNameList}></Selection>
-                    <div>
-                      <button onClick = {this.onButtonAdd.bind(this)}>Add</button>
-                      <button onClick = {this.onButtonDelete.bind(this)}>Delete</button>
-                    </div>
+
                   </div>
                   <div id="Treemap" >
+                      <div>
+                      <button className={'AddButton'} onClick = {this.onButtonAdd.bind(this)}>Add</button>
+                      <button className={'DeleteButton'}onClick = {this.onButtonDelete.bind(this)}>Delete</button>
+                    </div>
                   <TreeMap
                     key = {this.state.keyValue}
-                    height={410}
-                    width={980}
+                    height={this.screenInfoHeight()}
+                        width={this.screenInfoWidth()}
+                    bgColorRangeLow={"#F8EFD0"}
+                    bgColorRangeHigh={"#E6C24A"}
                     data={this.state.dataTree}
                     valueUnit={"Diagnoses"}
                     onChangeNode={this.onChangeNode.bind(this)}
                   />
-                 
+
                   </div>
-                </div> 
-           
+                </div>
+
                 <div id ="Rechts">
                   <div id = "Suchleiste">
-                      <div>
-                        <PatientCount data = {this.state.patientCount}/>
-                      </div>
+                        <Search></Search>
                   </div>
                   <div id = "Graphen">
-                
+                      <div id="PatientenAnzahl"> <PatientCount  data = {this.state.patientCount}/>
+                         <br/> Breite<input id="xyz" value={this.screenInfoWidthDisplay()}></input> <br/> Höhe<input id="xyz" value={this.screenInfoHeightDisplay()}></input>
+
+                      </div>
+                      <div className="vertical-menu">
+                          <div id="GeschlechtGraph"> GeschlechtGraph</div><br/>
+                          <div id="AlterGraph">AlterGraph</div><br/>
+                          <div id="AllgemeinGraph">AllgemeinGraph</div><br/>
+                          <div id="NebendiagnosenGraph">NebendiagnosenGraph</div>
+                      </div>
+
+
                   </div>
+
                   <div id="buttons">
-                   
+                        <form method='GET' action="runpage.html">
+                          <input type="submit" id="RunButton" value="Run"  className="RunButton"></input>
+
+                        </form>
+
                   </div>
                 </div>
               </div>
           </div>
         );
       }
-      
-    }
 
+    }
