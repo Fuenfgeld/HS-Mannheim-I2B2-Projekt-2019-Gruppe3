@@ -24,12 +24,10 @@ type MyState = {dataTree:any,
                 selectionList:any,
                 operatorList:any,
                 selectionNameList:any,
-                keyValue : number,
-                init : boolean};
+                keyValue : number};
 
 
 const data = require("./data/dataAllChild.json");
-let keyValueG = 1;
 
 export default class App extends React.Component<{}, MyState> {
 
@@ -45,8 +43,7 @@ export default class App extends React.Component<{}, MyState> {
           selectionList : [],
           operatorList : [],
           selectionNameList : [],
-          keyValue : 0,
-          init : true
+          keyValue : 0
         };  
         this.initNewData = this.initNewData.bind(this);
         this.resetTree = this.resetTree.bind(this);
@@ -84,12 +81,6 @@ export default class App extends React.Component<{}, MyState> {
             console.log("Merkmal schon enthalten")
           };
         };
-
-        console.log(this.state.selectionNameList);
-        console.log(this.state.selectionList);
-        console.log(this.state.patientCount);
-        console.log(keyValueG);
-        console.log(this.state.keyValue);
       };
       
      
@@ -107,7 +98,7 @@ export default class App extends React.Component<{}, MyState> {
           selectionList : selectionList,
           operatorList : operatorList
         },() => {
-          this.fetchData.bind(this);
+          this.fetchData();
         })
       }
 
@@ -131,23 +122,8 @@ export default class App extends React.Component<{}, MyState> {
 
            }).then(this.initNewData)
            .catch((e: any) => console.log("Request error NAV", e));
-
-           //this.fetchNavBuffer();
       }
 
-      fetchNavBuffer(){
-        for (let i = 0; i < 5; i++) {
-          setTimeout(()=>{
-            this.fetchNav();
-            this.fetchPCount();
-          },25000)
-        }
-        setTimeout(() =>{
-          this.setState({
-            keyValue : this.state.keyValue + 1
-          })
-        },50000)
-      }
 
       fetchNav(){
         console.log("FetchNav");
@@ -158,7 +134,6 @@ export default class App extends React.Component<{}, MyState> {
         .then(new_data => this.setState({dataTree : new_data}))
         .then(this.resetTree)
         .catch(e => console.log("Fetching error NAV", e));
-        keyValueG = keyValueG +1;
       };
 
       fetchPCount(){
@@ -182,8 +157,6 @@ export default class App extends React.Component<{}, MyState> {
       initNewData(){
         console.log("Data Init");
 
-        console.log(this.state.keyValue);
-
         this.fetchNav();
         this.fetchPCount();
         this.fetchDCount();
@@ -191,13 +164,9 @@ export default class App extends React.Component<{}, MyState> {
       }
 
       resetTree(){
-        console.log(this.state.keyValue);
-
         this.setState({
           keyValue : this.state.keyValue +1
         })
-
-        console.log(this.state.keyValue);
       }
     
       componentDidMount(){
@@ -205,22 +174,8 @@ export default class App extends React.Component<{}, MyState> {
         this.fetchNav();
         this.fetchPCount();
         this.fetchDCount();
-
-        console.log(this.state.patientCount);
       };
 
-      /*
-      componentWillUpdate(){
-        this.fetchNav();
-        this.fetchPCount();
-        if(this.state.fetchEnable){
-          this.fetchData();
-          this.setState({
-            fetchEnable : false
-          });
-        }
-      }
-      */
     
     public render() {
       console.log("Render");
