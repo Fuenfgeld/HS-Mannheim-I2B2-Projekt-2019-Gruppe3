@@ -4,11 +4,6 @@ import './App.css';
 import Selection from "./components/Layout/Selection";
 import Navbar from "./components/Layout/Navbar";
 import PatientCount from "./components/Graph/PatienCount";
-<<<<<<< HEAD
-=======
-import Search from "./components/Layout/Search"
-import TreeMapWraper from "./components/TreeMapWraper";
->>>>>>> FrontEnd
 //import {Doughnut,Line} from 'react-chartjs-2';
 
 
