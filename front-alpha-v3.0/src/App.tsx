@@ -178,8 +178,6 @@ export default class App extends React.Component<{}, MyState> {
 
 
       fetchNav(){
-        console.log("FetchNav");
-
         fetch(urlI2B2).then(res => {
           return res.json();
         })
@@ -189,7 +187,6 @@ export default class App extends React.Component<{}, MyState> {
       };
 
       fetchPCount(){
-        console.log("fetchPCount")
         fetch(urlPCount).then(res => {
           return res.json();
         })
@@ -198,7 +195,6 @@ export default class App extends React.Component<{}, MyState> {
       };
 
       fetchDCount(){
-        console.log("fetchDCount")
         fetch(urlPCount).then(res => {
           return res.json();
         })
@@ -207,12 +203,9 @@ export default class App extends React.Component<{}, MyState> {
       }
 
       initNewData(){
-        console.log("Data Init");
-
         this.fetchNav();
         this.fetchPCount();
         this.fetchDCount();
-
       }
 
       resetTree(){
@@ -222,7 +215,6 @@ export default class App extends React.Component<{}, MyState> {
       }
 
       componentDidMount(){
-
         this.fetchNav();
         this.fetchPCount();
         this.fetchDCount();
