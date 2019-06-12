@@ -28,6 +28,7 @@ class DBConnector(object):
                 print('connection established\n{}'.format(db_version[0]))
 
         return cls._instance
+        
 
     def __init__(self):
         self.connection = self._instance.connection
