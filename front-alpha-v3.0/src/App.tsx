@@ -63,7 +63,7 @@ export default class App extends React.Component<{}, MyState> {
           dataTree : data,
           dataAge : {},
           dataFM : {},
-          patientCount : 134,
+          patientCount : [82,52],
           diagnoseCount : [],
           currentNode : [],
           selectionList : [],
