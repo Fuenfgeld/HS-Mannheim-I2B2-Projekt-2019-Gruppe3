@@ -14,10 +14,11 @@ class DBConnector(object):
             try:
                 print('connecting to PostgreSQL database...')
                 connection = DBConnector._instance.connection = psycopg2.connect(**db_config)
-                cursor = DBConnector._instance.cursor = connection.cursor()
+                cursor = connection.cursor()
                 cursor.execute('SELECT VERSION()')
                 db_version = cursor.fetchone()
                 cursor.execute('set search_path to public,i2b2demodata,i2b2metadata')
+                cursor.close()
 
             except Exception as error:
                 print('Error: connection not established {}'.format(error))
@@ -30,13 +31,14 @@ class DBConnector(object):
 
     def __init__(self):
         self.connection = self._instance.connection
-        self.cursor = self._instance.cursor
 
     def query(self, sql_query):
         try:
+            cursor = self.connection.cursor()
             sql_query = (str(sql_query)).replace('\\', '\\\\')
-            self.cursor.execute(sql_query)
-            result = self.cursor.fetchall()
+            cursor.execute(sql_query)
+            result = cursor.fetchall()
+            cursor.close()
         except Exception as error:
             print('error execting query "{}", error: {}'.format(sql_query, error))
             return None
@@ -45,4 +47,3 @@ class DBConnector(object):
 
     def __del__(self):
         self.connection.close()
-        self.cursor.close()

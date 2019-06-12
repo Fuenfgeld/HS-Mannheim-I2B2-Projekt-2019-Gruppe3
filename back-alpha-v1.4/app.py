@@ -1,6 +1,6 @@
 from navigation_data import NavigationData
 from observer import Observer
-from graph_data import GraphDataPatientNumber,GraphDataDiagnoseCount
+from graph_data import GraphDataPatientNumber, GraphDataDiagnoseCount
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
 from flask_cors import CORS
