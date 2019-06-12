@@ -30,16 +30,20 @@ const data = [
   },
 ];
 
-export default class GraphVictory extends React.Component{
+type GraphProps = {
+  data? : any
+}
+
+
+export default class GraphVictory extends  React.Component<GraphProps, {}> {
 render() {
-    let data = this.props.data;
+    
     return (
             < VictoryChart
                 // domainPadding will add space to each side of VictoryBar to
                 // prevent it from overlapping the axis
                 theme={CostumTheme}
-                containerComponent={<VictoryVoronoiContainer/>}
-
+              
                 height={400}
                 width={500}
 
@@ -59,14 +63,14 @@ render() {
                     data={data}
                     x={"name"}
                     y={"pv"}
-                    labelComponent ={<VictoryTooltip
-                    text={(d)=>d.pv }
-                    dy={10}/>}
                 />
                 <VictoryBar
                     data={data}
                     x={"label"}
                     y={"pv"}
+                    labels = {(d: { pv: any; }) => d.pv}
+                    labelComponent = {<VictoryTooltip/>}
+                   
                 />
             </VictoryChart>
     );
