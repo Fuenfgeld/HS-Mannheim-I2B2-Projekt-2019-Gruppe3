@@ -129,12 +129,12 @@ padding:10px;
     overflow: auto;
     position: relative;
     white-space: nowrap;
-  height: 630px;
+  height: 950px;
 }
 #GeschlechtGraph{
   position: relative;
     width: 90%;
-    height :280px;
+    height :380px;
     background-color: #F9F9F9;
     display: inline-block;
     text-align: center;
@@ -150,7 +150,7 @@ padding:10px;
 #AlterGraph{
 position: relative;
     width: 90%;
-    height :280px;
+    height :380px;
     background-color: #F9F9F9;
     display: inline-block;
     text-align: center;
@@ -166,7 +166,7 @@ position: relative;
 #NebendiagnosenGraph{
 position: relative;
     width: 90%;
-    height :280px;
+    height :380px;
     background-color: #F9F9F9;
     display: inline-block;
     text-align: center;
@@ -182,7 +182,7 @@ position: relative;
 #AllgemeinGraph{
 position: relative;
     width: 90%;
-    height :280px;
+    height :380px;
     background-color: #F9F9F9;
     display: inline-block;
     text-align: center;
@@ -371,10 +371,10 @@ li a:hover {
     border-style: solid;
 }
 #Links {
-    width: 79%;
+    width: 69%;
 }
 #Rechts {
-    width: 20%;
+    width: 30%;
     margin-left: 0.5%;
 }
 #Selektion {
@@ -413,7 +413,7 @@ li a:hover {
 
 #Treemap{
     width: 100%;
-    height: 680px;
+    height: 1000px;
     float:left;
     text-align: left;
     border-color: white;
@@ -474,10 +474,11 @@ li a:hover {
 #Graphen{
     width: 100%;
     float:left;
-    height:775px;
+    height:1100px;
     border-color: white;
     border-width: 1px;
     border-style: solid;
+
 }
 
 
