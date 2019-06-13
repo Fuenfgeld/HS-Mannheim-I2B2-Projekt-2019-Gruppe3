@@ -1,9 +1,10 @@
 from navigation_data import NavigationData
 from observer import Observer
-from graph_data import GraphDataPatientNumber, GraphDataDiagnoseCount
+from graph_data import GraphDataPatientNumber, GraphDataDiagnoseCount, GraphDataGenderDistribution, GraphDataAgeDistribution
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+
 
 # connect to i2b2 Database
 DBConnector()
@@ -11,13 +12,14 @@ DBConnector()
 myObserver = Observer()
 # build navigation tree
 navigation = NavigationData("icd10_icd9")
-patient_count = GraphDataPatientNumber()
 diagnose_count = GraphDataDiagnoseCount()
-
+gender_distribution = GraphDataGenderDistribution()
+age_distribution =GraphDataAgeDistribution()
 # register all components
 myObserver.register(navigation)
-myObserver.register(patient_count)
+myObserver.register(gender_distribution)
 myObserver.register(diagnose_count)
+myObserver.register(age_distribution)
 # TODO GRapdata erstelle und GRapehn
 
 app = Flask(__name__)
@@ -44,9 +46,9 @@ def data_selection():
     return jsonify({"State": "Success"})
 
 
-@app.route("/api/patientcount/data", methods=['GET'])
+@app.route("/api/gender_distribution/data", methods=['GET'])
 def get_data1():
-    json_data = jsonify(patient_count.data)
+    json_data = jsonify(gender_distribution.data)
     return json_data
 
 
@@ -55,11 +57,15 @@ def get_data2():
     json_data = jsonify(diagnose_count.data)
     return json_data
 
+@app.route("/api/age_distribution/data", methods=['GET'])
+def get_data3():
+    json_data = jsonify(age_distribution.data)
+    return json_data
 
 @app.route("/api/graph3/data", methods=['GET'])
-def get_data3():
+def get_data4():
     pass
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',port=5000)
