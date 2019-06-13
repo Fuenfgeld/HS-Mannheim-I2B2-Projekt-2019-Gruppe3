@@ -5,29 +5,29 @@ import Selection from "./components/Layout/Selection";
 import Navbar from "./components/Layout/Navbar";
 import PatientCount from "./components/Graph/PatienCount";
 import Search from "./components/Layout/Search"
-//import GraphReChart from "./components/Graph/GraphReChart";
 import GraphVictory from "./components/Graph/GraphVictory";
+import GraphAgeMF from "./components/Graph/GraphAgeMF";
 
-//import {Doughnut,Line} from 'react-chartjs-2';
 
 
-const urlAGE ="http://localhost:5000/data";
-const urlFlare ="http://localhost:5000/flaredemo";
+
 const urlI2B2 ="http://127.0.0.1:5000/api/navigation/data";
 const urlSel = "http://localhost:5000/api/selection/data";
 const urlPCount = "http://localhost:5000/api/gender_distribution/data";
 const urlDCount = "http://localhost:5000/api/diagnosecount/data";
+const urlAgeDist = "http://localhost:5000/api/age_distribution/data"
 
-type MyState = {dataTree:any,
-                dataAge:any,
-                dataFM:any,
+type MyState = {dataTree : any,
+                dataAge : any,
+                dataFM : any,
                 patientCount : any,
                 diagnoseCount : string[],
-                currentNode:any,
-                selectionList:any,
-                operatorList:any,
-                selectionNameList:any,
-                keyValue : number};
+                currentNode : any,
+                selectionList : any,
+                operatorList : any,
+                selectionNameList : any,
+                keyValue : number,
+                ageDist : any};
 
 
 
@@ -69,7 +69,8 @@ export default class App extends React.Component<{}, MyState> {
           selectionList : [],
           operatorList : [],
           selectionNameList : [],
-          keyValue : 0
+          keyValue : 0,
+          ageDist : []
         };
         this.initNewData = this.initNewData.bind(this);
         this.resetTree = this.resetTree.bind(this);
@@ -202,10 +203,19 @@ export default class App extends React.Component<{}, MyState> {
         .catch(e => console.log("Fetching error DCount", e));
       }
 
+      fetchAgeDist(){
+        fetch(urlAgeDist).then(res => {
+          return res.json();
+        })
+        .then(new_data => this.setState({ageDist : new_data}))
+        .catch(e => console.log("Fetching error DCount", e));
+      }
+
       initNewData(){
         this.fetchNav();
         this.fetchPCount();
         this.fetchDCount();
+        this.fetchAgeDist();
       }
 
       resetTree(){
@@ -215,9 +225,7 @@ export default class App extends React.Component<{}, MyState> {
       }
 
       componentDidMount(){
-        this.fetchNav();
-        this.fetchPCount();
-        this.fetchDCount();
+        this.initNewData();
       };
 
 
@@ -263,7 +271,7 @@ export default class App extends React.Component<{}, MyState> {
                       </div>
                       <div className="vertical-menu">
                           <div id="GeschlechtGraph"> 
-                          
+                            <GraphAgeMF data = {this.state.ageDist}/>
                           </div><br/>
                           <div id="AlterGraph">
                             <GraphVictory
