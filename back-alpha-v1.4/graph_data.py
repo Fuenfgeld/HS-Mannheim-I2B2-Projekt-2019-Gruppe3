@@ -38,7 +38,7 @@ class GraphDataGenderDistribution:
         return result
 
 
-class GraphDataGenderDistribution:
+class GraphDataAgeDistribution:
 
     def __init__(self):
         self.data = self.get_age_distribution()
@@ -48,14 +48,14 @@ class GraphDataGenderDistribution:
 
     def get_age_distribution(self, data_change=None):
         db = DBConnector()
-        age_data = []
+        result = {"data": []}
         for i in range(0, 90, 10):
-            sql_query = age_distribution(i, i + 10, data_change)
-            data = db.query(sql_query)[0][0]
-            age_data.append(data)
-
-        labels = ["0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-80", "90-100"]
-        result = {"lable": labels, "data": age_data}
+            sql_query = age_distribution(i, i + 10, 'F', data_change)
+            age_data_f = db.query(sql_query)[0][0]
+            sql_query = age_distribution(i, i + 10, 'M', data_change)
+            age_data_m = db.query(sql_query)[0][0]
+            date_element = {"name": str(i)+"-"+str(i+10), "F": age_data_f, "M":age_data_m}
+            result["data"].append(date_element)
 
         return result
 
@@ -84,11 +84,13 @@ class GraphDataDiagnoseCount:
 if __name__ == '__main__':
     db = DBConnector()
     myGraph = GraphDataPatientNumber()
-    myGraph2 = GraphDataDiagnoseCount()
-    c_dimcode = r'\Diagnoses\(M00-M99) Dise~6mvn\(M00-M25) Arth~kgqv\%'
-    c_dimcode2 = r'\Diagnoses\(I00-I99) Dise~3w8h\%'
+    myGraph2 = GraphDataAgeDistribution()
+    c_dimcode = r'\Diagnoses\(M00-M99) Dise~6mvn\(M00-M25) Arth~kgqv'
+    c_dimcode2 = r'\Diagnoses\(I00-I99) Dise~3w8h'
     data_change = {'selection': [['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode],
                                  ['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode2]],
-                   'operator': ['AND', 'OR']}
-    myGraph2.update(data_change)
+                   'operator': ['INTERSECT', 'UNION']}
+    myGraph.update(data_change)
+   # myGraph2.update(data_change)
+    print(myGraph.data)
     print(myGraph2.data)
