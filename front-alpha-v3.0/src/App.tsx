@@ -6,6 +6,8 @@ import Navbar from "./components/Layout/Navbar";
 import PatientCount from "./components/Graph/PatienCount";
 import Search from "./components/Layout/Search"
 import GraphVictory from "./components/Graph/GraphVictory";
+//import GraphAgeMF from "./components/Graph/GraphAgeMF";
+import GenderDist from "./components/Graph/GenderDist";
 import GraphAgeMF from "./components/Graph/GraphAgeMF";
 
 
@@ -70,12 +72,11 @@ export default class App extends React.Component<{}, MyState> {
           operatorList : [],
           selectionNameList : [],
           keyValue : 0,
-          ageDist : []
+          ageDist : {"data":[{"F":1,"M":0,"name":"0-10"},{"F":11,"M":20,"name":"10-20"},{"F":9,"M":12,"name":"20-30"},{"F":13,"M":22,"name":"30-40"},{"F":6,"M":15,"name":"40-50"},{"F":2,"M":6,"name":"50-60"},{"F":4,"M":6,"name":"60-70"},{"F":3,"M":1,"name":"70-80"},{"F":3,"M":0,"name":"80-90"}]}
         };
         this.initNewData = this.initNewData.bind(this);
         this.resetTree = this.resetTree.bind(this);
       }
-
 
       onChangeNode(currentNode: any){
         this.setState({
@@ -225,7 +226,10 @@ export default class App extends React.Component<{}, MyState> {
       }
 
       componentDidMount(){
-        this.initNewData();
+        this.fetchNav();
+        this.fetchPCount();
+        this.fetchDCount();
+        this.fetchAgeDist();
       };
 
 
@@ -267,8 +271,9 @@ export default class App extends React.Component<{}, MyState> {
                         <Search></Search>
                   </div>
                   <div id = "Graphen">
-                      <div id="PatientenAnzahl"> <PatientCount  data = {this.state.patientCount}/>
-                      </div>
+                      <div id="PatientenAnzahl"> <PatientCount  data = {this.state.patientCount}/></div>
+                      <div id ="PatientenAnzahl"> <GenderDist  data = {this.state.patientCount}/> </div>
+                      
                       <div className="vertical-menu">
                           <div id="GeschlechtGraph"> 
                             <GraphAgeMF data = {this.state.ageDist}/>

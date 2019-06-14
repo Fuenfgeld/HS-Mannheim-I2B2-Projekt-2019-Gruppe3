@@ -118,7 +118,8 @@ form.example::after {
   display: table;
 }
 #PatientenAnzahl{
-  padding:10px;
+  float:left;
+  width : 50%;
   font-size: medium;
   font-family: Verdana bold;
 }

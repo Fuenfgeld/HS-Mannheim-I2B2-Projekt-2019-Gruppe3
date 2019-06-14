@@ -6,8 +6,7 @@ type PatProps = {
 }
 
 type PatState = {
-  perInM : number,
-  perInF : number,
+  perIn : number,
   perOut : number,
   maxP : number,
   init : boolean,
@@ -19,8 +18,7 @@ class PatientCount extends React.Component<PatProps,PatState> {
   constructor(){
     super();
     this.state = {
-      perInM : 50,
-      perInF : 50,
+      perIn : 100,
       perOut : 0,
       maxP : 134,
       init : false,
@@ -31,14 +29,12 @@ class PatientCount extends React.Component<PatProps,PatState> {
 
 componentDidUpdate(prevProps){ 
   if (prevProps.data !== this.props.data) {
-
-      let newPerInM = Math.round((100 / this.state.maxP) * this.props.data.data[0]);
-      let newPerInF = Math.round((100 / this.state.maxP) * this.props.data.data[1]);
-      let newPerOut = 100 -(newPerInF + newPerInM);
+      let pGes = this.arrSum(this.props.data.data);
+      let newPerIn = Math.round((100 / this.state.maxP) * pGes);
+      let newPerOut = 100 -(newPerIn);
 
       this.setState({
-        perInM : newPerInM,
-        perInF : newPerInF,
+        perIn : newPerIn,
         perOut : newPerOut,
         pComp : this.arrSum(this.props.data.data)
       })
@@ -64,12 +60,13 @@ render() {
         <VictoryPie
           standalone={false}
           width={400} height={400}
-          colorScale={["#123440","#E6C24A","#EBD2A9"]}
+          colorScale={["#123440","#ECE9D6"]}
           data={[
-            { y: this.state.perInM, label:"Male" },{ y: this.state.perInF, label:"Female"}, { y: this.state.perOut }
+            { y: this.state.perIn, label:"Patients in Selektion" }, { y: this.state.perOut }
           ]}
+          cornerRadius ={25}
           innerRadius={130} 
-          labelRadius={100}
+          labelRadius={140}
           labelComponent={<VictoryTooltip
                             cornerRadius ={20}
                             />}
@@ -80,7 +77,7 @@ render() {
           textAnchor="middle"
           style={{ fontSize: 40 }}
           x={200} y={200}
-          text= {(this.state.perInM+this.state.perInF)+"% \n"+(this.state.pComp)}
+          text= {(this.state.perIn)+"% \n"+(this.state.pComp)}
         />
        
       </svg>
