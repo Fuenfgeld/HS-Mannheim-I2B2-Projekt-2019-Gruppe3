@@ -32,7 +32,7 @@ class SelectionChild extends React.Component<SelChProps, SelChState> {
                 <div>
                     <div >
                         <button type = "buttons" id = "dropdown"><Dropdown options={options} onChange = {this.onChange} value ={defaultOption} placeholder="AND"/></button><br/>
-                        <br/><p id="DiagnoseName">{this.props.name}</p><br/>
+                        <p id="DiagnoseName">{this.props.name}</p>
 
                         <label className="container">Not
                         <input type="checkbox" />

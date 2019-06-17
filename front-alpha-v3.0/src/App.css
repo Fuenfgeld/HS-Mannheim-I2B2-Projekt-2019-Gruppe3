@@ -3,7 +3,7 @@
 }
 
 #Navigation {
-    background-color: #123440;
+    background-color: #09505c;
     overflow: hidden;
 }
 #DiagnoseName{
@@ -11,7 +11,6 @@
   border-style: solid;
   border-width: 2px;
   overflow:auto;
-
 }
 
 /* Customize the label (the container) */
@@ -133,19 +132,9 @@ padding:10px;
   height: 950px;
 }
 #GeschlechtGraph{
+  float: left;
   position: relative;
-    width: 90%;
-    height :380px;
-    background-color: #F9F9F9;
-    display: inline-block;
-    text-align: center;
-    padding: 14px;
-    text-decoration: none;
-    border-color: white ;
-    border-style: solid;
-    overflow: hidden;
-    z-index: 0;
-  color: black;
+  width: 100%;
 }
 
 #AlterGraph{
@@ -194,12 +183,6 @@ position: relative;
     overflow: hidden;
     z-index: 0;
   color: black;
-}
-
-
-#buttonsSelektion{
-  background-color: #ECE9D6;
-  border-color: white;
 }
 
 .AddButton {
@@ -287,7 +270,8 @@ position: relative;
 }
 
 .RunButton {
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  float: right;
+ 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
@@ -324,7 +308,7 @@ position: relative;
 	background-color:#f6f6f6;
 }
 
-.AddButton:active {
+.RunButton:active {
 	position:relative;
 	top:1px;
 }
@@ -362,6 +346,8 @@ li a:hover {
     border-color: white;
     border-width: 1px;
     border-style: solid;
+  width: 30%;
+  margin-right: 0.5%;
 }
 #Links{
     float: left;
@@ -370,18 +356,14 @@ li a:hover {
     border-color: white;
     border-width: 1px;
     border-style: solid;
+  width: 69%;
 }
-#Links {
-    width: 69%;
-}
-#Rechts {
-    width: 30%;
-    margin-left: 0.5%;
-}
+
+
 #Selektion {
     width: 100%;
     float: left;
-    height: 180px;
+      height: calc(100% -210px);
     border-color: white;
     border-width: 1px;
     border-style: solid;
@@ -393,13 +375,14 @@ li a:hover {
     overflow: auto;
     position: relative;
     white-space: nowrap;
+    height: 200px;
 }
 
 #Merkmal {
     position: relative;
     width: 30%;
-    height :145px;
-    background-color: #123440;
+    height :140px;
+    background-color: #095a5c;
     display: inline-block;
     text-align: center;
     padding: 14px;
@@ -408,7 +391,7 @@ li a:hover {
     border-style: solid;
     overflow: hidden;
     z-index: 0;
-  color: WHITE;
+    color: WHITE;
 }
 
 
@@ -423,15 +406,7 @@ li a:hover {
     color: #123440;
   background-color: #ECE9D6;
 }
-#add{
-    float: left;
-    border-radius: 20%;
-    position: absolute;
-    top: 32%;
-    left: 74%;
-   background-color: #EBD2A9;
 
-}
 .button{
   float:left;
   background-color: #E6C24A;

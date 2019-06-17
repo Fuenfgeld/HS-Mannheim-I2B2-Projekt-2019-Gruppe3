@@ -126,7 +126,7 @@ export default class App extends React.Component<{}, MyState> {
             this.setState({
               selectionNameList :  this.state.selectionNameList.concat([this.state.currentNode.data.name]),
               selectionList : this.state.selectionList.concat([this.state.currentNode.data.selection]),
-              operatorList : this.state.operatorList.concat(["AND"])
+              operatorList : this.state.operatorList.concat(["INTERSECT"])
             },() => {
               this.fetchData();
             })
@@ -251,6 +251,9 @@ export default class App extends React.Component<{}, MyState> {
                       <div>
                       <button className={'AddButton'} onClick = {this.onButtonAdd.bind(this)}>Add</button>
                       <button className={'DeleteButton'}onClick = {this.onButtonDelete.bind(this)}>Delete</button>
+                      <form method='GET' action="runpage.html">
+                          <input type="submit" id="RunButton" value="Run"  className="RunButton"></input>
+                      </form>
                     </div>
                   <TreeMap
                     key = {this.state.keyValue}
@@ -273,8 +276,6 @@ export default class App extends React.Component<{}, MyState> {
                   <div id = "Graphen">
                       <div id="PatientenAnzahl"> <PatientCount  data = {this.state.patientCount}/></div>
                       <div id ="PatientenAnzahl"> <GenderDist  data = {this.state.patientCount}/> </div>
-                      
-                      <div className="vertical-menu">
                           <div id="GeschlechtGraph"> 
                             <GraphAgeMF data = {this.state.ageDist}/>
                           </div><br/>
@@ -285,16 +286,10 @@ export default class App extends React.Component<{}, MyState> {
                             </div><br/>
                           <div id="AllgemeinGraph">AllgemeinGraph</div><br/>
                           <div id="NebendiagnosenGraph">NebendiagnosenGraph</div>
-                      </div>
-
-
                   </div>
 
                   <div id="buttons">
-                        <form method='GET' action="runpage.html">
-                          <input type="submit" id="RunButton" value="Run"  className="RunButton"></input>
-
-                        </form>
+                
 
                   </div>
                 </div>
