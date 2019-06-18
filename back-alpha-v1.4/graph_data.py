@@ -54,13 +54,34 @@ class GraphDataAgeDistribution:
             age_data_f = db.query(sql_query)[0][0]
             sql_query = age_distribution(i, i + 10, 'M', data_change)
             age_data_m = db.query(sql_query)[0][0]
-            date_element = {"name": str(i)+"-"+str(i+10), "F": age_data_f, "M":age_data_m}
+            date_element = {"name": str(i) + "-" + str(i + 10), "F": age_data_f, "M": age_data_m}
             result["data"].append(date_element)
 
         return result
 
 
 class GraphDataDiagnoseCount:
+
+    def __init__(self):
+        self.data = self.get_all_diagnose()
+
+    def update(self, data_change):
+        self.data = self.get_all_diagnose(data_change)
+
+    def get_all_diagnose(self, data_change=None):
+        db = DBConnector()
+        data = db.query(diagnoses_count(data_change))
+        lables = []
+        data_count = []
+        for element in data:
+            lables.append(element[0])
+            data_count.append(element[1])
+        result = {"lable": lables, "data": data_count}
+
+        return result
+
+
+class GraphDataDiagnoseGenderCount:
 
     def __init__(self):
         self.data = self.get_all_diagnose()
@@ -91,6 +112,6 @@ if __name__ == '__main__':
                                  ['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode2]],
                    'operator': ['INTERSECT', 'UNION']}
     myGraph.update(data_change)
-   # myGraph2.update(data_change)
+    # myGraph2.update(data_change)
     print(myGraph.data)
     print(myGraph2.data)

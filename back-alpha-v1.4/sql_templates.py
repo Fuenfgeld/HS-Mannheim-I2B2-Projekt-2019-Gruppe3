@@ -61,7 +61,7 @@ def tree_patient_count_first_hierachielvl(table_name, like, selection=None):
     return sql_query
 
 
-# Statisiks Querys
+############################################## Statisiks Querys ###################################################
 def all_patient(selection=None):
     sql_query = """SELECT COUNT(patient_num) FROM i2b2demodata.patient_dimension;"""
     if selection is not None:
@@ -96,7 +96,8 @@ def gender_equal_female(selection=None):
 
 def age_distribution(begin, end, gender, selection=None):
     sql_query = """SELECT COUNT(patient_num) FROM i2b2demodata.patient_dimension 
-                   WHERE age_in_years_num >= {} and age_in_years_num <{} AND sex_cd = '{}' """.format(begin, end, gender)
+                   WHERE age_in_years_num >= {} and age_in_years_num <{} AND sex_cd = '{}' """.format(begin, end,
+                                                                                                      gender)
     if selection is not None:
         pattern = selection_patient_count(selection)
         if pattern != "":
@@ -121,6 +122,50 @@ def diagnoses_count(selection=None):
                                 inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
                                 right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
                             WHERE patient_num in ( {} )
+                            group by c_name
+                            order by anzahl desc limit 10;""".format(pattern)
+
+    return sql_query
+
+
+def diagnoses_male_count(selection=None):
+    sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl
+                            FROM i2b2demodata.observation_fact demo_obs
+                                inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
+                                right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
+                            WHERE sex_cd = 'M'
+                            group by c_name
+                            order by anzahl desc limit 10;"""
+    if selection is not None:
+        pattern = selection_patient_count(selection)
+        if pattern != "":
+            sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl
+                            FROM i2b2demodata.observation_fact demo_obs
+                                inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
+                                right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
+                            WHERE patient_num in ( {} ) AND sex_cd = 'M'
+                            group by c_name
+                            order by anzahl desc limit 10;""".format(pattern)
+
+    return sql_query
+
+
+def diagnoses_female_count(selection=None):
+    sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl
+                            FROM i2b2demodata.observation_fact demo_obs
+                                inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
+                                right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
+                            WHERE sex_cd = 'F'
+                            group by c_name
+                            order by anzahl desc limit 10;"""
+    if selection is not None:
+        pattern = selection_patient_count(selection)
+        if pattern != "":
+            sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl
+                            FROM i2b2demodata.observation_fact demo_obs
+                                inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
+                                right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
+                            WHERE patient_num in ( {} ) AND sex_cd = 'F'
                             group by c_name
                             order by anzahl desc limit 10;""".format(pattern)
 

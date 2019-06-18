@@ -1,5 +1,5 @@
 import unittest
-from db_connector import DBConnector
+from db_connector import DBConnector, get_ontology_names
 
 
 class InitTestCase(unittest.TestCase):
@@ -37,10 +37,20 @@ class SqlQueryTestCase(unittest.TestCase):
         self.assertEqual(expected, actual)
 
 
+class GetOntologyNamesTestCase(unittest.TestCase):
+
+    def test_getNames(self):
+        expected = ['i2b2', 'birn', 'schemes', 'table_access', 'custom_meta', 'ont_process_status', 'icd10_icd9']
+        actual = get_ontology_names()
+
+        self.assertEqual(actual, expected)
+
+
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(InitTestCase))
     suite.addTest(unittest.makeSuite(SqlQueryTestCase))
+    suite.addTest(unittest.makeSuite(GetOntologyNamesTestCase))
 
     return suite
 

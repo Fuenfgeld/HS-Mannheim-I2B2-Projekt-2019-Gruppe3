@@ -28,7 +28,6 @@ class DBConnector(object):
                 print('connection established\n{}'.format(db_version[0]))
 
         return cls._instance
-        
 
     def __init__(self):
         self.connection = self._instance.connection
@@ -48,3 +47,14 @@ class DBConnector(object):
 
     def __del__(self):
         self.connection.close()
+
+
+def get_ontology_names():
+    sql_query = """SELECT table_name FROM   information_schema.tables WHERE table_schema = 'i2b2metadata';"""
+    db_connection = DBConnector()
+    ontology_list = list()
+    ontology_names = db_connection.query(sql_query)
+    for name in ontology_names:
+        ontology_list.append(name[0])
+
+    return ontology_list

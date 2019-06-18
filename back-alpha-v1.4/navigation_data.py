@@ -1,4 +1,4 @@
-from db_connector import DBConnector
+from db_connector import DBConnector, get_ontology_names
 from list_into_tree_converter import list_into_tree_node
 from sql_templates import tree_root, tree_first_hierachielvl, tree_patient_count_first_hierachielvl
 
@@ -6,9 +6,13 @@ from sql_templates import tree_root, tree_first_hierachielvl, tree_patient_count
 class NavigationData:
 
     def __init__(self, table_name):
-        # :param table_name is a string of the table name in the database, like i2b2 or icd10_icd9
-        self.table_name = table_name
-        self.navigation_tree = self.build_navigation_tree()
+        ontology_names = get_ontology_names()
+        if table_name in ontology_names:
+            # :param table_name is a string of the table name in the database, like i2b2 or icd10_icd9
+            self.table_name = table_name
+            self.navigation_tree = self.build_navigation_tree()
+        else:
+            raise FileNotFoundError("Tablename is not in the db schema")
 
     def build_navigation_tree(self, data_change=None):
         db_connection = DBConnector()
