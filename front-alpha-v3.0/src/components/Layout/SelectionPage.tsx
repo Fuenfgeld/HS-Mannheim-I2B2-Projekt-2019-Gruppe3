@@ -19,8 +19,9 @@ import SecondaryDiaGraph from "../Graph/SecondaryDiaGraph";
 const urlI2B2 ="http://127.0.0.1:5000/api/navigation/data";
 const urlSel = "http://localhost:5000/api/selection/data";
 const urlPCount = "http://localhost:5000/api/gender_distribution/data";
-const urlDCount = "http://localhost:5000/api/diagnosecount/data";
-const urlAgeDist = "http://localhost:5000/api/age_distribution/data"
+const urlDCount = "http://localhost:5000/api/diagnose_count/data";
+const urlAgeDist = "http://localhost:5000/api/age_distribution/data";
+const urlSelAll = "http://localhost:5000/api/selection_name/data";
 
 type MyState = {dataTree : any,
                 dataAge : any,
@@ -195,10 +196,13 @@ export default class App extends React.Component<{}, MyState> {
       }
 
       fetchSelData(){
-        fetch(urlAgeDist).then(res => {
+        fetch(urlSelAll).then(res => {
           return res.json();
         })
-        .then(new_data => this.setState({ageDist : new_data}))
+        .then(new_data => this.setState({selectionList : new_data.selection,
+                                          operatorList : new_data.operator,
+                                          selectionNameList : new_data.names
+                                        }))
         .catch(e => console.log("Fetching error DCount", e));
       }
 
@@ -218,9 +222,10 @@ export default class App extends React.Component<{}, MyState> {
 
       componentDidMount(){
         this.fetchNav();
+        this.fetchSelData();
         this.fetchPCount();
         this.fetchDCount();
-        this.fetchAgeDist();
+        this.fetchAgeDist(); 
       };
 
 
