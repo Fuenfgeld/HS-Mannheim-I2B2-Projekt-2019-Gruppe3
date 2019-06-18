@@ -66,7 +66,7 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
         super(props, context);
 
         this._createD3TreeMap(this.props.width, this.props.height);
-
+        console.log("Treemap is constructed")
         // Default State values
         this.state = {
             height: this.props.height,
