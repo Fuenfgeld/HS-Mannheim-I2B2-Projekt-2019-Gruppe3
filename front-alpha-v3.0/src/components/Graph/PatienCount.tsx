@@ -20,7 +20,7 @@ class PatientCount extends React.Component<PatProps,PatState> {
     this.state = {
       perIn : 100,
       perOut : 0,
-      maxP : 134,
+      maxP : 100,
       init : false,
       pComp : 100
     };
@@ -56,7 +56,7 @@ componentDidMount(){
 render() {
     return (
      <div>
-         <svg viewBox="0 0 400 400">
+        <svg viewBox="0 0 400 400">
         <VictoryPie
           standalone={false}
           width={400} height={400}
@@ -77,9 +77,14 @@ render() {
           textAnchor="middle"
           style={{ fontSize: 40 }}
           x={200} y={200}
-          text= {(this.state.perIn)+"% \n"+(this.state.pComp)}
+          text= {(this.state.perIn)+"% \n"+(this.state.pComp)+" von "+(this.state.maxP)}
         />
-       
+       <VictoryLabel
+          textAnchor="middle"
+          style={{ fontSize: 40 }}
+          x={200} y={20}
+          text= {"Patient in selection"}
+        />
       </svg>
      </div>
     );

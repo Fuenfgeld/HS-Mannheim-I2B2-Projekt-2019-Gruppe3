@@ -48,7 +48,6 @@ render() {
     return (
      <div>
        <svg viewBox={`0 0 ${width} ${height}`}
-        style={{ width: "100%", height: "auto" }}
         
 
       >
@@ -87,6 +86,12 @@ render() {
           }}
         />
          </VictoryStack>
+         <VictoryLabel
+          textAnchor="middle"
+          style={{ fontSize: 40 }}
+          x={200} y={20}
+          text= {"Gender distribution"}
+        />
       </svg>
        
     </div>
