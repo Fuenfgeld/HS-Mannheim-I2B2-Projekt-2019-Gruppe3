@@ -37,15 +37,15 @@ class Ergebnis extends React.Component<SelChProps, SelChState> {
 
                     <div id = "Oben">
                         <div id = "Selektion">
-                            <Selection selName={".."}></Selection>
+                            <Selection selName={"...."}></Selection>
                         </div>
                     </div>
 
                     <div id="Unten">
                         Your Results
 
-                                <button className={'RunButton'}onClick = {this.onButtonSave.bind(this)}>Save</button>
-                                    <Link className={'RunButton'} to='/'>Edit</Link>
+                        <button className={'RunButton'}onClick = {this.onButtonSave.bind(this)}>Save</button>
+                        <Link className={'RunButton'} to='/'>Edit</Link>
 
                     </div>
             </div>
