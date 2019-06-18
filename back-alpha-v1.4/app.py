@@ -24,7 +24,7 @@ myObserver.register(age_distribution)
 
 app = Flask(__name__)
 CORS(app)
-selection_names = dict()
+selection_all = {"names": [], "selection": [], "operator": []}
 
 
 @app.route('/')
@@ -38,9 +38,9 @@ def data_trans():
     return json_data
 
 
-@app.route("/api/selectionname/data", methods=['GET'])
+@app.route("/api/selection_name/data", methods=['GET'])
 def get_selection_names():
-    json_data = jsonify(selection_names)
+    json_data = jsonify(selection_all)
     return json_data
 
 
@@ -48,7 +48,9 @@ def get_selection_names():
 def data_selection():
     data_change = request.get_json()
     print(data_change)
-    selection_names.values = data_change["selection_name"]
+    selection_all.values["names"].append(data_change["selection_name"])
+    selection_all.values["selection"].append(data_change["selection"])
+    selection_all.values["operator"].append(data_change["operator"])
     myObserver.dispatch(data_change)
 
     return jsonify({"State": "Success"})
@@ -60,7 +62,7 @@ def get_data1():
     return json_data
 
 
-@app.route("/api/diagnosecount/data", methods=['GET'])
+@app.route("/api/diagnose_count/data", methods=['GET'])
 def get_data2():
     json_data = jsonify(diagnose_count.data)
     return json_data
