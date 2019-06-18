@@ -24,7 +24,7 @@ class GenderDist extends React.Component<genProps,genState> {
     };
   }
 
-componentDidUpdate(prevProps){ 
+componentDidUpdate(prevProps: { data: any; }){ 
   if (prevProps.data !== this.props.data) {
     this.setState({
             m : [{y: 0},{y : this.props.data.data[0]},{y : 0}],

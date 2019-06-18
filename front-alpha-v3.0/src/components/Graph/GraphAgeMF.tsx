@@ -54,7 +54,7 @@ class GraphAgeMF extends React.Component<ageProps,ageState> {
   }
 
  
-componentDidUpdate(prevProps){ 
+componentDidUpdate(prevProps: { data: any; }){ 
 
     if (prevProps.data !== this.props.data) {
        this.setState({
@@ -151,7 +151,7 @@ render() {
             tickLabels: { fontSize: 20, fill: "black" }
           }}
           tickLabelComponent={<VictoryLabel x={250} textAnchor="middle"/>}
-          tickValues={this.state.dataM.map((point) => point.x).reverse()}
+          tickValues={this.state.dataM.map((point: { x: any; }) => point.x).reverse()}
         />
         <VictoryLabel
           textAnchor="middle"

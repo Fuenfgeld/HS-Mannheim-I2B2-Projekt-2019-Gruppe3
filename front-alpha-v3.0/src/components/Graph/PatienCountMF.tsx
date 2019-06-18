@@ -22,14 +22,14 @@ class PatientCount extends React.Component<PatProps,PatState> {
       perInM : 50,
       perInF : 50,
       perOut : 0,
-      maxP : 134,
+      maxP : 100,
       init : false,
       pComp : 100
     };
     
   }
 
-componentDidUpdate(prevProps){ 
+componentDidUpdate(prevProps: { data: any; }){ 
   if (prevProps.data !== this.props.data) {
 
       let newPerInM = Math.round((100 / this.state.maxP) * this.props.data.data[0]);
@@ -40,18 +40,17 @@ componentDidUpdate(prevProps){
         perInM : newPerInM,
         perInF : newPerInF,
         perOut : newPerOut,
-        pComp : this.arrSum(this.props.data.data)
+        pComp : this.props.data.data[0] + this.props.data.data[1]
       })
   }
 }
 
-arrSum = arr => arr.reduce((a,b) => a + b, 0);
 
 
 componentDidMount(){
   if(!this.state.init){
     this.setState({
-      maxP : this.arrSum(this.props.data),
+      maxP :this.props.data.data[0] + this.props.data.data[1],
       init : true
     })
   };

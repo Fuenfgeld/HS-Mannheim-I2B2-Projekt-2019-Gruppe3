@@ -6,7 +6,7 @@
         "sourceMap": true,
         "alwaysStrict": true,
         "declaration": false,
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,  
         "typeRoots": [

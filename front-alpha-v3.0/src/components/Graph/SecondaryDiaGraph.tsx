@@ -29,7 +29,7 @@ class SecondaryDiaGraph extends React.Component<secProps,secState> {
     }
   }
 
-componentDidUpdate(prevProps){ 
+componentDidUpdate(prevProps: { data: any; }){ 
   if (prevProps.data !== this.props.data) {
     this.setState({
       data : [

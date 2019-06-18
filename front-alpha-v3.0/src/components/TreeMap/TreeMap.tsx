@@ -66,6 +66,7 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
         super(props, context);
 
         this._createD3TreeMap(this.props.width, this.props.height);
+        console.log("Treemap is constructed")
         // Default State values
         this.state = {
             height: this.props.height,
@@ -89,7 +90,8 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
 
     // gives Node to Parnt Component (for Selektion)
     public onChangeNode(nodeCurrent: any){
-       
+        console.log("in onChange Treemap");
+        console.log("Node in onChangeNode",nodeCurrent)
         this.state.onChangeNode(nodeCurrent);
     };
 
@@ -230,6 +232,8 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
             backgroundColor = this._nodesbgColorFunction(1);
         }
         const colorText = Utils.getHighContrastColorFromString(backgroundColor);
+        console.log("getNode-Call");
+
        
        
        
@@ -306,6 +310,7 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
                     breadCrumbItems
                 });
 
+                console.log("zoomToo",currentNode)
                 this.onChangeNode(currentNode);
 
 

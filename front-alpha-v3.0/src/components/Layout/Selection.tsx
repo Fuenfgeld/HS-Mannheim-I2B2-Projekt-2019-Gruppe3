@@ -8,8 +8,14 @@ type SelProps = {selName:any}
 
 class Selektion extends React.Component<SelProps, SelState> {
 
+
+
+  
   render() {
     let names = this.props.selName;
+    console.log("sel props",this.props.selName)
+    console.log("sel name",names)
+
     let elements=[];
         for(let i=0;i<names.length;i++){
              // push the component to elements!
