@@ -89,7 +89,6 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
         this.fetchPCount();
         this.fetchDCount();
         this.fetchAgeDist();
-        
       };
 
 

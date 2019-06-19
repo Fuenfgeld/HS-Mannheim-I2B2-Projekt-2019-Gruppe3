@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {VictoryChart, VictoryLabel,VictoryBar,VictoryContainer,VictoryStack } from "victory";
+import {VictoryChart, VictoryLabel,VictoryBar,VictoryContainer,VictoryStack,VictoryAxis } from "victory";
 
 type secProps = {
   data : any
@@ -15,16 +15,16 @@ class SecondaryDiaGraph extends React.Component<secProps,secState> {
     super();
     this.state = {
       data :[
-        {x:"loding", y:69 },
-        {x:"loding", y:69 },
-        {x:"loding", y:69 },
-        {x:"loding", y:69 },
-        {x:"loding", y:69 },
-        {x:"loding", y:69 },
-        {x:"loding", y:69 },
-        {x:"loding", y:69 },
-        {x:"loding", y:69 },
-        {x:"loding", y:69 }
+        {x:"loading", y:69 },
+        {x:"loading", y:69 },
+        {x:"loading", y:69 },
+        {x:"loading", y:69 },
+        {x:"loading", y:69 },
+        {x:"loading", y:69 },
+        {x:"loading", y:69 },
+        {x:"loading", y:69 },
+        {x:"loading", y:69 },
+        {x:"loading", y:69 }
       ]
     }
   }
@@ -56,12 +56,13 @@ componentDidMount(){
 render() {
     return (
      <div>
-       <VictoryChart height={400} width={400}
+       <VictoryChart height={300} width={400}
           domainPadding={{ x: 50}}
         >
-          <VictoryBar
+          <VictoryBar horizontal
             data= {this.state.data}
           />
+           
         </VictoryChart>
     </div>
     );
