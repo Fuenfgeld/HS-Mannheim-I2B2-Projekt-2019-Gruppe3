@@ -1,4 +1,5 @@
-from sql_templates import all_patient, gender_equal_female, gender_equal_male, age_distribution, diagnoses_count
+from sql_templates import all_patient, gender_equal_female, gender_equal_male, age_distribution, diagnoses_count, \
+    diagnoses_gender_count
 from db_connector import DBConnector
 
 
@@ -84,20 +85,24 @@ class GraphDataDiagnoseCount:
 class GraphDataDiagnoseGenderCount:
 
     def __init__(self):
-        self.data = self.get_all_diagnose()
+        self.data = self.get_gender_diagnose()
 
     def update(self, data_change):
-        self.data = self.get_all_diagnose(data_change)
+        self.data = self.get_gender_diagnose(data_change)
 
-    def get_all_diagnose(self, data_change=None):
+    def get_gender_diagnose(self, data_change=None):
         db = DBConnector()
-        data = db.query(diagnoses_count(data_change))
+        data = db.query(diagnoses_gender_count(data_change))
         lables = []
         data_count = []
+        data_m = []
+        data_f = []
         for element in data:
             lables.append(element[0])
             data_count.append(element[1])
-        result = {"lable": lables, "data": data_count}
+            data_m.append(element[2])
+            data_f.append(element[3])
+        result = {"lable": lables, "data": data_count, "M": data_m, "F": data_f}
 
         return result
 
@@ -105,13 +110,13 @@ class GraphDataDiagnoseGenderCount:
 if __name__ == '__main__':
     db = DBConnector()
     myGraph = GraphDataPatientNumber()
-    myGraph2 = GraphDataAgeDistribution()
+    myGraph2 = GraphDataDiagnoseGenderCount()
     c_dimcode = r'\Diagnoses\(M00-M99) Dise~6mvn\(M00-M25) Arth~kgqv'
     c_dimcode2 = r'\Diagnoses\(I00-I99) Dise~3w8h'
     data_change = {'selection': [['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode],
                                  ['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode2]],
                    'operator': ['INTERSECT', 'UNION']}
     myGraph.update(data_change)
-    # myGraph2.update(data_change)
+    myGraph2.update(data_change)
     print(myGraph.data)
     print(myGraph2.data)

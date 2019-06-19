@@ -1,9 +1,9 @@
-from unittest import TestCase
+import unittest
 from observer import Observer
 from graph_data import GraphDataPatientNumber
 
 
-class OberverTestCase(TestCase):
+class ObserverTestCase(unittest.TestCase):
 
     def setUp(self):
         self.my_observer = Observer()
@@ -17,3 +17,10 @@ class OberverTestCase(TestCase):
     def test_unregister(self):
         test_graph = GraphDataPatientNumber()
         self.assertTrue(self.my_observer.register(test_graph))
+
+
+def test_suite():
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.makeSuite(Observer))
+
+    return suite

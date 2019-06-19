@@ -1,6 +1,6 @@
 from navigation_data import NavigationData
 from observer import Observer
-from graph_data import GraphDataDiagnoseCount, GraphDataGenderDistribution, GraphDataAgeDistribution
+from graph_data import GraphDataDiagnoseGenderCount, GraphDataGenderDistribution, GraphDataAgeDistribution
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -12,7 +12,7 @@ myObserver = Observer()
 # build navigation tree
 navigation = NavigationData("icd10_icd9")
 # build the graphs
-diagnose_count = GraphDataDiagnoseCount()
+diagnose_count = GraphDataDiagnoseGenderCount()
 gender_distribution = GraphDataGenderDistribution()
 age_distribution = GraphDataAgeDistribution()
 # register all components
@@ -48,12 +48,12 @@ def get_selection_names():
 def data_selection():
     data_change = request.get_json()
     print(data_change)
-    selection_all.values["names"].append(data_change["selection_name"])
-    selection_all.values["selection"].append(data_change["selection"])
-    selection_all.values["operator"].append(data_change["operator"])
+    selection_all["names"] = data_change["selection_name"]
+    selection_all["selection"] = data_change["selection"]
+    selection_all["operator"] = data_change["operator"]
     myObserver.dispatch(data_change)
 
-    return jsonify({"State": "Success"})
+    return jsonify({"State": "Success"}), 200
 
 
 @app.route("/api/gender_distribution/data", methods=['GET'])

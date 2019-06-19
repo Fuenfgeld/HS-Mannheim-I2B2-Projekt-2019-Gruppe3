@@ -128,45 +128,32 @@ def diagnoses_count(selection=None):
     return sql_query
 
 
-def diagnoses_male_count(selection=None):
-    sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl
-                            FROM i2b2demodata.observation_fact demo_obs
-                                inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
-                                right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
-                            WHERE sex_cd = 'M'
-                            group by c_name
+def diagnoses_gender_count(selection=None):
+    sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl,
+       (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+       INNER JOIN i2b2demodata.patient_dimension using (patient_num)
+        WHERE concept_cd = c_basecode AND sex_cd='M') as anzahl_M,(SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+       INNER JOIN i2b2demodata.patient_dimension using (patient_num)
+        WHERE concept_cd = c_basecode AND sex_cd='F') as anzahl_F
+        FROM i2b2demodata.observation_fact demo_obs
+            inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
+            right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
+                            group by c_name,c_basecode
                             order by anzahl desc limit 10;"""
     if selection is not None:
         pattern = selection_patient_count(selection)
         if pattern != "":
-            sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl
-                            FROM i2b2demodata.observation_fact demo_obs
-                                inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
-                                right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
-                            WHERE patient_num in ( {} ) AND sex_cd = 'M'
-                            group by c_name
-                            order by anzahl desc limit 10;""".format(pattern)
-
-    return sql_query
-
-
-def diagnoses_female_count(selection=None):
-    sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl
-                            FROM i2b2demodata.observation_fact demo_obs
-                                inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
-                                right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
-                            WHERE sex_cd = 'F'
-                            group by c_name
-                            order by anzahl desc limit 10;"""
-    if selection is not None:
-        pattern = selection_patient_count(selection)
-        if pattern != "":
-            sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl
-                            FROM i2b2demodata.observation_fact demo_obs
-                                inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
-                                right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
-                            WHERE patient_num in ( {} ) AND sex_cd = 'F'
-                            group by c_name
-                            order by anzahl desc limit 10;""".format(pattern)
+            sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl,
+       (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+       INNER JOIN i2b2demodata.patient_dimension using (patient_num)
+        WHERE concept_cd = c_basecode AND patient_num in ( {} ) AND sex_cd='M') as anzahl_M,(SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+       INNER JOIN i2b2demodata.patient_dimension using (patient_num)
+        WHERE concept_cd = c_basecode AND patient_num in ( {} ) AND sex_cd='F') as anzahl_F
+        FROM i2b2demodata.observation_fact demo_obs
+            inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
+            right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
+             WHERE patient_num in ( {} )
+                            group by c_name,c_basecode
+                            order by anzahl desc limit 10;""".format(pattern, pattern, pattern)
 
     return sql_query
