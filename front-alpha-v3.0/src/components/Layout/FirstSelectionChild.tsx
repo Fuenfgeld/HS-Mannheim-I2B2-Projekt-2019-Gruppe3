@@ -1,10 +1,9 @@
-import value from "*.html";
 import {type} from "os";
 import React, {Component} from "react";
-import Dropdown from "react-dropdown";
+import Dropdown from 'react-dropdown'
 
 type SelChProps = {id?:number,name?:string};
-type SelChState = {id:number, name:string,oprtator:string};
+type SelChState = {id:number, name:string};
 
 class FirstSelectionChild extends React.Component<SelChProps, SelChState> {
     constructor(){
@@ -12,16 +11,11 @@ class FirstSelectionChild extends React.Component<SelChProps, SelChState> {
         this.state = {
           id : 0,
           name: "default",
-          oprtator : "AND"
+
         };
     };
 
-    onChange(e : any){
-        this.setState({
-            oprtator : e.target.value
-        })
-        console.log(this.state.oprtator)
-    }
+
 
     render() {
         const options = [
@@ -30,11 +24,11 @@ class FirstSelectionChild extends React.Component<SelChProps, SelChState> {
         const defaultOption = options[0]
         const  name  = this.props.name;
         return (
-
             <div id="Merkmal">
                 <div>
                     <div >
-                        <br/><p id="DiagnoseName">{this.props.name}</p><br/>
+                        <p></p>
+                        <br/><p id="DiagnoseName">{this.props.name}</p>
 
                         <label className="container">Not
                         <input type="checkbox" />
@@ -46,7 +40,6 @@ class FirstSelectionChild extends React.Component<SelChProps, SelChState> {
                 </div>
             </div>
         )
-
     }
 
 }
@@ -54,3 +47,4 @@ class FirstSelectionChild extends React.Component<SelChProps, SelChState> {
 
 
 export default FirstSelectionChild;
+

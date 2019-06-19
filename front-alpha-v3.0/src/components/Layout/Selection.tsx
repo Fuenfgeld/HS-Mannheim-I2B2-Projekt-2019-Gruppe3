@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import AddSelect from "./AddSelect"
 import SelectionChild from "./SelectionChild";
+import FirstSelectionChild from "./FirstSelectionChild";
 
 type SelState = {numChildren:number
                 selNames:any};
@@ -19,14 +20,19 @@ class Selektion extends React.Component<SelProps, SelState> {
     let elements=[];
         for(let i=0;i<names.length;i++){
              // push the component to elements!
-            elements.push(<SelectionChild name={ names[i] } />);
+            if(elements.length==0){
+                elements.push(<FirstSelectionChild name={ names[i] } />);
+            }else{
+                elements.push(<SelectionChild name={ names[i] } />);
+
+            }
         }
-    return (
-      <div id = "scrollMenu">
-        <div id="children-pane">
-          {elements}
-        </div>
-      </div>
+        return (
+          <div id = "scrollMenu">
+            <div id="children-pane">
+              {elements}
+            </div>
+          </div>
     );
   }
 }

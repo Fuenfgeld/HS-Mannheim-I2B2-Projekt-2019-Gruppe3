@@ -34,8 +34,7 @@ class Node extends React.Component<INodeProps, {}> {
             globalTotalNodes
         } = this.props;
         const cursor = hasChildren === true && isSelectedNode === false ? "pointer" : "auto";
-        //const itemsWidth = this._getNumberItemsWidthByNumberOfChars(fontSize, nodeTotalNodes.toString().length);
-        const itemsWidth = 0;
+        const itemsWidth = this._getNumberItemsWidthByNumberOfChars(fontSize, nodeTotalNodes.toString().length);
         const clipWidth = width > itemsWidth ? width - itemsWidth : width;
         return (
             <g
@@ -56,7 +55,7 @@ class Node extends React.Component<INodeProps, {}> {
                     id={"clip-" + id}
                 >
                     <rect
-                        width={Math.max(0, clipWidth)}
+                        width={Math.max(0, clipWidth - 5)}
                         height={height}
                     />
                 </clipPath>
@@ -65,8 +64,8 @@ class Node extends React.Component<INodeProps, {}> {
                 >
                     {this._getLabelNewLine()}
                 </text>
-                
-                <title>{label + "\n" + valueWithFormat + " " + valueUnit}</title>
+                {this._getNumberOfItemsRect()}
+                <title>{label + "\n" + valueWithFormat + " " + valueUnit + "\n" + nodeTotalNodes + "/" + globalTotalNodes}</title>
             </g>
         );
     }
@@ -75,7 +74,7 @@ class Node extends React.Component<INodeProps, {}> {
         return fontSize;
     }
     private _getNumberItemsWidthByNumberOfChars(fontSize: number, numberOfChars: number) {
-        return 0;
+        return fontSize / 2 * numberOfChars + 5;
     }
 
     private _getNumberOfItemsRect() {

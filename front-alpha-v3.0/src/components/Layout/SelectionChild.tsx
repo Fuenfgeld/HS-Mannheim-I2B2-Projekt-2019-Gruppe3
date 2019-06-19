@@ -29,19 +29,14 @@ class SelectionChild extends React.Component<SelChProps, SelChState> {
         const  name  = this.props.name;
         return (
             <div id="Merkmal">
-                <div>
-                    <div >
+                    <div>
                         <button type = "buttons" id = "dropdown"><Dropdown options={options} onChange = {this.onChange} value ={defaultOption} placeholder="AND"/></button><br/>
-                        <br/><p id="DiagnoseName">{this.props.name}</p><br/>
-
+                        <br/><p id="DiagnoseName">{this.props.name}</p>
                         <label className="container">Not
-                        <input type="checkbox" />
-                            <span className="checkmark"></span>
+                            <input type="checkbox" />
+                                <span className="checkmark"></span>
                         </label>
-
                     </div>
-
-                </div>
             </div>
         )
     }

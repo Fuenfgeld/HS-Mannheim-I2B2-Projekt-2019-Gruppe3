@@ -58,7 +58,7 @@ render() {
         <VictoryPie
           standalone={false}
           width={400} height={400}
-          colorScale={["#123440","#ECE9D6"]}
+          colorScale={["#215167","#ECE9D6"]}
           data={[
             { y: this.state.perIn, label:"Patients in Selektion" }, { y: this.state.perOut }
           ]}

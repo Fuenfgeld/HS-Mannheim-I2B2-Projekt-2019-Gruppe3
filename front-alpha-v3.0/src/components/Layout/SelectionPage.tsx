@@ -79,7 +79,7 @@ export default class App extends React.Component<{}, MyState> {
         var displayheight= window.screen.availHeight;
         var height
         if(displayheight==828){
-            height=450
+            height=350
         }
         return  height
     }
@@ -253,8 +253,8 @@ export default class App extends React.Component<{}, MyState> {
                     key = {this.state.keyValue}
                     height={this.screenInfoHeight()}
                     width={950}
-                    bgColorRangeLow={"#F8EFD0"}
-                    bgColorRangeHigh={"#E6C24A"}
+                    bgColorRangeLow={"#B7BEC5"}
+                    bgColorRangeHigh={"#66717E"}
                     data={this.state.dataTree}
                     valueUnit={"Diagnoses"}
                     onChangeNode={this.onChangeNode.bind(this)}
@@ -265,14 +265,17 @@ export default class App extends React.Component<{}, MyState> {
 
                 <div id ="Rechts">
                   <div id = "Graphen">
-                      <div id="PatientenAnzahl"> <PatientCount  data = {this.state.patientCount}/></div>
-                      <div id ="PatientenAnzahl"> <GenderDist  data = {this.state.patientCount}/> </div>
-                          <div id="GeschlechtGraph"> 
-                            <GraphAgeMF data = {this.state.ageDist}/>
-                          </div><br/>
-                          <div id="nebendiagnosen"> 
-                            <SecondaryDiaGraph data = {this.state.diagnoseCount}/>
-                          </div><br/>
+                      <div className="vertical-menu">
+                          <div id="PatientenAnzahl"> <PatientCount  data = {this.state.patientCount}/></div>
+                          <div id ="PatientenAnzahl"> <GenderDist  data = {this.state.patientCount}/> </div><br/>
+                              <div id="GeschlechtGraph">
+                               <GraphAgeMF data = {this.state.ageDist}/>
+                              </div><br/>
+                              <div id="NebendiagnosenGraph">
+                                    Nebendiagnosen
+                                  <SecondaryDiaGraph data = {this.state.diagnoseCount}/>
+                              </div><br/>
+                      </div>
                   </div>
 
                   <div id="buttons">

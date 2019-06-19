@@ -89,6 +89,7 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
         this.fetchPCount();
         this.fetchDCount();
         this.fetchAgeDist();
+        
       };
 
 
@@ -108,13 +109,26 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
                     </div>
 
                     <div id="Unten">
-                        Your Results
+                        <div id="Überschrift">Your Results
 
-                        <button className={'RunButton'}onClick = {this.onButtonSave.bind(this)}>Save</button>
                             <Link className={'RunButton'} to='/'>Edit</Link>
-                        <div>
-                            <PatientCount data = {this.state.patientCount}/>
                         </div>
+                        <br/><br/><br/>
+                    <div>
+
+                        <div id="PatientenAnzahl2"> <PatientCount  data = {this.state.patientCount}/></div>
+
+                        <div id ="PatientenAnzahl2"> <GenderDist  data = {this.state.patientCount}/> </div>
+
+                        <div id="AgeGenderGraph2"> <GraphAgeMF data = {this.state.ageDist}/> </div>
+
+                        <div id="NebendiagnosenGraph2">
+                           Nebendiagnosen
+                          <SecondaryDiaGraph data = {this.state.diagnoseCount}/>
+                        </div>
+
+                    </div>
+
                     </div>
             </div>
         )
