@@ -4,6 +4,7 @@ from graph_data import GraphDataDiagnoseGenderCount, GraphDataGenderDistribution
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import time
 
 # connect to i2b2 Database
 DBConnector()
@@ -17,8 +18,8 @@ gender_distribution = GraphDataGenderDistribution()
 age_distribution = GraphDataAgeDistribution()
 # register all components
 myObserver.register(navigation)
-myObserver.register(gender_distribution)
 myObserver.register(diagnose_count)
+myObserver.register(gender_distribution)
 myObserver.register(age_distribution)
 # TODO GRapdata erstelle und GRapehn
 
@@ -46,13 +47,16 @@ def get_selection_names():
 
 @app.route("/api/selection/data", methods=['POST'])
 def data_selection():
+    t0 = time.time()
     data_change = request.get_json()
     print(data_change)
     selection_all["names"] = data_change["selection_name"]
     selection_all["selection"] = data_change["selection"]
     selection_all["operator"] = data_change["operator"]
     myObserver.dispatch(data_change)
-
+    t1 = time.time()
+    total = t1-t0
+    print(total)
     return jsonify({"State": "Success"}), 200
 
 
