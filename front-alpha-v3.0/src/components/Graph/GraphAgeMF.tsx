@@ -101,7 +101,7 @@ componentDidUpdate(prevProps: { data: any; }){
 render() {
   const width = 400;
   const height = 400;
-  const padding = { top: 80, bottom: 80, left: 20, right: 20 };
+  const padding = { top: 80, bottom: 10, left: 20, right: 20 };
 
     return (
      <div>
@@ -134,7 +134,7 @@ render() {
           />
           
           <VictoryBar
-            style={{ data: { fill: "#ECE9D6" } }}
+            style={{ data: { fill: "#F9F9F9" } }}
             data={this.state.dataLabel}
             y={(data) => (-(data.y))}
             labels={(data) => (data.x)}

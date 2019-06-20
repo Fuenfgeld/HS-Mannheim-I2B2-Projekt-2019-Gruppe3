@@ -78,7 +78,7 @@ export default class App extends React.Component<{}, MyState> {
   screenInfoHeight(){
         var displayheight= window.screen.availHeight;
         var height
-        if(displayheight==828){
+        if(displayheight>=828){
             height=350
         }
         return  height
@@ -86,7 +86,7 @@ export default class App extends React.Component<{}, MyState> {
     screenInfoWidth(){
         var displaywidth= window.screen.availWidth;
         var width
-        if(displaywidth==1440){
+        if(displaywidth>=1440){
             width=1120
         }
         return width
@@ -272,7 +272,6 @@ export default class App extends React.Component<{}, MyState> {
                                <GraphAgeMF data = {this.state.ageDist}/>
                               </div><br/>
                               <div id="NebendiagnosenGraph">
-                                    Nebendiagnosen
                                   <SecondaryDiaGraph data = {this.state.diagnoseCount}/>
                               </div><br/>
                       </div>
