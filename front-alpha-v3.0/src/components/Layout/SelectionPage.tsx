@@ -4,8 +4,7 @@ import '../../App.css';
 import Selection from "./Selection";
 import Navbar from "./Navbar";
 import PatientCount from "../Graph/PatienCount";
-import {
-  BrowserRouter as Router,
+import {  BrowserRouter as Router,
   Route, Switch, Link
 } from 'react-router-dom'
 //import GraphAgeMF from "./components/Graph/GraphAgeMF";
@@ -78,16 +77,16 @@ export default class App extends React.Component<{}, MyState> {
   screenInfoHeight(){
         var displayheight= window.screen.availHeight;
         var height
-        if(displayheight==828){
-            height=350
+        if(displayheight>=860){
+            height=400
         }
         return  height
     }
     screenInfoWidth(){
         var displaywidth= window.screen.availWidth;
         var width
-        if(displaywidth==1440){
-            width=1120
+        if(displaywidth>=1600){
+            width=1000
         }
         return width
     }
@@ -252,7 +251,7 @@ export default class App extends React.Component<{}, MyState> {
                   <TreeMap
                     key = {this.state.keyValue}
                     height={this.screenInfoHeight()}
-                    width={950}
+                    width={this.screenInfoWidth()}
                     bgColorRangeLow={"#B7BEC5"}
                     bgColorRangeHigh={"#66717E"}
                     data={this.state.dataTree}
