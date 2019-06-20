@@ -271,7 +271,6 @@ export default class App extends React.Component<{}, MyState> {
                                <GraphAgeMF data = {this.state.ageDist}/>
                               </div><br/>
                               <div id="NebendiagnosenGraph">
-                                    Nebendiagnosen
                                   <SecondaryDiaGraph data = {this.state.diagnoseCount}/>
                               </div><br/>
                       </div>
