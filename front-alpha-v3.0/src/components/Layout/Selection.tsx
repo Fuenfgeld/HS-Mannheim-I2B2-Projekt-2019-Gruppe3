@@ -1,10 +1,10 @@
 import React, {Component} from "react"
-import AddSelect from "./AddSelect"
 import SelectionChild from "./SelectionChild";
 import FirstSelectionChild from "./FirstSelectionChild";
 
-type SelState = {numChildren:number
-                selNames:any};
+type SelState = {numChildren:number,
+                selNames:any,
+                selOperators : any};
 type SelProps = {selName:any}
 
 class Selektion extends React.Component<SelProps, SelState> {
@@ -14,18 +14,11 @@ class Selektion extends React.Component<SelProps, SelState> {
   
   render() {
     let names = this.props.selName;
-    console.log("sel props",this.props.selName)
-    console.log("sel name",names)
 
     let elements=[];
         for(let i=0;i<names.length;i++){
              // push the component to elements!
-            if(elements.length==0){
-                elements.push(<FirstSelectionChild name={ names[i] } />);
-            }else{
-                elements.push(<SelectionChild name={ names[i] } />);
-
-            }
+                elements.push(<SelectionChild key = {i} name={ names[i] } />);
         }
         return (
           <div id = "scrollMenu">

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {VictoryAxis, VictoryLabel,VictoryBar,VictoryContainer,VictoryStack } from "victory";
+import {VictoryAxis, VictoryLabel,VictoryBar,VictoryStack } from "victory";
 
 type genProps = {
   data : any
@@ -35,16 +35,11 @@ componentDidUpdate(prevProps: { data: any; }){
   }
 }
 
-componentDidMount(){
-    console.log(this.props.data)
-}
-
 
 render() {
     const padding = { top: 80, bottom: 80, left: 90, right: 90 };
     const width = 400
     const height = 400
-    const data1 = [{y : 50},{y : 25}]
     return (
      <div>
        <svg viewBox={`0 0 ${width} ${height}`}

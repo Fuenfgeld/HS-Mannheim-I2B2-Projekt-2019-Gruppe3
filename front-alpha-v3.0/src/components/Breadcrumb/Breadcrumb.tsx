@@ -7,10 +7,6 @@ import { IBreadcrumbProps, IBreadcrumbItem } from "./IBreadcrumbProps";
 
 class Breadcrumb extends React.Component<IBreadcrumbProps, {}> {
 
-    componentDidUpdate(){
-        console.log("Breadupdate");
-    }
-
     public render() {
         return (
             <div className={this.props.className}>

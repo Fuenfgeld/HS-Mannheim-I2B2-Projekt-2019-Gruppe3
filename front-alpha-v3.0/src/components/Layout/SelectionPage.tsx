@@ -96,7 +96,7 @@ export default class App extends React.Component<{}, MyState> {
         console.log("ADD Button Press");
 
         if(this.state.selectionNameList.length == 0){
-          console.log("war leer");
+          console.log("was empty");
           this.setState({
             selectionNameList :  this.state.selectionNameList.concat(["Diagnoses"])
           });
@@ -114,7 +114,7 @@ export default class App extends React.Component<{}, MyState> {
             })
 
           }else{
-            console.log("Merkmal schon enthalten")
+            console.log("already in selection")
           };
         };
       };
@@ -192,7 +192,7 @@ export default class App extends React.Component<{}, MyState> {
           return res.json();
         })
         .then(new_data => this.setState({ageDist : new_data}))
-        .catch(e => console.log("Fetching error DCount", e));
+        .catch(e => console.log("Fetching error AgeDist", e));
       }
 
       fetchSelData(){
@@ -203,7 +203,7 @@ export default class App extends React.Component<{}, MyState> {
                                           operatorList : new_data.operator,
                                           selectionNameList : new_data.names
                                         }))
-        .catch(e => console.log("Fetching error DCount", e));
+        .catch(e => console.log("Fetching error SelData", e));
       }
 
 
@@ -230,7 +230,6 @@ export default class App extends React.Component<{}, MyState> {
 
 
     public render() {
-      console.log("Render");
         return (
           <div className="App">
               <div id = "Navigation">

@@ -15,10 +15,7 @@ class SelectionChild extends React.Component<SelChProps, SelChState> {
     };
 
     onChange(e : any){
-        this.setState({
-            oprtator : e.target.value
-        })
-        console.log(this.state.oprtator)
+        
     }
 
     render() {
