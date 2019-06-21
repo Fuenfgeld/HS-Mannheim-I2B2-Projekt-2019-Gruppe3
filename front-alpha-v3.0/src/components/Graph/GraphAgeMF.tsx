@@ -8,7 +8,8 @@ type ageProps = {
 type ageState = {
     dataLabel : any,
     dataM : any,
-    dataF : any
+    dataF : any,
+    init : boolean
 }
 
 class GraphAgeMF extends React.Component<ageProps,ageState> {
@@ -48,7 +49,8 @@ class GraphAgeMF extends React.Component<ageProps,ageState> {
       { x: "60-70", y: 20},
       { x: "70-80", y: 20},
       { x: "80-90", y: 20}
-    ]
+    ],
+    init : false
     };
     
   }
@@ -57,41 +59,52 @@ class GraphAgeMF extends React.Component<ageProps,ageState> {
 componentDidUpdate(prevProps: { data: any; }){ 
 
     if (prevProps.data !== this.props.data) {
+      let maxC = 0;
+      if(Math.max(...this.props.data.F) >= Math.max(...this.props.data.M)){
+        maxC = Math.max(...this.props.data.F);
+      }else{
+        maxC = Math.max(...this.props.data.M);
+      }
+      
+
        this.setState({
          dataLabel :[
-          { x: "0-10", y: 40-this.props.data.data[0].M},
-          { x: "10-20", y: 40-this.props.data.data[1].M},
-          { x: "20-30", y: 40-this.props.data.data[2].M},
-          { x: "30-40", y: 40-this.props.data.data[3].M},
-          { x: "40-50", y: 40-this.props.data.data[4].M},
-          { x: "50-60", y: 40-this.props.data.data[5].M},
-          { x: "60-70", y: 40-this.props.data.data[6].M},
-          { x: "70-80", y: 40-this.props.data.data[7].M},
-          { x: "80-90", y: 40-this.props.data.data[8].M}
+          { x: "0-10", y: 40-(39 / maxC * this.props.data.M[0])},
+          { x: "10-20", y: 40-(39 / maxC * this.props.data.M[1])},
+          { x: "20-30", y: 40-(39 / maxC * this.props.data.M[2])},
+          { x: "30-40", y: 40-(39 / maxC * this.props.data.M[3])},
+          { x: "40-50", y: 40-(39 / maxC * this.props.data.M[4])},
+          { x: "50-60", y: 40-(39 / maxC * this.props.data.M[5])},
+          { x: "60-70", y: 40-(39 / maxC * this.props.data.M[6])},
+          { x: "70-80", y: 40-(39 / maxC * this.props.data.M[7])},
+          { x: "80-90", y: 40-(39 / maxC * this.props.data.M[8])}
          ],
           dataM :  [
-            { x: "0-10", y: this.props.data.data[0].M},
-            { x: "10-20", y: this.props.data.data[1].M},
-            { x: "20-30", y: this.props.data.data[2].M},
-            { x: "30-40", y: this.props.data.data[3].M},
-            { x: "40-50", y: this.props.data.data[4].M},
-            { x: "50-60", y: this.props.data.data[5].M},
-            { x: "60-70", y: this.props.data.data[6].M},
-            { x: "70-80", y: this.props.data.data[7].M},
-            { x: "80-90", y: this.props.data.data[8].M}
-          ],
+            { x: "0-10", y: (39 / maxC * this.props.data.M[0])},
+            { x: "10-20", y: (39 / maxC * this.props.data.M[1])},
+            { x: "20-30", y: (39 / maxC * this.props.data.M[2])},
+            { x: "30-40", y: (39 / maxC * this.props.data.M[3])},
+            { x: "40-50", y: (39 / maxC * this.props.data.M[4])},
+            { x: "50-60", y: (39 / maxC * this.props.data.M[5])},
+            { x: "60-70", y: (39 / maxC * this.props.data.M[6])},
+            { x: "70-80", y: (39 / maxC * this.props.data.M[7])},
+            { x: "80-90", y: (39 / maxC * this.props.data.M[8])}
+           ],
           dataF :  [
-            { x: "0-10", y: this.props.data.data[0].F},
-            { x: "10-20", y: this.props.data.data[1].F},
-            { x: "20-30", y: this.props.data.data[2].F},
-            { x: "30-40", y: this.props.data.data[3].F},
-            { x: "40-50", y: this.props.data.data[4].F},
-            { x: "50-60", y: this.props.data.data[5].F},
-            { x: "60-70", y: this.props.data.data[6].F},
-            { x: "70-80", y: this.props.data.data[7].F},
-            { x: "80-90", y: this.props.data.data[8].F}
+            { x: "0-10", y: (39 / maxC * this.props.data.F[0])},
+            { x: "10-20", y: (39 / maxC * this.props.data.F[1])},
+            { x: "20-30", y: (39 / maxC * this.props.data.F[2])},
+            { x: "30-40", y: (39 / maxC * this.props.data.F[3])},
+            { x: "40-50", y: (39 / maxC * this.props.data.F[4])},
+            { x: "50-60", y: (39 / maxC * this.props.data.F[5])},
+            { x: "60-70", y: (39 / maxC * this.props.data.F[6])},
+            { x: "70-80", y: (39 / maxC * this.props.data.F[7])},
+            { x: "80-90", y: (39 / maxC * this.props.data.F[8])}
           ],
-       }) 
+       });
+
+     
+
     }
 }
 
