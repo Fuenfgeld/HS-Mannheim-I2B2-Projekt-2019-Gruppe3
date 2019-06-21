@@ -96,12 +96,12 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
     render() {
 
         return (
-            <div>
+            <div id="resultpage">
                     <div id = "Navigation">
                         <Navbar>
                         </Navbar>
                     </div>
-
+                <div id="resultedit">
                     <div id = "Oben">
                         <div id = "Selektion">
                             <Selection selName={this.state.selectionNameList}></Selection>
@@ -130,6 +130,7 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
                     </div>
 
                     </div>
+                </div>
             </div>
         )
     }
