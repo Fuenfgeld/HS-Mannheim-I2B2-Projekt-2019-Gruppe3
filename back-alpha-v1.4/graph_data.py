@@ -47,7 +47,7 @@ class GraphDataAgeDistribution:
     def update(self, data_change):
         self.data = self.get_age_distribution(data_change)
 
-   def get_age_distribution(self, data_change=None):
+    def get_age_distribution(self, data_change=None):
         db = DBConnector()
         m_data = list()
         f_data = list()
