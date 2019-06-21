@@ -47,19 +47,21 @@ class GraphDataAgeDistribution:
     def update(self, data_change):
         self.data = self.get_age_distribution(data_change)
 
-    def get_age_distribution(self, data_change=None):
+   def get_age_distribution(self, data_change=None):
         db = DBConnector()
-        result = {"data": []}
+        m_data = list()
+        f_data = list()
+        lables = list()
         for i in range(0, 90, 10):
             sql_query = age_distribution(i, i + 10, 'F', data_change)
-            age_data_f = db.query(sql_query)[0][0]
+            f_data.append(db.query(sql_query)[0][0])
             sql_query = age_distribution(i, i + 10, 'M', data_change)
-            age_data_m = db.query(sql_query)[0][0]
-            date_element = {"name": str(i) + "-" + str(i + 10), "F": age_data_f, "M": age_data_m}
-            result["data"].append(date_element)
+            m_data.append(db.query(sql_query)[0][0])
+            lables.append(str(i) + "-" + str(i + 10))
+
+        result = {"label": lables, "M": m_data, "F": f_data}
 
         return result
-
 
 class GraphDataDiagnoseCount:
 
