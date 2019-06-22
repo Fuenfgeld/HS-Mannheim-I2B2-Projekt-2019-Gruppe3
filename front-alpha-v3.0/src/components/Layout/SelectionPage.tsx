@@ -65,17 +65,28 @@ export default class App extends React.Component<{}, MyState> {
           currentNode: currentNode
         });
       };
+
+      onChangeOperator(selOperatorList:any){
+        this.setState({
+          operatorList : selOperatorList
+        },() => {
+          this.fetchData();
+        })
+      }
+
       screenInfoHeightDisplay(){
         var displayheight= window.screen.availHeight;
 
         return  displayheight
       }
-     screenInfoWidthDisplay(){
+
+    screenInfoWidthDisplay(){
         var displaywidth= window.screen.availWidth;
 
         return displaywidth
-     }
-  screenInfoHeight(){
+    }
+
+    screenInfoHeight(){
         var displayheight= window.screen.availHeight;
         var height
         if(displayheight>=828){
@@ -83,6 +94,7 @@ export default class App extends React.Component<{}, MyState> {
         }
         return  height
     }
+
     screenInfoWidth(){
         var displaywidth= window.screen.availWidth;
         var width
@@ -108,7 +120,6 @@ export default class App extends React.Component<{}, MyState> {
             this.setState({
               selectionNameList :  this.state.selectionNameList.concat([this.state.currentNode.data.name]),
               selectionList : this.state.selectionList.concat([this.state.currentNode.data.selection]),
-              operatorList : this.state.operatorList.concat(["INTERSECT"])
             },() => {
               this.fetchData();
             })
@@ -239,8 +250,7 @@ export default class App extends React.Component<{}, MyState> {
               <div id = "Parts">
                 <div id = "Links">
                   <div id = "Selektion">
-                    <Selection selName = {this.state.selectionNameList}></Selection>
-
+                    <Selection selName = {this.state.selectionNameList} onChangeOperator={this.onChangeOperator.bind(this)} disabeld={false} selOperators={this.state.operatorList}></Selection>
                   </div>
                   <div id="Treemap" >
                       <div>

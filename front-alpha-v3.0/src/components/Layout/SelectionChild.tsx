@@ -1,33 +1,39 @@
 import React, {Component} from "react";
 import Dropdown from 'react-dropdown'
 
-type SelChProps = {id?:number,name?:string};
-type SelChState = {id:number, name:string,oprtator:string};
+type SelChProps = {id:number,name:string,updateOperator:any,disabeld:boolean,operator:any};
+type SelChState = {id:number,operator:any, updateOperator:any};
 
 class SelectionChild extends React.Component<SelChProps, SelChState> {
-    constructor(){
-        super();
+    constructor(props:SelChProps){
+        super(props);
         this.state = {
-          id : 0,
-          name: "default",
-          oprtator : "AND"
+          id : this.props.id,
+          operator : this.props.operator,
+          updateOperator :this.props.updateOperator.bind(this)
         };  
+        this.onChange = this.onChange.bind(this)
     };
 
-    onChange(e : any){
-        
+    onChange(option : any){
+      this.setState({
+          operator : option
+      })
+      this.state.updateOperator(this.state.id,option)
+    }
+    componentDidMount(){
+        this.state.updateOperator(this.state.id,this.state.operator)
     }
 
     render() {
+
         const options = [
-            "AND", "OR"
+           {label:"AND",value: "INTERSECT"},{label:"OR", value:"UNION"}
         ]
-        const defaultOption = options[0]
-        const  name  = this.props.name;
         return (
             <div id="Merkmal">
                     <div>
-                        <button type = "buttons" id = "dropdown"><Dropdown options={options} onChange = {this.onChange} value ={defaultOption} placeholder="AND"/></button><br/>
+                        <button type = "buttons" id = "dropdown"><Dropdown disabled = {this.props.disabeld} options={options} onChange = {this.onChange} value ={this.state.operator} /></button><br/>
                         <br/><p id="DiagnoseName">{this.props.name}</p>
                         <label className="container">Not
                             <input type="checkbox" />
