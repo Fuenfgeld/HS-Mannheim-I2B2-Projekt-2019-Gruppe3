@@ -90,7 +90,7 @@ export default class App extends React.Component<{}, MyState> {
     screenInfoHeight(){
         var displayheight= window.screen.availHeight;
         var height
-            height=(displayheight/100)*40;
+            height=(displayheight/100)*50;
 
         return  height
     }
@@ -98,7 +98,7 @@ export default class App extends React.Component<{}, MyState> {
     screenInfoWidth(){
         var displaywidth= window.screen.availWidth;
         var width
-            width=(displaywidth/100)*60;
+            width=(displaywidth/100)*69;
 
         return width
     }
@@ -260,7 +260,7 @@ export default class App extends React.Component<{}, MyState> {
                   <TreeMap
                     key = {this.state.keyValue}
                     height={this.screenInfoHeight()}
-                    width={950}
+                    width={this.screenInfoWidth()}
                     bgColorRangeLow={"#B7BEC5"}
                     bgColorRangeHigh={"#66717E"}
                     data={this.state.dataTree}
