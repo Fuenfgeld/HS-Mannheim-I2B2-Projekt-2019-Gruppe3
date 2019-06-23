@@ -5,7 +5,7 @@ def tree_root(table_name):
     sql_query = """SELECT DISTINCT  c_hlevel, c_name,
                  (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
                   WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)),
-                  c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.{}
+                  c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname,c_basecode FROM i2b2metadata.{}
                   WHERE c_hlevel = 0
                   order by c_fullname;""".format(table_name)
     return sql_query
@@ -39,11 +39,32 @@ def tree_patient_count(table_name, selection=None):
     return sql_query
 
 
+def tree_patient_all_over_0(table_name, selection=None):
+    sql_query = """SELECT DISTINCT  c_hlevel, c_name,
+       (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+        WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)),
+        c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname,c_basecode FROM i2b2metadata.{}
+        WHERE c_hlevel > 0
+        order by c_fullname""".format(table_name)
+
+    if selection is not None:
+        pattern = selection_patient_count(selection)
+        if pattern != "":
+            sql_query = """SELECT DISTINCT  c_hlevel, c_name,
+               (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+                WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)),
+                c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname,c_basecode FROM i2b2metadata.{}
+                WHERE c_hlevel > 0 AND patient_num in ( {} )
+                order by c_fullname""".format(pattern, table_name)
+    return sql_query
+
+
+
 def tree_patient_count_first_hierachielvl(table_name, like, selection=None):
     sql_query = """SELECT DISTINCT  c_hlevel, c_name,
        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
         WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)),
-        c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.{}
+        c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname,c_basecode FROM i2b2metadata.{}
         WHERE c_fullname LIKE '{}%' 
         order by c_fullname;""".format(table_name, like)
 
@@ -54,7 +75,7 @@ def tree_patient_count_first_hierachielvl(table_name, like, selection=None):
                        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
                         WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)
                         AND patient_num in ( {} ) ),
-                        c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname FROM i2b2metadata.{}
+                        c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname,c_basecode FROM i2b2metadata.{}
                         WHERE c_fullname LIKE '{}%' 
                         order by c_fullname;""".format(pattern, table_name, like)
 

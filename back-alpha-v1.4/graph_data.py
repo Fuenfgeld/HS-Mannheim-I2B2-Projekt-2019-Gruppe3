@@ -63,6 +63,7 @@ class GraphDataAgeDistribution:
 
         return result
 
+
 class GraphDataDiagnoseCount:
 
     def __init__(self):
@@ -111,14 +112,14 @@ class GraphDataDiagnoseGenderCount:
 
 if __name__ == '__main__':
     db = DBConnector()
-    myGraph = GraphDataPatientNumber()
+    myGraph = GraphDataAgeDistribution()
     myGraph2 = GraphDataDiagnoseGenderCount()
     c_dimcode = r'\Diagnoses\(M00-M99) Dise~6mvn\(M00-M25) Arth~kgqv'
     c_dimcode2 = r'\Diagnoses\(I00-I99) Dise~3w8h'
     data_change = {'selection': [['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode],
                                  ['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode2]],
                    'operator': ['INTERSECT', 'UNION']}
-    myGraph.update(data_change)
+    # myGraph.update(data_change)
     myGraph2.update(data_change)
     print(myGraph.data)
     print(myGraph2.data)

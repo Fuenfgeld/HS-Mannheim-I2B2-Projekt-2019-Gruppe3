@@ -3,8 +3,7 @@ from observer import Observer
 from graph_data import GraphDataDiagnoseGenderCount, GraphDataGenderDistribution, GraphDataAgeDistribution
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
-from flask_cors import CORS
-import time
+from flask_cors import CORS, cross_origin
 
 # connect to i2b2 Database
 DBConnector()
@@ -18,67 +17,80 @@ gender_distribution = GraphDataGenderDistribution()
 age_distribution = GraphDataAgeDistribution()
 # register all components
 myObserver.register(navigation)
-myObserver.register(diagnose_count)
 myObserver.register(gender_distribution)
+myObserver.register(diagnose_count)
 myObserver.register(age_distribution)
 # TODO GRapdata erstelle und GRapehn
 
 app = Flask(__name__)
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 selection_all = {"names": [], "selection": [], "operator": []}
 
 
+@app.after_request  # blueprint can also be app~~
+def after_request(response):
+    header = response.headers
+    header['Access-Control-Allow-Origin'] = '*'
+    return response
+
+
 @app.route('/')
+@cross_origin()
 def index():
     return jsonify({"Hello": "World"}), 200
 
 
 @app.route("/api/navigation/data", methods=['GET'])
+@cross_origin()
 def data_trans():
     json_data = jsonify(navigation.into_dict())
     return json_data
 
 
 @app.route("/api/selection_name/data", methods=['GET'])
+@cross_origin()
 def get_selection_names():
     json_data = jsonify(selection_all)
     return json_data
 
 
 @app.route("/api/selection/data", methods=['POST'])
+@cross_origin()
 def data_selection():
-    t0 = time.time()
     data_change = request.get_json()
     print(data_change)
     selection_all["names"] = data_change["selection_name"]
     selection_all["selection"] = data_change["selection"]
     selection_all["operator"] = data_change["operator"]
     myObserver.dispatch(data_change)
-    t1 = time.time()
-    total = t1-t0
-    print(total)
+
     return jsonify({"State": "Success"}), 200
 
 
 @app.route("/api/gender_distribution/data", methods=['GET'])
+@cross_origin()
 def get_data1():
     json_data = jsonify(gender_distribution.data)
     return json_data
 
 
 @app.route("/api/diagnose_count/data", methods=['GET'])
+@cross_origin()
 def get_data2():
     json_data = jsonify(diagnose_count.data)
     return json_data
 
 
 @app.route("/api/age_distribution/data", methods=['GET'])
+@cross_origin()
 def get_data3():
     json_data = jsonify(age_distribution.data)
     return json_data
 
 
 @app.route("/api/graph3/data", methods=['GET'])
+@cross_origin()
 def get_data4():
     pass
 

@@ -29,7 +29,7 @@ def selection_patient_count(data_change):
     check_logical_operator = False
     for i in range(len(selections)):
         if check_logical_operator:
-            sql_query += logical_operator[i - 1]+" "
+            sql_query += (logical_operator[i - 1])['value']+" "
             check_logical_operator = False
         check_logical_operator = True
         sql_query += """(SELECT DISTINCT patient_num FROM i2b2demodata.observation_fact WHERE {}) """.format(
