@@ -59,7 +59,6 @@ def tree_patient_all_over_0(table_name, selection=None):
     return sql_query
 
 
-
 def tree_patient_count_first_hierachielvl(table_name, like, selection=None):
     sql_query = """SELECT DISTINCT  c_hlevel, c_name,
        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
@@ -130,25 +129,6 @@ def age_distribution(begin, end, gender, selection=None):
     return sql_query
 
 
-def diagnoses_count(selection=None):
-    sql_query = """SELECT DISTINCT c_name,
-       (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-        WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)) as anzahl FROM i2b2metadata.icd10_icd9
-        order by anzahl desc LIMIT 10;"""
-    if selection is not None:
-        pattern = selection_patient_count(selection)
-        if pattern != "":
-            sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl
-                            FROM i2b2demodata.observation_fact demo_obs
-                                inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
-                                right join i2b2metadata.icd10_icd9 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
-                            WHERE patient_num in ( {} )
-                            group by c_name
-                            order by anzahl desc limit 10;""".format(pattern)
-
-    return sql_query
-
-
 def diagnoses_gender_count(selection=None):
     sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl,
        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
@@ -207,6 +187,39 @@ def medications_gender_count(selection=None):
             inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
             right join i2b2metadata.i2b2 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
         WHERE concept_path LIKE '\\i2b2\\Medications%' AND patient_num in ( {} )
+                            group by c_name,c_basecode
+                            order by anzahl desc limit 10;""".format(pattern, pattern, pattern)
+
+    return sql_query
+
+
+def procedures_gender_count(selection=None):
+    sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl,
+       (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+       INNER JOIN i2b2demodata.patient_dimension using (patient_num)
+        WHERE concept_cd = c_basecode AND sex_cd='M') as anzahl_M,(SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+       INNER JOIN i2b2demodata.patient_dimension using (patient_num)
+        WHERE concept_cd = c_basecode AND sex_cd='F') as anzahl_F
+        FROM i2b2demodata.observation_fact demo_obs
+            inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
+            right join i2b2metadata.i2b2 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
+        WHERE concept_path LIKE '\\i2b2\\Procedures%'
+                            group by c_name,c_basecode
+                            order by anzahl desc limit 10;"""
+
+    if selection is not None:
+        pattern = selection_patient_count(selection)
+        if pattern != "":
+            sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl,
+       (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+       INNER JOIN i2b2demodata.patient_dimension using (patient_num)
+        WHERE concept_cd = c_basecode AND  sex_cd='M' AND patient_num in ( {} )) as anzahl_M,(SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+       INNER JOIN i2b2demodata.patient_dimension using (patient_num)
+        WHERE concept_cd = c_basecode AND sex_cd='F' AND patient_num in ( {} )) as anzahl_F
+        FROM i2b2demodata.observation_fact demo_obs
+            inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
+            right join i2b2metadata.i2b2 meta_icd on demo_cdim.concept_path = meta_icd.c_dimcode
+        WHERE concept_path LIKE '\\i2b2\\Procedures%' AND patient_num in ( {} )
                             group by c_name,c_basecode
                             order by anzahl desc limit 10;""".format(pattern, pattern, pattern)
 

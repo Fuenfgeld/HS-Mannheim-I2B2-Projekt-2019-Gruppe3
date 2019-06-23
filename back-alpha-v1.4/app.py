@@ -1,7 +1,7 @@
 from navigation_data import NavigationData
 from observer import Observer
 from graph_data import GraphDataDiagnoseGenderCount, GraphDataGenderDistribution, GraphDataAgeDistribution, \
-    GraphDataMedicationGenderCount
+    GraphDataMedicationGenderCount, GraphDataProcedureGenderCount
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
@@ -17,12 +17,14 @@ diagnose_count = GraphDataDiagnoseGenderCount()
 gender_distribution = GraphDataGenderDistribution()
 age_distribution = GraphDataAgeDistribution()
 medication_count = GraphDataMedicationGenderCount()
+procedure_count = GraphDataProcedureGenderCount()
 # register all components
 myObserver.register(navigation)
 myObserver.register(gender_distribution)
 myObserver.register(diagnose_count)
 myObserver.register(age_distribution)
 myObserver.register(medication_count)
+myObserver.register(procedure_count)
 # TODO GRapdata erstelle und GRapehn
 
 app = Flask(__name__)
@@ -88,6 +90,13 @@ def get_data_dia():
 @cross_origin()
 def get_data_med():
     json_data = jsonify(medication_count.data)
+    return json_data
+
+
+@app.route("/api/procedure_count/data", methods=['GET'])
+@cross_origin()
+def get_data_prod():
+    json_data = jsonify(procedure_count.data)
     return json_data
 
 
