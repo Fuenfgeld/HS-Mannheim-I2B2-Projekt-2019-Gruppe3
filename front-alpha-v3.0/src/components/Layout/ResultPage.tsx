@@ -21,13 +21,14 @@ type SelChState = {
     patientCount : any,
     diagnoseCount : any,
     ageDist : any,
-    selectionNameList : any
+    selectionNameList : any,
+    operatorList : any
     };
 
 
 
 const urlPCount = "http://localhost:5000/api/gender_distribution/data";
-const urlDCount = "http://localhost:5000/api/diagnosecount/data";
+const urlDCount = "http://localhost:5000/api/diagnose_count/data";
 const urlAgeDist = "http://localhost:5000/api/age_distribution/data";
 const urlSelAll = "http://localhost:5000/api/selection_name/data";
 
@@ -42,6 +43,7 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
           patientCount : [82,52],
           diagnoseCount : [],
           selectionNameList : [],
+          operatorList : [],
           ageDist : {"data":[{"F":1,"M":0,"name":"0-10"},{"F":11,"M":20,"name":"10-20"},{"F":9,"M":12,"name":"20-30"},{"F":13,"M":22,"name":"30-40"},{"F":6,"M":15,"name":"40-50"},{"F":2,"M":6,"name":"50-60"},{"F":4,"M":6,"name":"60-70"},{"F":3,"M":1,"name":"70-80"},{"F":3,"M":0,"name":"80-90"}]}
         };
     }
@@ -84,6 +86,16 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
         .catch(e => console.log("Fetching error DCount", e));
       }
 
+      onChangeOperator(selOperatorList:any){
+        this.setState({
+          operatorList : selOperatorList
+        },() => {
+          //this.fetchData();
+        })
+      }
+
+      
+
       componentDidMount(){
         this.fetchSel();
         this.fetchPCount();
@@ -104,7 +116,7 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
                 <div id="resultedit">
                     <div id = "Oben">
                         <div id = "Selektion">
-                            <Selection selName={this.state.selectionNameList}></Selection>
+                            <Selection selName={this.state.selectionNameList} onChangeOperator={this.onChangeOperator} disabeld={true} selOperators={this.state.operatorList}></Selection>
                         </div>
                     </div>
 
