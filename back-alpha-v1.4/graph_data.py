@@ -1,5 +1,5 @@
 from sql_templates import all_patient, gender_equal_female, gender_equal_male, age_distribution, diagnoses_count, \
-    diagnoses_gender_count
+    diagnoses_gender_count,medications_gender_count
 from db_connector import DBConnector
 
 
@@ -96,6 +96,31 @@ class GraphDataDiagnoseGenderCount:
     def get_gender_diagnose(self, data_change=None):
         db = DBConnector()
         data = db.query(diagnoses_gender_count(data_change))
+        lables = []
+        data_count = []
+        data_m = []
+        data_f = []
+        for element in data:
+            lables.append(element[0])
+            data_count.append(element[1])
+            data_m.append(element[2])
+            data_f.append(element[3])
+        result = {"lable": lables, "data": data_count, "M": data_m, "F": data_f}
+
+        return result
+
+
+class GraphDataMedicationGenderCount:
+
+    def __init__(self):
+        self.data = self.get_gender_medications()
+
+    def update(self, data_change):
+        self.data = self.get_gender_medications(data_change)
+
+    def get_gender_medications(self, data_change=None):
+        db = DBConnector()
+        data = db.query(medications_gender_count(data_change))
         lables = []
         data_count = []
         data_m = []

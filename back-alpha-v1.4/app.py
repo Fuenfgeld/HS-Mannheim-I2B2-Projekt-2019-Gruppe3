@@ -1,6 +1,7 @@
 from navigation_data import NavigationData
 from observer import Observer
-from graph_data import GraphDataDiagnoseGenderCount, GraphDataGenderDistribution, GraphDataAgeDistribution
+from graph_data import GraphDataDiagnoseGenderCount, GraphDataGenderDistribution, GraphDataAgeDistribution, \
+    GraphDataMedicationGenderCount
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
@@ -15,20 +16,21 @@ navigation = NavigationData("icd10_icd9")
 diagnose_count = GraphDataDiagnoseGenderCount()
 gender_distribution = GraphDataGenderDistribution()
 age_distribution = GraphDataAgeDistribution()
+medication_count = GraphDataMedicationGenderCount()
 # register all components
 myObserver.register(navigation)
 myObserver.register(gender_distribution)
 myObserver.register(diagnose_count)
 myObserver.register(age_distribution)
+myObserver.register(medication_count)
 # TODO GRapdata erstelle und GRapehn
 
 app = Flask(__name__)
 CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 selection_all = {"names": [], "selection": [], "operator": []}
 
 
-@app.after_request  # blueprint can also be app~~
+@app.after_request
 def after_request(response):
     header = response.headers
     header['Access-Control-Allow-Origin'] = '*'
@@ -70,21 +72,28 @@ def data_selection():
 
 @app.route("/api/gender_distribution/data", methods=['GET'])
 @cross_origin()
-def get_data1():
+def get_data1_gender_dist():
     json_data = jsonify(gender_distribution.data)
     return json_data
 
 
 @app.route("/api/diagnose_count/data", methods=['GET'])
 @cross_origin()
-def get_data2():
+def get_data_dia():
     json_data = jsonify(diagnose_count.data)
+    return json_data
+
+
+@app.route("/api/medication_count/data", methods=['GET'])
+@cross_origin()
+def get_data_med():
+    json_data = jsonify(medication_count.data)
     return json_data
 
 
 @app.route("/api/age_distribution/data", methods=['GET'])
 @cross_origin()
-def get_data3():
+def get_data_age_dist():
     json_data = jsonify(age_distribution.data)
     return json_data
 
