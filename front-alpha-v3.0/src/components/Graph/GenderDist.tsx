@@ -37,7 +37,7 @@ componentDidUpdate(prevProps: { data: any; }){
 
 
 render() {
-    const padding = { top: 80, bottom: 80, left: 90, right: 90 };
+    const padding = { top: 60, bottom: 80, left: 90, right: 90 };
     const width = 400
     const height = 400
     return (
@@ -83,7 +83,7 @@ render() {
          </VictoryStack>
          <VictoryLabel
           textAnchor="middle"
-          style={{ fontSize: 40 }}
+          style={{ fontSize: 30 }}
           x={200} y={20}
           text= {"Gender distribution"}
         />

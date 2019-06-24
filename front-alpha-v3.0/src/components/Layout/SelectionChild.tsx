@@ -21,9 +21,7 @@ class SelectionChild extends React.Component<SelChProps, SelChState> {
       })
       this.state.updateOperator(this.state.id,option)
     }
-    componentDidMount(){
-        this.state.updateOperator(this.state.id,this.state.operator)
-    }
+    
 
     render() {
 

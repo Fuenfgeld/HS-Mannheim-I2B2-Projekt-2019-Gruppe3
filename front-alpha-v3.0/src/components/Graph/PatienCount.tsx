@@ -52,13 +52,15 @@ componentDidMount(){
 }
 
 render() {
+  const padding = { top: 60, bottom: 30, left: 30, right: 30 };
     return (
      <div>
         <svg viewBox="0 0 400 400">
         <VictoryPie
           standalone={false}
           width={400} height={400}
-          colorScale={["#215167","#ECE9D6"]}
+          padding ={padding}
+          colorScale={["#215167","#F9F9F9"]}
           data={[
             { y: this.state.perIn, label:"Patients in Selektion" }, { y: this.state.perOut }
           ]}
@@ -79,7 +81,7 @@ render() {
         />
        <VictoryLabel
           textAnchor="middle"
-          style={{ fontSize: 40 }}
+          style={{ fontSize: 30 }}
           x={200} y={20}
           text= {"Patient in selection"}
         />

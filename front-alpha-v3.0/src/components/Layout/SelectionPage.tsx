@@ -71,7 +71,10 @@ export default class App extends React.Component<{}, MyState> {
         this.setState({
           operatorList : selOperatorList
         },() => {
-          this.fetchData();
+          if(this.state.selectionNameList.length >= 1){
+            console.log("Operator fetsh")
+            this.fetchData();
+          }
         })
       }
 
@@ -120,6 +123,8 @@ export default class App extends React.Component<{}, MyState> {
               selectionNameList :  this.state.selectionNameList.concat([this.state.currentNode.data.name]),
               selectionList : this.state.selectionList.concat([this.state.currentNode.data.selection]),
             },() => {
+            console.log("add fetsh")
+
               this.fetchData();
             })
 

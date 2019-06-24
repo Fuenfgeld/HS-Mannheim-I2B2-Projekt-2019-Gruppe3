@@ -77,7 +77,7 @@ render() {
         />
         <VictoryLabel
           textAnchor="middle"
-          style={{ fontSize: 40 }}
+          style={{ fontSize: 30 }}
           x={200} y={200}
           text= {(this.state.perInM+this.state.perInF)+"% \n"+(this.state.pComp)}
         />
