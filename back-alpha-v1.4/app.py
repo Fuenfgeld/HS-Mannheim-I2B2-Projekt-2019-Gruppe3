@@ -1,7 +1,8 @@
 from navigation_data import NavigationData
 from observer import Observer
 from graph_data import GraphDataDiagnoseGenderCount, GraphDataGenderDistribution, GraphDataAgeDistribution, \
-    GraphDataMedicationGenderCount, GraphDataProcedureGenderCount,GraphDataVitalStaturCount
+    GraphDataMedicationGenderCount, GraphDataProcedureGenderCount, GraphDataVitalStaturCount, \
+    GraphDataStayOfDays
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
@@ -19,6 +20,7 @@ age_distribution = GraphDataAgeDistribution()
 medication_count = GraphDataMedicationGenderCount()
 procedure_count = GraphDataProcedureGenderCount()
 vital_status = GraphDataVitalStaturCount()
+stay_of_days = GraphDataStayOfDays()
 # register all components
 myObserver.register(navigation)
 myObserver.register(gender_distribution)
@@ -27,6 +29,7 @@ myObserver.register(age_distribution)
 myObserver.register(medication_count)
 myObserver.register(procedure_count)
 myObserver.register(vital_status)
+myObserver.register(stay_of_days)
 # TODO GRapdata erstelle und GRapehn
 
 app = Flask(__name__)
@@ -113,8 +116,15 @@ def get_data_age_dist():
 
 @app.route("/api/vital_status/data", methods=['GET'])
 @cross_origin()
-def get_data4():
+def get_vital_status():
     json_data = jsonify(vital_status.data)
+    return json_data
+
+
+@app.route("/api/stay_of_days/data", methods=['GET'])
+@cross_origin()
+def get_stay_of_day():
+    json_data = jsonify(stay_of_days.data)
     return json_data
 
 

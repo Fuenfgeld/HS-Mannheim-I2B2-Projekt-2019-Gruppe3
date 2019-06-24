@@ -114,6 +114,33 @@ def gender_equal_female(selection=None):
     return sql_query
 
 
+def max_stay_of_days(selection=None):
+    sql_query = """SELECT max(length_of_stay) from i2b2demodata.visit_dimension"""
+    if selection is not None:
+        pattern = selection_patient_count(selection)
+        if pattern != "":
+            sql_query = """SELECT max(length_of_stay) from i2b2demodata.visit_dimension
+            inner join i2b2demodata.observation_fact using (patient_num)
+            inner join i2b2demodata.concept_dimension using (concept_cd)
+            WHERE patient_num in ( {} )""".format(pattern)
+
+    return sql_query
+
+def stay_of_day(days, selection=None):
+    sql_query = """SELECT count(DISTINCT patient_num) from i2b2demodata.observation_fact inner join i2b2demodata.visit_dimension
+using (patient_num) where length_of_stay = {};""".format(days)
+    if selection is not None:
+        pattern = selection_patient_count(selection)
+        if pattern != "":
+            sql_query = """SELECT count(DISTINCT visit_dimension.end_date-visit_dimension.start_date) FROM i2b2demodata.observation_fact
+                  inner join i2b2demodata.patient_dimension using (patient_num)
+                 inner join i2b2demodata.visit_dimension using (patient_num)
+                 inner join i2b2demodata.concept_dimension using (concept_cd)
+                  WHERE patient_num in ( {} ) AND length_of_stay = {}""".format(pattern, days)
+
+    return sql_query
+
+
 def age_distribution(begin, end, gender, selection=None):
     sql_query = """SELECT COUNT(patient_num) FROM i2b2demodata.patient_dimension 
                    WHERE age_in_years_num >= {} and age_in_years_num <{} AND sex_cd = '{}' """.format(begin, end,
@@ -141,7 +168,7 @@ def vital_status(state, gender, selection=None):
                     INNER JOIN i2b2demodata.patient_dimension using (patient_num)
                     INNER JOIN i2b2demodata.concept_dimension using (concept_cd)
         WHERE  concept_path LIKE '\\i2b2\\Demographics\\Vital Status\\{}%' AND sex_cd='{}' AND patient_num in ({})
-        """.format(state, gender,pattern)
+        """.format(state, gender, pattern)
 
     return sql_query
 

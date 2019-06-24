@@ -1,5 +1,6 @@
 from sql_templates import all_patient, gender_equal_female, gender_equal_male, age_distribution, \
-    diagnoses_gender_count, medications_gender_count, procedures_gender_count, vital_status
+    diagnoses_gender_count, medications_gender_count, procedures_gender_count, vital_status, stay_of_day,\
+    max_stay_of_days
 from db_connector import DBConnector
 
 
@@ -27,7 +28,6 @@ class GraphDataGenderDistribution:
 
     def update(self, data_change):
         self.data = self.get_gender_distribution(data_change)
-
 
     def get_gender_distribution(self, data_change=None):
         db = DBConnector()
@@ -96,8 +96,8 @@ class GraphDataVitalStaturCount:
             data_all_m += male
             data_m.append(male)
         if data_change is None:
-            unknown_m = data_all_patient[0]-data_all_m
-            unknown_f = data_all_patient[1]-data_all_f
+            unknown_m = data_all_patient[0] - data_all_m
+            unknown_f = data_all_patient[1] - data_all_f
             lables.append("not recorded")
             data_m.append(unknown_m)
             data_f.append(unknown_f)
@@ -176,6 +176,31 @@ class GraphDataProcedureGenderCount:
             data_m.append(element[2])
             data_f.append(element[3])
         result = {"lable": lables, "data": data_count, "M": data_m, "F": data_f}
+
+        return result
+
+
+class GraphDataStayOfDays:
+
+    def __init__(self):
+        self.data = self.get_stay_of_days()
+
+    def update(self, data_change):
+        self.data = self.get_stay_of_days(data_change)
+
+    def get_stay_of_days(self, data_change=None):
+        db = DBConnector()
+        lables = []
+        data_count = []
+        max_days = db.query(max_stay_of_days(data_change))[0][0]
+        for i in range(1, max_days+1):
+            sql_query = stay_of_day(i, data_change)
+            data_count.append(db.query(sql_query)[0][0])
+            lables.append(str(i)+" days")
+
+        result = {"label": lables, "data": data_count}
+
+        return result
 
         return result
 
