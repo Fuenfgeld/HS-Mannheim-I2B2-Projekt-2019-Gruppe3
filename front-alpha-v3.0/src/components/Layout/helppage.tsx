@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Dropdown from 'react-dropdown';
+import Dropdown from 'react-dropdown'
 import Navbar from "./Navbar";
 import Selection from "./Selection";
 import SelectionPage from "./SelectionPage"
@@ -7,12 +7,12 @@ import GenderDist from "../Graph/GenderDist";
 import GraphAgeMF from "../Graph/GraphAgeMF";
 import SecondaryDiaGraph from "../Graph/SecondaryDiaGraph";
 
+
 import {
   BrowserRouter as Router,
   Route, Switch, Link
 } from 'react-router-dom'
 import PatientCount from "../Graph/PatienCount";
-
 
 type SelChProps = {
     id?:number,

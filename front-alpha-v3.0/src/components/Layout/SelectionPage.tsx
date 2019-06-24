@@ -90,7 +90,7 @@ export default class App extends React.Component<{}, MyState> {
     screenInfoHeight(){
         var displayheight= window.screen.availHeight;
         var height
-            height=(displayheight/100)*50;
+            height=(displayheight/100)*56;
 
         return  height
     }
@@ -267,7 +267,6 @@ export default class App extends React.Component<{}, MyState> {
                     valueUnit={"Diagnoses"}
                     onChangeNode={this.onChangeNode.bind(this)}
                   />
-
                   </div>
                 </div>
 
@@ -284,7 +283,6 @@ export default class App extends React.Component<{}, MyState> {
                               </div><br/>
                       </div>
                   </div>
-
                   <div id="buttons">
                 
 

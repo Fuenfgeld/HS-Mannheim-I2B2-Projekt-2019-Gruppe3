@@ -32,11 +32,11 @@ class SelectionChild extends React.Component<SelChProps, SelChState> {
         ]
         return (
             <div id="Merkmal">
-                    <div>
-                        <button type = "buttons" id = "dropdown"><Dropdown disabled = {this.props.disabeld} options={options} onChange = {this.onChange} value ={this.state.operator} /></button><br/>
-                        <br/><p id="DiagnoseName">{this.props.name}</p>
-
-                    </div>
+                <div id="merkmalzeile">
+                        <div id="DiagnoseName">{this.props.name}</div>
+                        <div><button id = "dropdown"><Dropdown disabled = {this.props.disabeld} options={options} onChange = {this.onChange} value ={this.state.operator} /></button>
+                        </div>
+                </div>
             </div>
         )
     }
