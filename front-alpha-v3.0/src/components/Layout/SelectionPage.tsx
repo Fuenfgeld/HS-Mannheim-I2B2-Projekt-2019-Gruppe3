@@ -4,8 +4,7 @@ import '../../App.css';
 import Selection from "./Selection";
 import Navbar from "./Navbar";
 import PatientCount from "../Graph/PatienCount";
-import {
-  BrowserRouter as Router,
+import {  BrowserRouter as Router,
   Route, Switch, Link
 } from 'react-router-dom'
 //import GraphAgeMF from "./components/Graph/GraphAgeMF";
@@ -71,7 +70,10 @@ export default class App extends React.Component<{}, MyState> {
         this.setState({
           operatorList : selOperatorList
         },() => {
-          this.fetchData();
+          if(this.state.selectionNameList.length >= 1){
+            console.log("Operator fetsh")
+            this.fetchData();
+          }
         })
       }
 
@@ -90,6 +92,7 @@ export default class App extends React.Component<{}, MyState> {
     screenInfoHeight(){
         var displayheight= window.screen.availHeight;
         var height
+
             height=(displayheight/100)*56;
 
         return  height
@@ -99,7 +102,6 @@ export default class App extends React.Component<{}, MyState> {
         var displaywidth= window.screen.availWidth;
         var width
             width=(displaywidth/100)*69;
-
         return width
     }
 
@@ -120,6 +122,8 @@ export default class App extends React.Component<{}, MyState> {
               selectionNameList :  this.state.selectionNameList.concat([this.state.currentNode.data.name]),
               selectionList : this.state.selectionList.concat([this.state.currentNode.data.selection]),
             },() => {
+            console.log("add fetsh")
+
               this.fetchData();
             })
 

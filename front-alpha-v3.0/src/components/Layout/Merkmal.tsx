@@ -13,17 +13,13 @@ class Merkmal extends Component<{}, {}> {
         return (
 
             <div id="Merkmal">Name
-<div>HHHAAALLOOOO</div>
                 <div >
                     <button type = "buttons" id = "dropdown"><Dropdown options={options} value ={defaultOption} placeholder="AND"/></button><br/>
                      <label className="container">One
                         <input type="checkbox" />
                             <span className="checkmark"></span>
                     </label>
-                    <div>HHHAAALLOOOO</div>
                 </div>
-                <div>HHHAAALLOOOO</div>
-
                 </div>
         )
     }

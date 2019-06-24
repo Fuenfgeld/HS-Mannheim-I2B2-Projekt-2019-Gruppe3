@@ -10,7 +10,7 @@ type secState = {
   dataF : any
 }
 
-class SecondaryDiaGraph extends React.Component<secProps,secState> {
+class Procedures extends React.Component<secProps,secState> {
 
   constructor(){
     super();
@@ -142,7 +142,7 @@ render() {
           textAnchor="middle"
           style={{ fontSize: 30 }}
           x={(width/2)} y={30}
-          text= {"Top 10 Secondary Diagnoses"}
+          text= {"Top 10 Procedures"}
         />
         </VictoryChart>
         
@@ -151,4 +151,4 @@ render() {
   }
 }
 
-export default SecondaryDiaGraph;
+export default Procedures;
