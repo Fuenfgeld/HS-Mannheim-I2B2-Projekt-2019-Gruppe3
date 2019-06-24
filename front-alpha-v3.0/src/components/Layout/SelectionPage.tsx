@@ -64,30 +64,42 @@ export default class App extends React.Component<{}, MyState> {
           currentNode: currentNode
         });
       };
+
+
+      onChangeOperator(selOperatorList:any){
+        this.setState({
+          operatorList : selOperatorList
+        },() => {
+          if(this.state.selectionNameList.length >= 1){
+            console.log("Operator fetsh")
+            this.fetchData();
+          }
+        })
+      }
+
       screenInfoHeightDisplay(){
         var displayheight= window.screen.availHeight;
 
         return  displayheight
       }
-     screenInfoWidthDisplay(){
+
+    screenInfoWidthDisplay(){
         var displaywidth= window.screen.availWidth;
 
         return displaywidth
-     }
-  screenInfoHeight(){
+    }
+
+    screenInfoHeight(){
         var displayheight= window.screen.availHeight;
         var height
-        if(displayheight>=860){
-            height=400
-        }
+            height=(displayheight/100)*50;
         return  height
     }
+
     screenInfoWidth(){
         var displaywidth= window.screen.availWidth;
         var width
-        if(displaywidth>=1600){
-            width=1000
-        }
+            width=(displaywidth/100)*69;
         return width
     }
 
@@ -107,8 +119,9 @@ export default class App extends React.Component<{}, MyState> {
             this.setState({
               selectionNameList :  this.state.selectionNameList.concat([this.state.currentNode.data.name]),
               selectionList : this.state.selectionList.concat([this.state.currentNode.data.selection]),
-              operatorList : this.state.operatorList.concat(["INTERSECT"])
             },() => {
+            console.log("add fetsh")
+
               this.fetchData();
             })
 
@@ -238,14 +251,13 @@ export default class App extends React.Component<{}, MyState> {
               <div id = "Parts">
                 <div id = "Links">
                   <div id = "Selektion">
-                    <Selection selName = {this.state.selectionNameList}></Selection>
-
+                    <Selection selName = {this.state.selectionNameList} onChangeOperator={this.onChangeOperator.bind(this)} disabeld={false} selOperators={this.state.operatorList}></Selection>
                   </div>
                   <div id="Treemap" >
                       <div>
                       <button className={'AddButton'} onClick = {this.onButtonAdd.bind(this)}>Add</button>
                       <button className={'DeleteButton'}onClick = {this.onButtonDelete.bind(this)}>Delete</button>
-                      <Link className={'RunButton'} to='/about'>Run</Link>
+                      <Link className={'RunButton'} to='/result'>Result</Link>
                     </div>
                   <TreeMap
                     key = {this.state.keyValue}

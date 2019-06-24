@@ -25,7 +25,7 @@ export default class App extends React.Component<{}, {}> {
         return (
         <Router>
             <Switch>
-              <Route path="/about" component={ResultPage} />
+              <Route path="/result" component={ResultPage} />
               <Route path="/" component={SelectionPage} />
             </Switch>
         </Router>

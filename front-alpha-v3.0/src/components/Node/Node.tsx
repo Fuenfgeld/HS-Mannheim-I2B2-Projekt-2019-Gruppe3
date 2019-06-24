@@ -64,7 +64,7 @@ class Node extends React.Component<INodeProps, {}> {
                 >
                     {this._getLabelNewLine()}
                 </text>
-                {this._getNumberOfItemsRect()}
+                
                 <title>{label + "\n" + valueWithFormat + " " + valueUnit + "\n" + nodeTotalNodes + "/" + globalTotalNodes}</title>
             </g>
         );
@@ -74,7 +74,7 @@ class Node extends React.Component<INodeProps, {}> {
         return fontSize;
     }
     private _getNumberItemsWidthByNumberOfChars(fontSize: number, numberOfChars: number) {
-        return fontSize / 2 * numberOfChars + 5;
+        return 0;
     }
 
     private _getNumberOfItemsRect() {
