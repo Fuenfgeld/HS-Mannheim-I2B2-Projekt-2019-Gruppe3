@@ -123,7 +123,6 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
                         <div id="AgeGenderGraph2"> <GraphAgeMF data = {this.state.ageDist}/> </div>
 
                         <div id="NebendiagnosenGraph2">
-                           Nebendiagnosen
                           <SecondaryDiaGraph data = {this.state.diagnoseCount}/>
                         </div>
 
