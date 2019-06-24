@@ -69,6 +69,8 @@ def data_selection():
     selection_all["names"] = data_change["selection_name"]
     selection_all["selection"] = data_change["selection"]
     selection_all["operator"] = data_change["operator"]
+    if len(data_change['selection']) == 0:
+        data_change = None
     myObserver.dispatch(data_change)
 
     return jsonify({"State": "Success"}), 200
