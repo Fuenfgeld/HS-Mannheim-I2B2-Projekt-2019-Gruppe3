@@ -173,6 +173,24 @@ def vital_status(state, gender, selection=None):
     return sql_query
 
 
+def labory_by_flag(value, sex, selection=None):
+    sql_query = """SELECT DISTINCT patient_num, nval_num FROM i2b2demodata.observation_fact
+            inner join i2b2demodata.patient_dimension USING (patient_num)
+            inner join i2b2demodata.concept_dimension USING (concept_cd)
+            WHERE concept_path like  '{}%' AND nval_num notnull
+            AND sex_cd = '{}'""".format(value, sex)
+    if selection is not None:
+        pattern = selection_patient_count(selection)
+        if pattern != "":
+            sql_query = """SELECT DISTINCT patient_num, nval_num  FROM i2b2demodata.observation_fact
+            inner join i2b2demodata.patient_dimension USING (patient_num)
+            inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
+            WHERE concept_path like  '{}%' AND nval_num notnull
+            AND sex_cd = '{}' AND patient_num in ({});""".format(value, sex, pattern)
+
+    return sql_query
+
+
 def diagnoses_gender_count(selection=None):
     sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl,
        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact

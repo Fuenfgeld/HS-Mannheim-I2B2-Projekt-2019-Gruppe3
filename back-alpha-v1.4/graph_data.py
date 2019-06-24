@@ -1,6 +1,6 @@
 from sql_templates import all_patient, gender_equal_female, gender_equal_male, age_distribution, \
-    diagnoses_gender_count, medications_gender_count, procedures_gender_count, vital_status, stay_of_day,\
-    max_stay_of_days
+    diagnoses_gender_count, medications_gender_count, procedures_gender_count, vital_status, stay_of_day, \
+    max_stay_of_days, labory_by_flag
 from db_connector import DBConnector
 
 
@@ -193,12 +193,46 @@ class GraphDataStayOfDays:
         lables = []
         data_count = []
         max_days = db.query(max_stay_of_days(data_change))[0][0]
-        for i in range(1, max_days+1):
+        for i in range(1, max_days + 1):
             sql_query = stay_of_day(i, data_change)
             data_count.append(db.query(sql_query)[0][0])
-            lables.append(str(i)+" days")
+            lables.append(str(i))
 
         result = {"label": lables, "data": data_count}
+
+        return result
+
+        return result
+
+
+class GraphDataLaboratoryTest:
+
+    def __init__(self):
+        self.data = self.get_lab_values()
+
+    def update(self, data_change):
+        self.data = self.get_lab_values(data_change)
+
+    def get_lab_values(self, data_change=None):
+        db = DBConnector()
+        labory_tests = [r'\i2b2\Labtests\LAB\(LLB16) Chemistry\(LLB17) Lipid Tests\CHOL\LOINC:2093-3',
+                        r'\i2b2\Labtests\LAB\(LLB16) Chemistry\Hemoglobin\GHBA1C\LOINC:4548-4',
+                        r'\i2b2\Labtests\LAB\(LLB16) Chemistry\(LLB20) Cardiac Tests\CPK\LOINC:2157-6',
+                        r'\i2b2\Labtests\LAB\(LLB16) Chemistry\(LLB20) Cardiac Tests\HSCRP\LOINC:30522-7']
+        lables = ["cholesterol", "hemoglobin", "creatine", "C-REACTIVE PROTEIN "]
+        data_m = list()
+        data_f = list()
+        result = dict()
+        for test in labory_tests:
+            sql_query = labory_by_flag(test, 'M', data_change)
+            male = db.query(sql_query)
+            for person in male:
+                data_m.append(str(person[1]))
+            sql_query = labory_by_flag(test, 'F', data_change)
+            female = db.query(sql_query)
+            for person in female:
+                data_f.append(str(person[1]))
+            result.update({lables.pop(): [{'M': data_m, 'F': data_f}]})
 
         return result
 
