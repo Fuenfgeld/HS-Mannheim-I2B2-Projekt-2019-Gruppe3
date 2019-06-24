@@ -9,6 +9,8 @@ import SecondaryDiaGraph from "../Graph/SecondaryDiaGraph";
 import Medication from "../Graph/Medication";
 import Procedures from "../Graph/Procedures"
 import VitalStatus from "../Graph/VitalStatus"
+import LengthOfStay from "../Graph/LengthOfStay"
+import LabTest from "../Graph/LabTest"
 
 import {
   BrowserRouter as Router,
@@ -28,7 +30,9 @@ type SelChState = {
     operatorList : any,
     medicationCount : any
     procedureCount : any,
-    vitalStatus : any
+    vitalStatus : any,
+    lengthStay : any,
+    labTestData : any
     };
 
 
@@ -40,7 +44,8 @@ const urlSelAll = "http://localhost:5000/api/selection_name/data";
 const urlMed = "http://localhost:5000/api/medication_count/data";
 const urlPro = "http://localhost:5000/api/procedure_count/data";
 const urlVit = "http://localhost:5000/api/vital_status/data";
-
+const urlSty = "http://localhost:5000/api/stay_of_days/data";
+const urlLab = "http://localhost:5000/api/laboratory_test/data"
 
 
 
@@ -59,7 +64,9 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
           ageDist : {"data":[{"F":1,"M":0,"name":"0-10"},{"F":11,"M":20,"name":"10-20"},{"F":9,"M":12,"name":"20-30"},{"F":13,"M":22,"name":"30-40"},{"F":6,"M":15,"name":"40-50"},{"F":2,"M":6,"name":"50-60"},{"F":4,"M":6,"name":"60-70"},{"F":3,"M":1,"name":"70-80"},{"F":3,"M":0,"name":"80-90"}]},
           medicationCount : [],
           procedureCount : [],
-          vitalStatus :[]
+          vitalStatus :[],
+          lengthStay : [],
+          labTestData : []
         };
     }
 
@@ -125,6 +132,22 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
         .catch(e => console.log("Fetching error DCount", e));
       }
 
+      fetchSty(){
+        fetch(urlSty).then(res => {
+          return res.json();
+        })
+        .then(new_data => this.setState({lengthStay : new_data}))
+        .catch(e => console.log("Fetching error DCount", e));
+      }
+
+      fetchLab(){
+        fetch(urlLab).then(res => {
+          return res.json();
+        })
+        .then(new_data => this.setState({labTestData : new_data}))
+        .catch(e => console.log("Fetching error DCount", e));
+      }
+
       onChangeOperator(selOperatorList:any){
         this.setState({
           operatorList : selOperatorList
@@ -136,6 +159,7 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
       
 
       componentDidMount(){
+        
         this.fetchSel();
         this.fetchPCount();
         this.fetchDCount();
@@ -143,6 +167,8 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
         this.fetchMed();
         this.fetchPro();
         this.fetchVit();
+        this.fetchSty();
+
       };
 
 
@@ -167,9 +193,10 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
                         </div>
                         <br/><br/><br/>
                     <div>
-                    VitalStatus
                         <div id="PatientenAnzahl2"> <PatientCount  data = {this.state.patientCount}/></div>
                         <div id="PatientenAnzahl2"> <VitalStatus  data = {this.state.vitalStatus}/></div>
+                        <div id="PatientenAnzahl2"> <LengthOfStay data ={this.state.lengthStay}/></div>
+                        <div id="PatientenAnzahl2"> <LabTest/></div>
 
 
                         <div id ="PatientenAnzahl2"> <GenderDist  data = {this.state.patientCount}/> </div>
