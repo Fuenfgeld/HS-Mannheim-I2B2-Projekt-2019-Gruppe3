@@ -129,6 +129,23 @@ def age_distribution(begin, end, gender, selection=None):
     return sql_query
 
 
+def vital_status(state, gender, selection=None):
+    sql_query = """SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+                    INNER JOIN i2b2demodata.patient_dimension using (patient_num)
+                    INNER JOIN i2b2demodata.concept_dimension using (concept_cd)
+        WHERE concept_path LIKE '\\i2b2\\Demographics\\Vital Status\\{}%' AND sex_cd='{}'""".format(state, gender)
+    if selection is not None:
+        pattern = selection_patient_count(selection)
+        if pattern != "":
+            sql_query = """SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+                    INNER JOIN i2b2demodata.patient_dimension using (patient_num)
+                    INNER JOIN i2b2demodata.concept_dimension using (concept_cd)
+        WHERE  concept_path LIKE '\\i2b2\\Demographics\\Vital Status\\{}%' AND sex_cd='{}' AND patient_num in ({})
+        """.format(state, gender,pattern)
+
+    return sql_query
+
+
 def diagnoses_gender_count(selection=None):
     sql_query = """SELECT c_name,count(DISTINCT patient_num) as anzahl,
        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact

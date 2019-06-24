@@ -1,5 +1,5 @@
 from sql_templates import all_patient, gender_equal_female, gender_equal_male, age_distribution, \
-    diagnoses_gender_count, medications_gender_count, procedures_gender_count
+    diagnoses_gender_count, medications_gender_count, procedures_gender_count, vital_status
 from db_connector import DBConnector
 
 
@@ -27,6 +27,7 @@ class GraphDataGenderDistribution:
 
     def update(self, data_change):
         self.data = self.get_gender_distribution(data_change)
+
 
     def get_gender_distribution(self, data_change=None):
         db = DBConnector()
@@ -61,6 +62,46 @@ class GraphDataAgeDistribution:
 
         result = {"label": lables, "M": m_data, "F": f_data}
 
+        return result
+
+
+class GraphDataVitalStaturCount:
+
+    def __init__(self):
+        self.data = self.get_vital_status()
+
+    def update(self, data_change):
+        self.data = self.get_vital_status(data_change)
+
+    def get_vital_status(self, data_change=None):
+        db = DBConnector()
+        lables = ["Deceased", "Living", "Deferred"]
+        if data_change is not None:
+            lables.append("not recorded")
+        else:
+            data_male = db.query(gender_equal_male())
+            data_female = db.query(gender_equal_female())
+            data_all_patient = [data_male[0][0], data_female[0][0]]
+        data_all_m = 0
+        data_all_f = 0
+        data_f = list()
+        data_m = list()
+        for element in lables:
+            sql_query = vital_status(element, 'F', data_change)
+            female = db.query(sql_query)[0][0]
+            data_all_f += female
+            data_f.append(female)
+            sql_query = vital_status(element, 'M', data_change)
+            male = db.query(sql_query)[0][0]
+            data_all_m += male
+            data_m.append(male)
+        if data_change is None:
+            unknown_m = data_all_patient[0]-data_all_m
+            unknown_f = data_all_patient[1]-data_all_f
+            lables.append("not recorded")
+            data_m.append(unknown_m)
+            data_f.append(unknown_f)
+        result = {"lable": lables, "M": data_m, "F": data_f}
         return result
 
 
