@@ -191,7 +191,6 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
                         <h1 id="schatten">The Results
                             <Link className={'RunButton'} to='/'>Edit</Link>
                         </h1>
-                        <br/>
 
                         <div className="vertical-menu2">
                             <div id="resultGeneralInfo">
