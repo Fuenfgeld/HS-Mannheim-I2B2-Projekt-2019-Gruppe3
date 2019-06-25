@@ -108,9 +108,6 @@ componentDidUpdate(prevProps: { data: any; }){
     }
 }
 
-
-
-
 render() {
   const width = 400;
   const height = 400;
