@@ -219,20 +219,20 @@ class GraphDataLaboratoryTest:
                         r'\i2b2\Labtests\LAB\(LLB16) Chemistry\Hemoglobin\GHBA1C\LOINC:4548-4',
                         r'\i2b2\Labtests\LAB\(LLB16) Chemistry\(LLB20) Cardiac Tests\CPK\LOINC:2157-6',
                         r'\i2b2\Labtests\LAB\(LLB16) Chemistry\(LLB20) Cardiac Tests\HSCRP\LOINC:30522-7']
-        lables = ["cholesterol", "hemoglobin", "creatine", "C-REACTIVE PROTEIN "]
-        data_m = list()
-        data_f = list()
+        lables = ["cholesterol", "hemoglobin", "creatine", "C_REACTIVE_PROTEIN"]
         result = dict()
         for test in labory_tests:
+            data_m = list()
+            data_f = list()
             sql_query = labory_by_flag(test, 'M', data_change)
             male = db.query(sql_query)
             for person in male:
-                data_m.append(str(person[1]))
+                data_m.append(float(person[1]))
             sql_query = labory_by_flag(test, 'F', data_change)
             female = db.query(sql_query)
             for person in female:
-                data_f.append(str(person[1]))
-            result.update({lables.pop(): [{'M': data_m, 'F': data_f}]})
+                data_f.append(float(person[1]))
+            result.update({lables.pop(0): [{'M': data_m, 'F': data_f}]})
 
         return result
 
