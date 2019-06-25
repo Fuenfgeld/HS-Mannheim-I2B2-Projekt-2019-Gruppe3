@@ -203,10 +203,6 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
                                 </div>
                                 <br/>
                                 <div id="resultGeneralInfo2">
-                                    <div id="rgi1">
-                                        <div id="NebendiagnosenGraph2"  > <VitalStatus  data = {this.state.vitalStatus}/></div>
-
-                                    </div>
 
                                     <div id="rgi2">
                                         <div id="NebendiagnosenGraph2">
@@ -227,8 +223,10 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
                             </div>
 
                             <div id="resultmainInfo">
+
                                 <div id="AgeGenderGraph2"> <GraphAgeMF data = {this.state.ageDist}/> </div>
-                                <div id="AgeGenderGraph2"><LengthOfStay></LengthOfStay></div>
+                                <div id="AgeGenderGraph2"  > <VitalStatus  data = {this.state.vitalStatus}/></div>
+                                <div id="AgeGenderGraph3"><LengthOfStay></LengthOfStay></div>
 
 
 

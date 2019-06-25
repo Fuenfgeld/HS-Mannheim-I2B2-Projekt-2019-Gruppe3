@@ -74,7 +74,7 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
       
       const width = 400;
       const height = 400;
-      const padding = { top: 80, bottom: 100, left: 30, right: 30 };
+      const padding = { top: 80, bottom: 50, left: 30, right: 30 };
         return (
          <div>
             <VictoryChart 

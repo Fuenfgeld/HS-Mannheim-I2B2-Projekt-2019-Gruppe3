@@ -340,7 +340,13 @@ padding:10px;
   float: left;
   position: relative;
   width: 70%;
-  padding-bottom:100px;
+  padding-bottom:60px;
+  padding-left: 60px;
+}
+#AgeGenderGraph3{
+  float: left;
+  position: relative;
+  width: 70%;
   padding-left: 60px;
 }
 
