@@ -7,7 +7,8 @@ type vitProps = {
   
   type vitState = {
     dataM : any,
-    dataF : any
+    dataF : any,
+  
   }
 
 class VitalStatus extends React.Component<vitProps,vitState> {
@@ -15,16 +16,16 @@ class VitalStatus extends React.Component<vitProps,vitState> {
         super();
         this.state = {
           dataM :[
-            {x:"decceased", y:10 },
-            {x:"defeared", y:10 },
-            {x:"alive", y:10 },
-            {x:"unknown", y:10 },
+            {x:"decceased", y:10},
+            {x:"defeared", y:10},
+            {x:"alive", y:10},
+            {x:"unknown", y:10},
           ],
           dataF :[
-            {x:"decceased", y:10 },
-            {x:"defeared", y:10 },
-            {x:"alive", y:10 },
-            {x:"unknown", y:10 },
+            {x:"decceased", y:10},
+            {x:"defeared", y:10},
+            {x:"alive", y:10},
+            {x:"unknown", y:10},
           ]
         }
       }
@@ -34,16 +35,16 @@ class VitalStatus extends React.Component<vitProps,vitState> {
       if (prevProps.data !== this.props.data) {
         this.setState({
           dataM : [
-            {x:this.props.data.lable[0], y:this.props.data.M[0] },
-            {x:this.props.data.lable[1], y:this.props.data.M[1] },
-            {x:this.props.data.lable[2], y:this.props.data.M[2] },
-            {x:this.props.data.lable[3], y:this.props.data.M[3] }
+            {x:this.props.data.lable[0], y:this.props.data.M[0]},
+            {x:this.props.data.lable[1], y:this.props.data.M[1]},
+            {x:this.props.data.lable[2], y:this.props.data.M[2]},
+            {x:this.props.data.lable[3], y:this.props.data.M[3]}
           ],
           dataF : [
-            {x:this.props.data.lable[0], y:this.props.data.F[0] },
-            {x:this.props.data.lable[1], y:this.props.data.F[1] },
-            {x:this.props.data.lable[2], y:this.props.data.F[2] },
-            {x:this.props.data.lable[3], y:this.props.data.F[3] }
+            {x:this.props.data.lable[0], y:this.props.data.F[0]},
+            {x:this.props.data.lable[1], y:this.props.data.F[1]},
+            {x:this.props.data.lable[2], y:this.props.data.F[2]},
+            {x:this.props.data.lable[3], y:this.props.data.F[3]}
           ]
         })
       }
@@ -55,9 +56,10 @@ class VitalStatus extends React.Component<vitProps,vitState> {
     
     
     render() {
+      
       const width = 400;
       const height = 400;
-      const padding = { top: 60, bottom: 100, left: 50, right: 50 };
+      const padding = { top: 80, bottom: 100, left: 50, right: 50 };
         return (
          <div>
            <VictoryChart height={height} width={width}
@@ -66,23 +68,20 @@ class VitalStatus extends React.Component<vitProps,vitState> {
             >
               <VictoryStack 
                 standalone={false}
-                 style={{ data: { width: 20 }, labels: { fontSize: 15 } }}
+                 style={{ data: { width: 20 }, labels: { fontSize: 17 } }}
                  padding ={10}
+                 labels = {[(this.state.dataF[0].y+this.state.dataM[0].y),(this.state.dataF[1].y+this.state.dataM[1].y),(this.state.dataF[2].y+this.state.dataM[2].y),(this.state.dataF[3].y+this.state.dataM[3].y)]}
                 >
                
               <VictoryBar 
                 style={{ data: { fill: "#215167" } }}
                 data= {this.state.dataM}
-                labelComponent={<VictoryTooltip
-                  cornerRadius ={20}
-                  />}
+                //labelComponent={<VictoryTooltip/>}
               />
                <VictoryBar
                 style={{ data: { fill: "#E6C24A" } }}
                 data= {this.state.dataF}
-                labelComponent={<VictoryTooltip
-                  cornerRadius ={20}
-                  />}
+                //labelComponent={<VictoryTooltip/>}
               />
               </VictoryStack>
               <VictoryAxis 
