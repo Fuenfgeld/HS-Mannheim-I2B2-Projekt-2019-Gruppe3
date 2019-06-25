@@ -16,16 +16,16 @@ class VitalStatus extends React.Component<vitProps,vitState> {
         super();
         this.state = {
           dataM :[
-            {x:"decceased", y:10},
-            {x:"defeared", y:10},
-            {x:"alive", y:10},
-            {x:"unknown", y:10},
+            {x:"deceased", y:10 },
+            {x:"defeared", y:10 },
+            {x:"alive", y:10 },
+            {x:"unknown", y:10 },
           ],
           dataF :[
-            {x:"decceased", y:10},
-            {x:"defeared", y:10},
-            {x:"alive", y:10},
-            {x:"unknown", y:10},
+            {x:"deceased", y:10 },
+            {x:"defeared", y:10 },
+            {x:"alive", y:10 },
+            {x:"unknown", y:10 },
           ]
         }
       }
