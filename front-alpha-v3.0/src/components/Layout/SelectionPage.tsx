@@ -273,11 +273,13 @@ export default class App extends React.Component<{}, MyState> {
                 <div id ="Rechts">
                   <div id = "Graphen">
                       <div className="vertical-menu">
+                          <div id="generalInfo">
+                              <div id="PatientenAnzahl"> <PatientCount  data = {this.state.patientCount}/></div>
+                              <div id ="PatientenAnzahl"> <GenderDist  data = {this.state.patientCount}/> </div><br/>
+                          </div>
 
-                          <div id="PatientenAnzahl"> <PatientCount  data = {this.state.patientCount}/></div>
-                          <div id ="PatientenAnzahl"> <GenderDist  data = {this.state.patientCount}/> </div><br/>
-                              <div id="GeschlechtGraph">
-                               <GraphAgeMF data = {this.state.ageDist}/>
+                          <div id="GeschlechtGraph">
+                              <GraphAgeMF data = {this.state.ageDist}/>
                               </div><br/>
                               <div id="grenze"> </div>
 

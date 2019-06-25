@@ -188,7 +188,7 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
 
                     <div id="Unten">
                         <br/>
-                        <h1 id="schatten">Your Results
+                        <h1 id="schatten">The Results
                             <Link className={'RunButton'} to='/'>Edit</Link>
                         </h1>
                         <br/>
