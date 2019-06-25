@@ -95,7 +95,7 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
                     textAnchor="middle"
                     style={{ fontSize: 30 }}
                     x={200} y={20}
-                    text= {"Lenght of stay in days"}
+                    text= {"Length of stay in days"}
                     />
             </VictoryChart>
         </div>
