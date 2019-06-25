@@ -48,24 +48,34 @@ componentDidUpdate(prevProps: { data: any; }){
       dataM : [
         {x:this.props.data.lable[9], y:0 },
         {x:" ", y:this.props.data.M[9] },
+        {x:"           ", y:0 },        
         {x:this.props.data.lable[8], y:0 },
         {x:"  ", y:this.props.data.M[8] },
+        {x:"            ", y:0 },        
         {x:this.props.data.lable[7], y:0 },
         {x:"   ", y:this.props.data.M[7] },
+        {x:"             ", y:0 },        
         {x:this.props.data.lable[6], y:0 },
         {x:"    ", y:this.props.data.M[6] },
+        {x:"              ", y:0 },        
         {x:this.props.data.lable[5], y:0 },
         {x:"     ", y:this.props.data.M[5] },
+        {x:"               ", y:0 },        
         {x:this.props.data.lable[4], y:0 },
         {x:"      ", y:this.props.data.M[4] },
+        {x:"                ", y:0 },        
         {x:this.props.data.lable[3], y:0 },
         {x:"       ", y:this.props.data.M[3] },
+        {x:"                 ", y:0 },        
         {x:this.props.data.lable[2], y:0 },
         {x:"        ", y:this.props.data.M[2] },
+        {x:"                  ", y:0 },        
         {x:this.props.data.lable[1], y:0 },
         {x:"         ", y:this.props.data.M[1] },
+        {x:"                   ", y:0 },        
         {x:this.props.data.lable[0], y:0 },
-        {x:"          ", y:this.props.data.M[0] }
+        {x:"          ", y:this.props.data.M[0] },
+        {x:"                    ", y:0 } 
       ],
       dataF : [
         {x:this.props.data.lable[9], y:0 },
@@ -100,7 +110,7 @@ componentDidMount(){
 
 render() {
   const width = 400;
-  const height = 400;
+  const height = 500;
   const padding = { top: 60, bottom: 10, left: 20, right: 20 };
     return (
      <div>

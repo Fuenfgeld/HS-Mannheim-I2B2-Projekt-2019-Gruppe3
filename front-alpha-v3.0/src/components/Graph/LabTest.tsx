@@ -1,29 +1,38 @@
 import React, {Component} from "react";
-import {VictoryBoxPlot, VictoryLabel,VictoryArea,VictoryStack, VictoryChart,VictoryTooltip } from "victory";
+import {VictoryBoxPlot, VictoryLabel,VictoryArea,VictoryStack, VictoryChart,VictoryTooltip, VictoryPie } from "victory";
 
 type vitProps = {
-    data? : any
+    data : any,
+    domain? : any,
+    label : any,
+    normRange : any
   }
   
   type vitState = {
     data : any,
-    normValue : any
-  
+    normValueM : any,
+    normValueF : any
+    testMax : number
   }
 
-class LengthOfStay extends React.Component<vitProps,vitState> {
+class LabTest extends React.Component<vitProps,vitState> {
     constructor(){
         super();
         this.state = {
           data :[
             {x:" ", y:[0]},
-            {x:"Male", y:[20,33,5,6,9,8,7]},
-            {x:"Female", y:[5,4,19,4,7,12]},
+            {x:"Male", y:[0]},
+            {x:"Female", y:[0]},
             {x:"  ", y:[0]}
           ],
-          normValue : [
+          normValueM : [
             {x:""}
-          ]
+          ],
+          normValueF : [
+            {x:""}
+          ],
+
+          testMax : 100
         }
       }
     
@@ -41,16 +50,15 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
           data : [
             {x:" ", y:[0]},
             {x:"Male", y:this.props.data[0].M},
-            {x:"  ", y:[0]},
             {x:"Female", y:this.props.data[0].F},
-            {x:"   ", y:[0]}
+            {x:"    ", y:[0]}
           ],
-          normValue : [
-            { x: 1, y: 175, y0: 135 },
-            { x: 2, y: 175, y0: 135 },
-            { x: 3, y: 165, y0: 130 },
-            { x: 4, y: 155, y0: 125 },
-            { x: 5, y: 155, y0: 125 }
+
+          normValueM : [
+            { x: 1, y: this.props.normRange.m[0], y0: this.props.normRange.m[1] },
+            { x: 2, y: this.props.normRange.m[0], y0: this.props.normRange.m[1] },
+            { x: 3, y: this.props.normRange.f[0], y0: this.props.normRange.f[1] },
+            { x: 4, y: this.props.normRange.f[0], y0: this.props.normRange.f[1] }
 
           ]
         })
@@ -75,17 +83,18 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
             <VictoryChart
             width = {width}
             height = {height}
-            padding = {padding}
-            domain = {{y:[0,400]}}
+            padding = { padding}
+            domain = {{y:this.props.domain}}
             domainPadding = {{x : [50,50]}}
             >
                 <VictoryArea
+                interpolation = {"step"}
                 style={{
                     data: {
                       fill: "#c43a31", fillOpacity: 0.2
                     },
                   }}
-                data={this.state.normValue}
+                data={this.state.normValueM}
                 />
                 <VictoryBoxPlot
                 
@@ -97,16 +106,22 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
                     max: { stroke: (d) => d.x =="Male" ? maleC : femaleC },
                     q1: { fill: (d) => d.x =="Male" ? maleC : femaleC },
                     q3: { fill: (d) => d.x =="Male" ? maleC : femaleC },
-                    median: { stroke: (d) => d.x =="Male" ? maleC : femaleC, strokeWidth: 2 },
+                    //median: { stroke: (d) => d.x =="Male" ? maleC : femaleC, strokeWidth: 2 },
                     minLabels: { fill: (d) => d.x =="Male" ? maleC : femaleC },
                     maxLabels: { fill: (d) => d.x =="Male" ? maleC : femaleC }
                 }}
                 />  
-
+              <VictoryLabel
+                    textAnchor="middle"
+                    style={{ fontSize: 30 }}
+                    x={200} y={20}
+                    text= {this.props.label + " Test"}
+                    />
             </VictoryChart>
+            
         </div>
         );
       }
     }
 
-export default LengthOfStay;
+export default LabTest;

@@ -225,15 +225,17 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
 
                                 <div id="AgeGenderGraph2"> <GraphAgeMF data = {this.state.ageDist}/> </div>
                                 <div id="AgeGenderGraph2"  > <VitalStatus  data = {this.state.vitalStatus}/></div>
-                                <div id="AgeGenderGraph3"><LengthOfStay></LengthOfStay></div>
+                                <div id="AgeGenderGraph3"><LengthOfStay data = {this.state.lengthStay}/></div>
 
 
 
                             </div>
 
                             <div id="resultspecialInfo">
-
-                                <div id="rsi1"><LabTest></LabTest></div>
+                              <div id ="rsi1"> <LabTest  data = {this.state.labTestData.creatine} domain={[0,400]} label={"Creatine"} normRange={{f:[45,90],m:[60,110]}}/></div>
+                              <div id ="rsi1"> <LabTest  data = {this.state.labTestData.cholesterol} domain={[0,300]} label={"Cholesterol"} normRange={{f:[0,0],m:[0,0]}}/></div>
+                              <div id ="rsi1"> <LabTest  data = {this.state.labTestData.hemoglobin} domain={[0,20]} label={"Hemoglobin"} normRange={{f:[12.5,15.5],m:[13.5,17.5]}}/></div>
+                              <div id ="rsi1"> <LabTest  data = {this.state.labTestData.CREACTIVEPROTEIN} domain={[0,10]} label={"C-Reactive Protein"} normRange={{f:[45,90],m:[60,110]}}/></div>
                             </div>
 
 
