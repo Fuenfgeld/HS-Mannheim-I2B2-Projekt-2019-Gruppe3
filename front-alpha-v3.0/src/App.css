@@ -7,6 +7,94 @@ html{
   height:100%;
 }
 
+#logo{
+  padding-top: 10px;
+  padding-left:15px;
+  font-family: Arial;
+  font-size:18px;
+}
+
+.Medication{
+  border-width: 5px;
+  border-color:black;
+  border-style:solid;
+}
+
+.SecondaryDiaGraph{
+    border-width: 5px;
+  border-color:black;
+  border-style:solid;
+}
+#resultGeneralInfo{
+  padding-top:20px;
+  border-color: #F9F9F9;
+  border-width: 2px;
+    border-style: solid;
+  width:20%;
+  height:100%;
+  float:left;
+}
+#resultGeneralInfo1{
+  padding-top:5px;
+  border-color: #7b7b7b;
+  border-width: 2px;
+  border-style: solid;
+  width:99%;
+  height:35%;
+  float:left;
+}
+#resultGeneralInfo2{
+  padding-top:5px;
+  border-color: #123440;
+  border-width: 2px;
+  border-right-style: solid;
+  border-left-style: solid;
+  width:99%;
+  height:99%;
+  float:left;
+}
+#resultmainInfo{
+  padding-top:20px;
+  padding-bottom:20px;
+  padding-left:60px;
+   border-color: #F9F9F9;
+  border-width: 2px;
+  border-left-style: solid;
+  border-right-style:solid;
+  width:50%;
+  height:99%;
+  float: left;
+}
+
+#resultspecialInfo{
+  padding-top:10px;
+  border-color: #7b7b7b;
+    border-right-style: hidden;
+  border-width: 2px;
+  border-style: solid;
+  width:23%;
+  height:100%;
+  float:left;
+}
+#navhelp{
+    padding-top: 10px;
+  padding-right:10px;
+  font-family: Arial;
+  font-size:16px;
+}
+
+#borderhorizontal{
+  border-style: solid;
+  border-bottom-width: 10px;
+  border-color: black;
+}
+
+#bordervertical{
+  border-style: solid;
+  border-right-width: 10px;
+  border-color: black;
+}
+
 #resultpage{
   height:100%;
   width:100%;
@@ -20,15 +108,18 @@ html{
 #Navigation {
     background-color: #66717E;
     overflow: hidden;
-  height:5%;
+    height:5%;
+    color: white;
 }
 
 #DiagnoseName{
   padding:10px;
-  border-style: solid;
   overflow:auto;
   float:left;
   width:65%;
+  font-family: Arial;
+  font-size: 20px;
+  border-bottom: solid 1px white;
 }
 
 
@@ -140,8 +231,17 @@ form.example::after {
 }
 
 #PatientenAnzahl2{
+  padding-top:10px;
   float:left;
-  width : 25%;
+  width : 40%;
+  font-size: small;
+  font-family: Verdana bold;
+}
+
+#PatientenAnzahl3{
+  padding-top:10px;
+  float:left;
+  width : 60%;
   font-size: small;
   font-family: Verdana bold;
 }
@@ -153,7 +253,17 @@ padding:10px;
     overflow: auto;
     position: relative;
     white-space: nowrap;
-  height: 672px;
+  height: 98%;
+}
+
+
+.vertical-menu2 {
+padding:10px;
+    background-color: #F9F9F9;
+    overflow: auto;
+    position: relative;
+    white-space: nowrap;
+  height: 87%;
 }
 
 #GeschlechtGraph{
@@ -165,7 +275,8 @@ padding:10px;
 #AgeGenderGraph2{
   float: left;
   position: relative;
-  width: 25%;
+  width: 70%;
+  padding-bottom:50px;
 }
 
 #AlterGraph{
@@ -201,29 +312,31 @@ position: relative;
   font-family: Verdana bold;
 
 }
-#NebendiagnosenGraph3{
+
+
+#NebendiagnosenGraph2{
+  padding-top:10px;
   float:left;
   position: relative;
-  width: 24%;
-  height :50%;
+  width: 99%;
+  height:50%;
   background-color: #F9F9F9;
   display: inline-block;
   text-align: center;
-  padding: 14px;
   text-decoration: none;
   border-color: white ;
-  overflow: hidden;
   z-index: 0;
   color: black;
   font-family: Verdana bold;
 
 }
 
-#NebendiagnosenGraph2{
+#NebendiagnosenGraph3{
+  padding-top:10px;
   float:left;
   position: relative;
-  width: 25%;
-  height:50%;
+  width: 99%;
+  height: 99%;
   background-color: #F9F9F9;
   display: inline-block;
   text-align: center;
@@ -337,7 +450,7 @@ position: relative;
 
 .RunButton {
   float: right;
- 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
@@ -436,16 +549,20 @@ li a:hover {
     border-width: 1px;
     border-style: solid;
   background-color: #F9F9F9;
+  border-bottom-size:0.5px;
+   border-bottom-color: #7b7b7b;
+
 }
 
 #scrollMenu {
     width: 100%;
-  background-color: #F9F9F9;
+    background-color: #F9F9F9;
     overflow: auto;
     position: relative;
     white-space: nowrap;
-  height:100%;
+    height:100%;
 }
+
 
 
 #Merkmal {
@@ -486,9 +603,11 @@ li a:hover {
     top: 32%;
     left: 77%;
 }
+
 #tm{
     margin-right: 100px;
 }
+
 #Suchleiste{
     width: 100%;
     height:30px;
@@ -497,6 +616,7 @@ li a:hover {
     border-width: 1px;
     border-style: solid;
 }
+
 #suche {
         float:left;
   border: 1px solid white;
@@ -520,6 +640,8 @@ li a:hover {
     border-width: 1px;
     border-style: solid;
     background-color: #F9F9F9;
+    border-left-color: #7b7b7b;
+  border-left-width: 0.5px;
 
 
 }
@@ -572,7 +694,7 @@ li a:hover {
 	font-family:Arial;
 	font-size:14px;
 	font-weight:bold;
-	padding:10px 20px;
+	padding:6px 15px;
 	text-decoration:none;
 	text-shadow:0px 0px 0px #ffffff;
 }
@@ -608,7 +730,6 @@ li a:hover {
   background-color: #09505c;
     width: 100%;
     border-bottom-width: 5px;
-    width: 100%;
     float: left;
     border-color: white;
     border-style: solid;
@@ -618,7 +739,7 @@ li a:hover {
 #Unten {
 border-top-width: 20px;
     background-color: #F9F9F9;
-  height: 100%;
+  height:87%;
 }
 
 #Überschrift{

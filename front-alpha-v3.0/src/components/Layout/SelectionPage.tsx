@@ -1,8 +1,7 @@
 import * as React from "react";
 import TreeMap from "../TreeMap/TreeMap";
-import '../../App.css';
+import Navbar from "./Navbar"
 import Selection from "./Selection";
-import Navbar from "./Navbar";
 import PatientCount from "../Graph/PatienCount";
 import {  BrowserRouter as Router,
   Route, Switch, Link
@@ -11,8 +10,6 @@ import {  BrowserRouter as Router,
 import GenderDist from "../Graph/GenderDist";
 import GraphAgeMF from "../Graph/GraphAgeMF";
 import SecondaryDiaGraph from "../Graph/SecondaryDiaGraph";
-
-
 
 
 const urlI2B2 ="http://127.0.0.1:5000/api/navigation/data";
@@ -247,8 +244,7 @@ export default class App extends React.Component<{}, MyState> {
         return (
           <div className="App">
               <div id = "Navigation">
-                <Navbar>
-                </Navbar>
+                  <Navbar></Navbar>
               </div>
               <div id = "Parts">
                 <div id = "Links">
@@ -277,11 +273,14 @@ export default class App extends React.Component<{}, MyState> {
                 <div id ="Rechts">
                   <div id = "Graphen">
                       <div className="vertical-menu">
+
                           <div id="PatientenAnzahl"> <PatientCount  data = {this.state.patientCount}/></div>
                           <div id ="PatientenAnzahl"> <GenderDist  data = {this.state.patientCount}/> </div><br/>
                               <div id="GeschlechtGraph">
                                <GraphAgeMF data = {this.state.ageDist}/>
                               </div><br/>
+                              <div id="grenze"> </div>
+
                               <div id="NebendiagnosenGraph">
                                   <SecondaryDiaGraph data = {this.state.diagnoseCount}/>
                               </div><br/>

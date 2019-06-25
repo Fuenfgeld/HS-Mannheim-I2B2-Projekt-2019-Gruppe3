@@ -151,46 +151,63 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
         return (
             <div id="resultpage">
                     <div id = "Navigation">
-                        <Navbar>
-                        </Navbar>
+                        <Navbar></Navbar>
                     </div>
-                <div id="resultedit">
-                    <div id = "Oben">
+                    <div id="resultedit">
+                        <div id = "Oben">
                         <div id = "Selektion">
                             <Selection selName={this.state.selectionNameList} onChangeOperator={this.onChangeOperator} disabeld={true} selOperators={this.state.operatorList}></Selection>
                         </div>
-                    </div>
+                        </div>
 
                     <div id="Unten">
+                        <br/>
                         <div id="Überschrift">Your Results
                             <Link className={'RunButton'} to='/'>Edit</Link>
                         </div>
-                        <br/><br/><br/>
-                    <div>
-                    VitalStatus
-                        <div id="PatientenAnzahl2"> <PatientCount  data = {this.state.patientCount}/></div>
-                        <div id="PatientenAnzahl2"> <VitalStatus  data = {this.state.vitalStatus}/></div>
+                        <br/>
 
+                        <div className="vertical-menu2">
+                            <div id="resultGeneralInfo">
+                                <div id="resultGeneralInfo1">
+                                    <div id="PatientenAnzahl2"> <PatientCount  data = {this.state.patientCount}/></div>
 
-                        <div id ="PatientenAnzahl2"> <GenderDist  data = {this.state.patientCount}/> </div>
+                                    <div id ="PatientenAnzahl3"> <GenderDist  data = {this.state.patientCount}/> </div>
 
-                        <div id="AgeGenderGraph2"> <GraphAgeMF data = {this.state.ageDist}/> </div>
+                                </div>
+                                <br/>
+                                <div id="resultGeneralInfo2">
+                                    <div id="NebendiagnosenGraph2">
+                                            <SecondaryDiaGraph data = {this.state.diagnoseCount}/>
+                                        </div><br/><br/><br/>
 
-                        <div id="NebendiagnosenGraph2">
-                          <SecondaryDiaGraph data = {this.state.diagnoseCount}/>
+                                        <div id="NebendiagnosenGraph2">
+                                            <Medication data = {this.state.medicationCount}/>
+                                        </div><br/><br/><br/>
+
+                                        <div id="NebendiagnosenGraph3">
+                                            <Procedures data = {this.state.procedureCount}/>
+                                        </div><br/><br/>
+                                </div>
+                            </div>
+
+                            <div id="resultmainInfo">
+
+                                <div id="AgeGenderGraph2"> <GraphAgeMF data = {this.state.ageDist}/> </div><br/><br/><br/>
+
+                                <div id="AgeGenderGraph2"  > <VitalStatus  data = {this.state.vitalStatus}/></div>
+
+                            </div>
+
+                            <div id="resultspecialInfo">
+
+                            </div>
+
                         </div>
-                        <div id="NebendiagnosenGraph2">
-                        <Medication data = {this.state.medicationCount}/>
-                        </div>
-                        <div id="AgeGenderGraph2">
-                          <Procedures data = {this.state.procedureCount}/>
-                        </div>
-
-                    </div>
-
                     </div>
                 </div>
             </div>
+
         )
     }
 

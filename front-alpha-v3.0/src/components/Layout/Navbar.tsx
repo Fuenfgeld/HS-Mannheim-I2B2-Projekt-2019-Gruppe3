@@ -4,9 +4,7 @@ class Navbar extends Component{
     render() {
         return(
             <ul>
-                <li><a href="default.asp">IdealGraph</a></li>
-                <li style={{float: "right"}}><a className="active"
-                                                href="#Help">Help</a></li>
+                <li><div id="logo" >IdealGraph</div ></li>
             </ul>
         )
     }
