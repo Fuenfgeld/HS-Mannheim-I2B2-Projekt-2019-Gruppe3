@@ -98,8 +98,8 @@ def gender_equal_male(selection=None):
         pattern = selection_patient_count(selection)
         if pattern != "":
             sql_query = """SELECT count(DISTINCT obs.patient_num) FROM observation_fact obs
-                        inner join patient_dimension using (patient_num)
-                        WHERE patient_num in ( {} ) AND sex_cd = 'M' """.format(pattern)
+                        WHERE patient_num in ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd = 'M')
+                        INTERSECT ({}))""".format(pattern)
     return sql_query
 
 
@@ -109,8 +109,8 @@ def gender_equal_female(selection=None):
         pattern = selection_patient_count(selection)
         if pattern != "":
             sql_query = """SELECT count(DISTINCT obs.patient_num) FROM observation_fact obs
-                        inner join patient_dimension using (patient_num)
-                        WHERE patient_num in ( {} ) AND sex_cd = 'F' """.format(pattern)
+                        WHERE patient_num in ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd = 'F')
+                        INTERSECT ({})) """.format(pattern)
     return sql_query
 
 
@@ -120,73 +120,77 @@ def max_stay_of_days(selection=None):
         pattern = selection_patient_count(selection)
         if pattern != "":
             sql_query = """SELECT max(length_of_stay) from i2b2demodata.visit_dimension
-            inner join i2b2demodata.observation_fact using (patient_num)
-            inner join i2b2demodata.concept_dimension using (concept_cd)
             WHERE patient_num in ( {} )""".format(pattern)
 
     return sql_query
 
+
 def stay_of_day(days, selection=None):
-    sql_query = """SELECT count(DISTINCT patient_num) from i2b2demodata.observation_fact inner join i2b2demodata.visit_dimension
-using (patient_num) where length_of_stay = {};""".format(days)
+    sql_query = """SELECT count(DISTINCT patient_num) from i2b2demodata.observation_fact where
+                    patient_num in (SELECT patient_num from i2b2demodata.visit_dimension 
+                                    where length_of_stay = {});""".format(days)
     if selection is not None:
         pattern = selection_patient_count(selection)
         if pattern != "":
-            sql_query = """SELECT count(DISTINCT visit_dimension.end_date-visit_dimension.start_date) FROM i2b2demodata.observation_fact
-                  inner join i2b2demodata.patient_dimension using (patient_num)
-                 inner join i2b2demodata.visit_dimension using (patient_num)
-                 inner join i2b2demodata.concept_dimension using (concept_cd)
-                  WHERE patient_num in ( {} ) AND length_of_stay = {}""".format(pattern, days)
+            sql_query = """SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
+                  WHERE patient_num in ((SELECT patient_num from i2b2demodata.visit_dimension 
+                                            where length_of_stay = {}) 
+                                        INTERSECT ({}))""".format(days, pattern)
 
     return sql_query
 
 
 def age_distribution(begin, end, gender, selection=None):
     sql_query = """SELECT COUNT(patient_num) FROM i2b2demodata.patient_dimension 
-                   WHERE age_in_years_num >= {} and age_in_years_num <{} AND sex_cd = '{}' """.format(begin, end,
-                                                                                                      gender)
+                   WHERE age_in_years_num between {} AND {} AND sex_cd = '{}' """.format(begin, end, gender)
     if selection is not None:
         pattern = selection_patient_count(selection)
         if pattern != "":
             sql_query = """SELECT count(DISTINCT obs.patient_num) FROM observation_fact obs
-                        inner join patient_dimension using (patient_num)
-                        WHERE patient_num in ( {} ) AND age_in_years_num >= {} and age_in_years_num < {} AND sex_cd = '{}' """.format(
-                pattern, begin, end, gender)
+                        WHERE patient_num in (( SELECT patient_num from i2b2demodata.patient_dimension WHERE
+                        sex_cd = '{}' AND age_in_years_num between {} AND {}) INTERSECT ({}))""".format(
+                gender, begin, end, pattern)
 
     return sql_query
 
 
 def vital_status(state, gender, selection=None):
     sql_query = """SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-                    INNER JOIN i2b2demodata.patient_dimension using (patient_num)
-                    INNER JOIN i2b2demodata.concept_dimension using (concept_cd)
-        WHERE concept_path LIKE '\\i2b2\\Demographics\\Vital Status\\{}%' AND sex_cd='{}'""".format(state, gender)
+        WHERE patient_num in (SELECT patient_num from observation_fact WHERE concept_cd in
+                (SELECT concept_cd from i2b2demodata.concept_dimension WHERE concept_path like  '\\i2b2\\Demographics\\Vital Status\\{}%')
+        INTERSECT (SELECT patient_num from i2b2demodata.patient_dimension where sex_cd='{}'))""".format(state, gender)
     if selection is not None:
         pattern = selection_patient_count(selection)
         if pattern != "":
             sql_query = """SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-                    INNER JOIN i2b2demodata.patient_dimension using (patient_num)
-                    INNER JOIN i2b2demodata.concept_dimension using (concept_cd)
-        WHERE  concept_path LIKE '\\i2b2\\Demographics\\Vital Status\\{}%' AND sex_cd='{}' AND patient_num in ({})
-        """.format(state, gender, pattern)
+        WHERE patient_num in (SELECT patient_num from observation_fact WHERE concept_cd in
+                (SELECT concept_cd from i2b2demodata.concept_dimension WHERE concept_path like  '\\i2b2\\Demographics\\Vital Status\\{}%')
+        INTERSECT (SELECT patient_num from i2b2demodata.patient_dimension where sex_cd='{}')
+        INTERSECT ({}))""".format(state, gender, pattern)
 
     return sql_query
 
 
+def labory_by_flag_count(value):
+    sql_query = """SELECT count( nval_num) from i2b2demodata.observation_fact where nval_num notnull and concept_cd
+        in (SELECT concept_cd from i2b2demodata.concept_dimension
+        where concept_path LIKE  '{}%')""".format(value)
+
+    return sql_query
+
 def labory_by_flag(value, sex, selection=None):
-    sql_query = """SELECT DISTINCT patient_num, nval_num FROM i2b2demodata.observation_fact
-            inner join i2b2demodata.patient_dimension USING (patient_num)
-            inner join i2b2demodata.concept_dimension USING (concept_cd)
-            WHERE concept_path like  '{}%' AND nval_num notnull
-            AND sex_cd = '{}'""".format(value, sex)
+    sql_query = """SELECT nval_num from i2b2demodata.observation_fact where nval_num notnull and concept_cd
+        in (SELECT concept_cd from i2b2demodata.concept_dimension
+        where concept_path LIKE  '{}%')
+        AND patient_num in (SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd='{}')""".format(value, sex)
     if selection is not None:
         pattern = selection_patient_count(selection)
         if pattern != "":
-            sql_query = """SELECT DISTINCT patient_num, nval_num  FROM i2b2demodata.observation_fact
-            inner join i2b2demodata.patient_dimension USING (patient_num)
-            inner join i2b2demodata.concept_dimension demo_cdim USING (concept_cd)
-            WHERE concept_path like  '{}%' AND nval_num notnull
-            AND sex_cd = '{}' AND patient_num in ({});""".format(value, sex, pattern)
+            sql_query = """SELECT nval_num from i2b2demodata.observation_fact where nval_num notnull and concept_cd
+        in (SELECT concept_cd from i2b2demodata.concept_dimension
+        where concept_path LIKE  '{}%')
+        AND patient_num in ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd='{}')
+        INTERSECT ({}))""".format(value, sex, pattern)
 
     return sql_query
 

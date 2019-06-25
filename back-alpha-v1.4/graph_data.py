@@ -1,6 +1,6 @@
 from sql_templates import all_patient, gender_equal_female, gender_equal_male, age_distribution, \
     diagnoses_gender_count, medications_gender_count, procedures_gender_count, vital_status, stay_of_day, \
-    max_stay_of_days, labory_by_flag
+    max_stay_of_days, labory_by_flag, labory_by_flag_count
 from db_connector import DBConnector
 
 
@@ -216,7 +216,7 @@ class GraphDataLaboratoryTest:
     def get_lab_values(self, data_change=None):
         db = DBConnector()
         labory_tests = [r'\i2b2\Labtests\LAB\(LLB16) Chemistry\(LLB17) Lipid Tests\CHOL\LOINC:2093-3',
-                        r'\i2b2\Labtests\LAB\(LLB16) Chemistry\Hemoglobin\GHBA1C\LOINC:4548-4',
+                        r'\i2b2\Labtests\LAB\(LLB53) Hematology\(LLB57) Complete Blood Count\HGB\LOINC:718-7',
                         r'\i2b2\Labtests\LAB\(LLB16) Chemistry\(LLB20) Cardiac Tests\CPK\LOINC:2157-6',
                         r'\i2b2\Labtests\LAB\(LLB16) Chemistry\(LLB20) Cardiac Tests\HSCRP\LOINC:30522-7']
         lables = ["cholesterol", "hemoglobin", "creatine", "C_REACTIVE_PROTEIN"]
@@ -226,13 +226,14 @@ class GraphDataLaboratoryTest:
             data_f = list()
             sql_query = labory_by_flag(test, 'M', data_change)
             male = db.query(sql_query)
-            for person in male:
-                data_m.append(float(person[1]))
+            for value in male:
+                data_m.append(float(value[0]))
             sql_query = labory_by_flag(test, 'F', data_change)
             female = db.query(sql_query)
-            for person in female:
-                data_f.append(float(person[1]))
-            result.update({lables.pop(0): [{'M': data_m, 'F': data_f}]})
+            for value in female:
+                data_f.append(float(value[0]))
+            data_all = db.query(labory_by_flag_count(test))[0][0]
+            result.update({lables.pop(0): [{'M': data_m, 'F': data_f, "V": data_all}]})
 
         return result
 
