@@ -52,7 +52,7 @@ componentDidMount(){
 }
 
 render() {
-  const padding = { top: 60, bottom: 30, left: 30, right: 30 };
+  const padding = { top: 60, bottom: 100, left: 30, right: 30 };
     return (
      <div>
         <svg viewBox="0 0 400 400">
@@ -60,7 +60,7 @@ render() {
           standalone={false}
           width={400} height={400}
           padding ={padding}
-          colorScale={["#215167","#F9F9F9"]}
+          colorScale={["#66717E","#F9F9F9"]}
           data={[
             { y: this.state.perIn, label:"Patients in Selektion" }, { y: this.state.perOut }
           ]}
@@ -76,7 +76,7 @@ render() {
         <VictoryLabel
           textAnchor="middle"
           style={{ fontSize: 40 }}
-          x={200} y={200}
+          x={200} y={170}
           text= {(this.state.perIn)+"% \n"+(this.state.pComp)+" von "+(this.state.maxP)}
         />
        <VictoryLabel
