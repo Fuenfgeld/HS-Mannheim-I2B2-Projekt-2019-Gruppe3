@@ -59,7 +59,6 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
     componentDidUpdate(prevProps: { data: any; }){ 
       if (prevProps.data !== this.props.data) {
         let data = this.createKeyValue(this.props.data.label,this.props.data.data)
-        console.log(data)
         this.setState({
           dataM : data
         })
@@ -90,7 +89,7 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
                       fill: "#66717E", fillOpacity: 0.7, stroke: "#66717E", strokeWidth: 3
                     },
                 }}
-                labels={(d: any) => d.y}
+                labels={(d: any) => d.y }
                 />
                  <VictoryLabel
                     textAnchor="middle"

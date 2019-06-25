@@ -45,7 +45,7 @@ const urlMed = "http://localhost:5000/api/medication_count/data";
 const urlPro = "http://localhost:5000/api/procedure_count/data";
 const urlVit = "http://localhost:5000/api/vital_status/data";
 const urlSty = "http://localhost:5000/api/stay_of_days/data";
-const urlLab = "http://localhost:5000/api/laboratory_test/data"
+const urlLab = "http://localhost:5000/api/laboratory_tests/data"
 
 
 
@@ -168,12 +168,12 @@ class ResultPage extends React.Component<SelChProps, SelChState> {
         this.fetchPro();
         this.fetchVit();
         this.fetchSty();
+        this.fetchLab();
 
       };
 
 
     render() {
-
         return (
             <div id="resultpage">
                     <div id = "Navigation">

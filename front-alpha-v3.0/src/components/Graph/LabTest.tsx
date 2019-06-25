@@ -7,6 +7,7 @@ type vitProps = {
   
   type vitState = {
     data : any,
+    normValue : any
   
   }
 
@@ -15,28 +16,42 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
         super();
         this.state = {
           data :[
+            {x:" ", y:[0]},
             {x:"Male", y:[20,33,5,6,9,8,7]},
-            {x:"Female", y:[5,4,19,4,7,12]}
+            {x:"Female", y:[5,4,19,4,7,12]},
+            {x:"  ", y:[0]}
+          ],
+          normValue : [
+            {x:""}
           ]
         }
       }
     
 
-    createKeyValue(xValues: any[],yValues:any){
-      let keyValData = [];
-      
-      for(let i = 0; i < xValues.length; i++){   
-        keyValData[i] = {x: xValues[i], y: yValues[i]}
-      }
-      return keyValData;
+    
+
+    parseData(data : any){
+
     }
 
     componentDidUpdate(prevProps: { data: any; }){ 
       if (prevProps.data !== this.props.data) {
+        
         this.setState({
           data : [
-            {x:"Male", y:this.props.data.M},
-            {x:"Female", y:this.props.data.F}
+            {x:" ", y:[0]},
+            {x:"Male", y:this.props.data[0].M},
+            {x:"  ", y:[0]},
+            {x:"Female", y:this.props.data[0].F},
+            {x:"   ", y:[0]}
+          ],
+          normValue : [
+            { x: 1, y: 175, y0: 135 },
+            { x: 2, y: 175, y0: 135 },
+            { x: 3, y: 165, y0: 130 },
+            { x: 4, y: 155, y0: 125 },
+            { x: 5, y: 155, y0: 125 }
+
           ]
         })
       }
@@ -51,7 +66,7 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
       
       const width = 400;
       const height = 400;
-      const padding = { top: 80, bottom: 100, left: 30, right: 30 };
+      const padding = { top: 80, bottom: 100, left: 40, right: 40 };
       const maleC = "#215167";
       const femaleC = "#E6C24A";
 
@@ -61,10 +76,21 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
             width = {width}
             height = {height}
             padding = {padding}
-            domainPadding = {100}
+            domain = {{y:[0,400]}}
+            domainPadding = {{x : [50,50]}}
             >
+                <VictoryArea
+                style={{
+                    data: {
+                      fill: "#c43a31", fillOpacity: 0.2
+                    },
+                  }}
+                data={this.state.normValue}
+                />
                 <VictoryBoxPlot
+                
                 boxWidth={40}
+                padding={100}
                 data={this.state.data}
                 style={{
                     min: { stroke: (d) => d.x =="Male" ? maleC :femaleC},
@@ -76,6 +102,7 @@ class LengthOfStay extends React.Component<vitProps,vitState> {
                     maxLabels: { fill: (d) => d.x =="Male" ? maleC : femaleC }
                 }}
                 />  
+
             </VictoryChart>
         </div>
         );
