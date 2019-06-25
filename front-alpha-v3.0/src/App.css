@@ -25,56 +25,119 @@ html{
   border-color:black;
   border-style:solid;
 }
+
 #resultGeneralInfo{
-  padding-top:20px;
-  border-color: #F9F9F9;
-  border-width: 2px;
-    border-style: solid;
-  width:20%;
-  height:100%;
-  float:left;
-}
-#resultGeneralInfo1{
-  padding-top:5px;
+  border-style:solid;
+  border-width: 3px;
   border-color: #7b7b7b;
-  border-width: 2px;
-  border-style: solid;
-  width:99%;
-  height:35%;
-  float:left;
-}
-#resultGeneralInfo2{
+  padding-bottom:5px;
   padding-top:5px;
-  border-color: #123440;
-  border-width: 2px;
-  border-right-style: solid;
-  border-left-style: solid;
-  width:99%;
-  height:99%;
+  background-color: #7b7b7b;
+  width:24%;
+  height:300%;
   float:left;
 }
+
+#resultGeneralInfo1{
+    margin-left:10px;
+
+  background-color: #F9F9F9;
+  padding-top:5px;
+  padding-bottom:2px;
+  border-color: #7b7b7b;
+  border-width: 5px;
+  border-style: solid;
+  width:90%;
+  height:12%;
+}
+
+#resultGeneralInfo2{
+  background-color: #7b7b7b;
+  padding-top:5px;
+  width:95%;
+  height:80%;
+}
+#rsi1{
+      margin-left:5px;
+
+  padding-bottom:10px;
+  margin-bottom: 10px;
+    text-align: center;
+  width:95%;
+  height: 24%;
+  background-color: #f1f1f1;
+    border-color: #7b7b7b;
+    border-style: solid;
+}
+
+#rgi1{
+  margin-left:13px;
+  margin-bottom: 10px;
+    text-align: center;
+  width:95%;
+  height: 23%;
+  background-color: #f1f1f1;
+    border-color: #7b7b7b;
+    border-style: solid;
+}
+
+#rgi2{
+    margin-left:13px;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+   width:95%;
+    height: 23%;
+  background-color: #f1f1f1;
+    border-color: #7b7b7b;
+    border-style: solid;
+}
+
+#rgi3{
+    margin-left:13px;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+   width:95%;
+    height: 23%;
+  background-color: #f1f1f1;
+    border-color: #7b7b7b;
+    border-style: solid;
+}
+#rgi4{
+    margin-left:13px;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+   width:95%;
+    height: 23%;
+  background-color: #f1f1f1;
+    border-color: #7b7b7b;
+    border-style: solid;
+}
+
+
 #resultmainInfo{
   padding-top:20px;
   padding-bottom:20px;
   padding-left:60px;
-   border-color: #F9F9F9;
-  border-width: 2px;
-  border-left-style: solid;
-  border-right-style:solid;
-  width:50%;
-  height:99%;
+  width:46%;
+  height:98%;
   float: left;
 }
 
 #resultspecialInfo{
-  padding-top:10px;
+  padding-top:5px;
   border-color: #7b7b7b;
-    border-right-style: hidden;
-  border-width: 2px;
+  border-width: 3px;
   border-style: solid;
   width:23%;
-  height:100%;
+  height:200%;
   float:left;
+  background-color: #7b7b7b;
 }
 #navhelp{
     padding-top: 10px;
@@ -231,17 +294,17 @@ form.example::after {
 }
 
 #PatientenAnzahl2{
-  padding-top:10px;
+  padding-top:30px;
   float:left;
-  width : 40%;
+  width : 45%;
   font-size: small;
   font-family: Verdana bold;
 }
 
 #PatientenAnzahl3{
-  padding-top:10px;
+  padding-top:30px;
   float:left;
-  width : 60%;
+  width : 55%;
   font-size: small;
   font-family: Verdana bold;
 }
@@ -260,6 +323,7 @@ padding:10px;
 .vertical-menu2 {
 padding:10px;
     background-color: #F9F9F9;
+
     overflow: auto;
     position: relative;
     white-space: nowrap;
@@ -276,7 +340,8 @@ padding:10px;
   float: left;
   position: relative;
   width: 70%;
-  padding-bottom:50px;
+  padding-bottom:100px;
+  padding-left: 60px;
 }
 
 #AlterGraph{
@@ -315,12 +380,11 @@ position: relative;
 
 
 #NebendiagnosenGraph2{
-  padding-top:10px;
+  padding-top:20px;
   float:left;
   position: relative;
-  width: 99%;
-  height:50%;
-  background-color: #F9F9F9;
+  width: 90%;
+  height:30%;
   display: inline-block;
   text-align: center;
   text-decoration: none;
@@ -332,12 +396,11 @@ position: relative;
 }
 
 #NebendiagnosenGraph3{
-  padding-top:10px;
+  fpadding-top:20px;
   float:left;
   position: relative;
-  width: 99%;
+  width: 90%;
   height: 99%;
-  background-color: #F9F9F9;
   display: inline-block;
   text-align: center;
   text-decoration: none;
