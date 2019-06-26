@@ -17,7 +17,6 @@ class NavigationData:
             raise FileNotFoundError("Tablename is not in the db schema")
 
     def build_navigation_tree_thread(self, data_change=None):
-        t0 = time.time()
         db_connection = DBConnector()
         root = db_connection.query(tree_root(self.table_name))
         navigation_tree = list_into_tree_node(root)
@@ -35,9 +34,6 @@ class NavigationData:
 
         for child in children:
             navigation_tree.add_child(child)
-        t1 = time.time()
-        total = t1 - t0
-        print("baum gebaut in " + str(total))
         return navigation_tree
 
     def build_navigation_tree(self, data_change=None):
@@ -52,7 +48,7 @@ class NavigationData:
         return navigation_tree
 
     def update(self, data_change):
-        self.navigation_tree = self.build_navigation_tree_thread(data_change)
+        self.navigation_tree = self.build_navigation_tree(data_change)
 
     def into_dict(self):
         return self.navigation_tree.build_tree_dict()

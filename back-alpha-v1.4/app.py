@@ -6,7 +6,6 @@ from graph_data import GraphDataDiagnoseGenderCount, GraphDataGenderDistribution
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
-from threading import Thread
 
 # connect to i2b2 Database
 DBConnector()
