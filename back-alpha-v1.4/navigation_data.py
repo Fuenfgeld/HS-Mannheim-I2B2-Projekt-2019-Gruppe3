@@ -5,6 +5,7 @@ from sql_templates import tree_root, tree_first_hierachielvl, tree_patient_count
 from thread_with_return import ThreadWithReturnValue
 
 
+
 class NavigationData:
 
     def __init__(self, table_name):
@@ -17,6 +18,7 @@ class NavigationData:
             raise FileNotFoundError("Tablename is not in the db schema")
 
     def build_navigation_tree_thread(self, data_change=None):
+
         db_connection = DBConnector()
         root = db_connection.query(tree_root(self.table_name))
         navigation_tree = list_into_tree_node(root)
@@ -55,3 +57,4 @@ class NavigationData:
 
     def save_as_json(self, path=None):
         self.navigation_tree.save(path)
+

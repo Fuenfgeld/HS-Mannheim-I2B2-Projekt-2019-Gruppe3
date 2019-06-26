@@ -1,11 +1,13 @@
 from sql_pattern import selection_patient_count
 
 
+
 def tree_root(table_name):
     sql_query = """SELECT DISTINCT  c_hlevel, c_name,
                  (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
                   WHERE concept_cd in (SELECT concept_cd FROM i2b2demodata.concept_dimension WHERE concept_path = c_fullname)),
                   c_facttablecolumn, c_tablename,c_columnname,c_operator, c_fullname,c_basecode FROM i2b2metadata.{}
+
                   WHERE c_hlevel = 0
                   order by c_fullname;""".format(table_name)
     return sql_query

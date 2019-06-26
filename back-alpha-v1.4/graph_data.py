@@ -1,6 +1,7 @@
 from sql_templates import all_patient, gender_equal_female, gender_equal_male, age_distribution, \
     diagnoses_gender_count, medications_gender_count, procedures_gender_count, vital_status, stay_of_day, \
     max_stay_of_days, labory_by_flag, labory_by_flag_count
+
 from db_connector import DBConnector
 
 
@@ -38,6 +39,7 @@ class GraphDataGenderDistribution:
         result = {"lable": lables, "data": data}
 
         return result
+
 
 
 class GraphDataAgeDistribution:
@@ -151,6 +153,7 @@ class GraphDataMedicationGenderCount:
             data_m.append(element[2])
             data_f.append(element[3])
         result = {"lable": lables, "data": data_count, "M": data_m, "F": data_f}
+
 
         return result
 

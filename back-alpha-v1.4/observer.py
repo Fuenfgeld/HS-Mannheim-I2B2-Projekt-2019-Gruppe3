@@ -1,6 +1,5 @@
 from threading import Thread
 
-
 class Observer:
 
     def __init__(self):

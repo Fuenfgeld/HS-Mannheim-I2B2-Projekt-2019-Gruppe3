@@ -36,3 +36,4 @@ def selection_patient_count(data_change):
             selection_tree_data(selections[i]))
 
     return sql_query
+

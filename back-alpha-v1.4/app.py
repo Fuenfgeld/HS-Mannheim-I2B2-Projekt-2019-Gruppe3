@@ -1,11 +1,13 @@
 from navigation_data import NavigationData
 from observer import Observer
+
 from graph_data import GraphDataDiagnoseGenderCount, GraphDataGenderDistribution, GraphDataAgeDistribution, \
     GraphDataMedicationGenderCount, GraphDataProcedureGenderCount, GraphDataVitalStaturCount, \
     GraphDataStayOfDays, GraphDataLaboratoryTest
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
+
 
 # connect to i2b2 Database
 DBConnector()
@@ -32,10 +34,12 @@ myObserver.register(procedure_count)
 myObserver.register(vital_status)
 myObserver.register(stay_of_days)
 myObserver.register(laboratory_tests)
+
 # TODO GRapdata erstelle und GRapehn
 
 app = Flask(__name__)
 CORS(app)
+
 selection_all = {"names": [], "selection": [], "operator": []}
 
 
@@ -47,9 +51,11 @@ def index():
 
 @app.route("/api/navigation/data", methods=['GET'])
 @cross_origin()
+
 def data_trans():
     json_data = jsonify(navigation.into_dict())
     return json_data
+
 
 
 @app.route("/api/selection_name/data", methods=['GET'])
@@ -84,8 +90,10 @@ def get_data1_gender_dist():
 @app.route("/api/diagnose_count/data", methods=['GET'])
 @cross_origin()
 def get_data_dia():
+
     json_data = jsonify(diagnose_count.data)
     return json_data
+
 
 
 @app.route("/api/medication_count/data", methods=['GET'])
@@ -132,3 +140,4 @@ def get_laboratory_tests():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+

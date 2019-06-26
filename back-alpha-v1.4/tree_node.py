@@ -43,7 +43,6 @@ class TreeNode:
                 dic = self.get_dict_form(children)
         else:
             dic = self.get_dict_form()
-
         return dic
 
     def __repr__(self):
