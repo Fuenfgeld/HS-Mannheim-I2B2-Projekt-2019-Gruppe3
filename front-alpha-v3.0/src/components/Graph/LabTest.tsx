@@ -5,7 +5,8 @@ type vitProps = {
     data : any,
     domain? : any,
     label : any,
-    normRange : any
+    normRange : any,
+    unit : any
   }
   
   type vitState = {
@@ -13,6 +14,7 @@ type vitProps = {
     normValueM : any,
     normValueF : any
     testMax : number
+    value : number
   }
 
 class LabTest extends React.Component<vitProps,vitState> {
@@ -32,7 +34,8 @@ class LabTest extends React.Component<vitProps,vitState> {
             {x:""}
           ],
 
-          testMax : 100
+          testMax : 100,
+          value : 0
         }
       }
     
@@ -45,12 +48,13 @@ class LabTest extends React.Component<vitProps,vitState> {
 
     componentDidUpdate(prevProps: { data: any; }){ 
       if (prevProps.data !== this.props.data) {
-        
+        let yM = this.props.data[0].M.length > 0 ? this.props.data[0].M : [0];
+        let yF = this.props.data[0].F.length > 0 ? this.props.data[0].F : [0];
         this.setState({
           data : [
             {x:" ", y:[0]},
-            {x:"Male", y:this.props.data[0].M},
-            {x:"Female", y:this.props.data[0].F},
+            {x:"Male", y: yM},
+            {x:"Female", y: yF},
             {x:"    ", y:[0]}
           ],
 
@@ -60,7 +64,9 @@ class LabTest extends React.Component<vitProps,vitState> {
             { x: 3, y: this.props.normRange.f[0], y0: this.props.normRange.f[1] },
             { x: 4, y: this.props.normRange.f[0], y0: this.props.normRange.f[1] }
 
-          ]
+          ],
+
+          value : this.props.data[0].V
         })
       }
     }
@@ -71,7 +77,6 @@ class LabTest extends React.Component<vitProps,vitState> {
     
     
     render() {
-      
       const width = 400;
       const height = 400;
       const padding = { top: 80, bottom: 100, left: 40, right: 40 };
@@ -91,7 +96,7 @@ class LabTest extends React.Component<vitProps,vitState> {
                 interpolation = {"step"}
                 style={{
                     data: {
-                      fill: "#c43a31", fillOpacity: 0.2
+                      fill: "#458b74", fillOpacity: 0.2
                     },
                   }}
                 data={this.state.normValueM}
@@ -115,7 +120,13 @@ class LabTest extends React.Component<vitProps,vitState> {
                     textAnchor="middle"
                     style={{ fontSize: 30 }}
                     x={200} y={20}
-                    text= {this.props.label + " Test"}
+                    text= {this.props.label + " Test (" +this.props.unit+")"}
+                    />
+              <VictoryLabel
+                    textAnchor="middle"
+                    style={{ fontSize: 17 }}
+                    x={200} y={45}
+                    text= {this.state.value + " datapoints are in Graph"}
                     />
             </VictoryChart>
             

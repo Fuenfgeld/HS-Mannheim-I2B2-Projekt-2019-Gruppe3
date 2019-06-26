@@ -3,8 +3,9 @@ import {VictoryAxis, VictoryLabel,VictoryBar,VictoryStack, VictoryChart,VictoryT
 
 type vitProps = {
     data : any
-  }
+  } 
   
+ 
   type vitState = {
     dataM : any,
     dataF : any,

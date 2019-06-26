@@ -22,7 +22,7 @@ class PatientCount extends React.Component<PatProps,PatState> {
       perOut : 0,
       maxP : 100,
       init : false,
-      pComp : 100
+      pComp : 134
     };
     
   }
