@@ -42,7 +42,6 @@ class NavigationData:
         return navigation_tree
 
     def build_navigation_tree(self, data_change=None):
-        t0 = time.time()
         db_connection = DBConnector()
         data_list = list()
         root = db_connection.query(tree_root(self.table_name))
@@ -50,9 +49,7 @@ class NavigationData:
         nav_tree_list = db_connection.query(tree_patient_all_over_0(self.table_name, data_change))
         data_list.extend(nav_tree_list)
         navigation_tree = list_into_tree_node(data_list)
-        t1 = time.time()
-        total = t1 - t0
-        print("baum gebaut in " + str(total))
+
         return navigation_tree
 
     def update(self, data_change):

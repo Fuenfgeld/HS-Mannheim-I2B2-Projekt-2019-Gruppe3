@@ -6,7 +6,7 @@ from graph_data import GraphDataDiagnoseGenderCount, GraphDataGenderDistribution
 from db_connector import DBConnector
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
-
+from threading import Thread
 # connect to i2b2 Database
 DBConnector()
 # init observer
@@ -23,7 +23,7 @@ vital_status = GraphDataVitalStaturCount()
 stay_of_days = GraphDataStayOfDays()
 laboratory_tests = GraphDataLaboratoryTest()
 # register all components
-myObserver.register(navigation)
+# myObserver.register(navigation)
 myObserver.register(gender_distribution)
 myObserver.register(diagnose_count)
 myObserver.register(age_distribution)
@@ -76,7 +76,12 @@ def data_selection():
     selection_all["operator"] = data_change["operator"]
     if len(data_change['selection']) == 0:
         data_change = None
+    t = Thread(target=navigation.update, args=(data_change,))
+    t.start()
     myObserver.dispatch(data_change)
+    t.join()
+
+
 
     return jsonify({"State": "Success"}), 200
 
