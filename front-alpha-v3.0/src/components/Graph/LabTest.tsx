@@ -96,7 +96,7 @@ class LabTest extends React.Component<vitProps,vitState> {
                 interpolation = {"step"}
                 style={{
                     data: {
-                      fill: "#c43a31", fillOpacity: 0.2
+                      fill: "#458b74", fillOpacity: 0.2
                     },
                   }}
                 data={this.state.normValueM}

@@ -12,12 +12,14 @@ import GraphAgeMF from "../Graph/GraphAgeMF";
 import SecondaryDiaGraph from "../Graph/SecondaryDiaGraph";
 
 
-const urlI2B2 ="http://127.0.0.1:5000/api/navigation/data";
-const urlSel = "http://localhost:5000/api/selection/data";
-const urlPCount = "http://localhost:5000/api/gender_distribution/data";
-const urlDCount = "http://localhost:5000/api/diagnose_count/data";
-const urlAgeDist = "http://localhost:5000/api/age_distribution/data";
-const urlSelAll = "http://localhost:5000/api/selection_name/data";
+const urlPre = "http://localhost:5000"
+
+const urlI2B2 =urlPre + "/api/navigation/data";
+const urlSel = urlPre + "/api/selection/data";
+const urlPCount = urlPre + "/api/gender_distribution/data";
+const urlDCount = urlPre + "/api/diagnose_count/data";
+const urlAgeDist = urlPre + "/api/age_distribution/data";
+const urlSelAll = urlPre + "/api/selection_name/data";
 
 type MyState = {dataTree : any,
                 dataAge : any,

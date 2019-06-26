@@ -36,16 +36,17 @@ type SelChState = {
     };
 
 
+const urlPre = "http://localhost:5000"
 
-const urlPCount = "http://localhost:5000/api/gender_distribution/data";
-const urlDCount = "http://localhost:5000/api/diagnose_count/data";
-const urlAgeDist = "http://localhost:5000/api/age_distribution/data";
-const urlSelAll = "http://localhost:5000/api/selection_name/data";
-const urlMed = "http://localhost:5000/api/medication_count/data";
-const urlPro = "http://localhost:5000/api/procedure_count/data";
-const urlVit = "http://localhost:5000/api/vital_status/data";
-const urlSty = "http://localhost:5000/api/stay_of_days/data";
-const urlLab = "http://localhost:5000/api/laboratory_tests/data"
+const urlPCount = urlPre+"/api/gender_distribution/data";
+const urlDCount = urlPre+"/api/diagnose_count/data";
+const urlAgeDist = urlPre+"/api/age_distribution/data";
+const urlSelAll = urlPre+"/api/selection_name/data";
+const urlMed = urlPre+"/api/medication_count/data";
+const urlPro = urlPre+"/api/procedure_count/data";
+const urlVit = urlPre+"/api/vital_status/data";
+const urlSty = urlPre+"/api/stay_of_days/data";
+const urlLab = urlPre+"/api/laboratory_tests/data";
 
 
 
