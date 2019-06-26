@@ -236,11 +236,17 @@ def medications_gender_count(selection=None):
         if pattern != "":
             sql_query = """SELECT c_name,count(distinct patient_num) as anzahl,
        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-            WHERE concept_cd = c_basecode AND patient_num in ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd='M') INTERSECT ({})))as anzahl_M,
+        WHERE concept_cd = c_basecode AND patient_num in
+                    ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd='M')
+       INTERSECT ({})))as anzahl_M,
        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-            WHERE concept_cd = c_basecode AND patient_num in ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd='F') INTERSECT ({})))as anzahl_F
-       FROM i2b2metadata.icd10_icd9 join i2b2demodata.observation_fact on observation_fact.concept_cd = c_basecode
-            WHERE c_fullname LIKE '\\i2b2\\Medications%' AND  patient_num in ({})
+        WHERE concept_cd = c_basecode AND patient_num in
+                    ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd='F')
+       INTERSECT ({})))as anzahl_F
+        FROM i2b2metadata.i2b2
+            join i2b2demodata.observation_fact on observation_fact.concept_cd = c_basecode
+        WHERE c_fullname LIKE '\\i2b2\\Medications%' and
+              patient_num in ({})
                             group by c_name,c_basecode
                             order by anzahl desc limit 10;""".format(pattern, pattern, pattern)
 
@@ -263,11 +269,17 @@ def procedures_gender_count(selection=None):
         if pattern != "":
             sql_query = """SELECT c_name,count(distinct patient_num) as anzahl,
        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-            WHERE concept_cd = c_basecode AND patient_num in ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd='M') INTERSECT ({})))as anzahl_M,
+        WHERE concept_cd = c_basecode AND patient_num in
+                    ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd='M')
+       INTERSECT ({})))as anzahl_M,
        (SELECT count(DISTINCT patient_num) FROM i2b2demodata.observation_fact
-            WHERE concept_cd = c_basecode AND patient_num in ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd='F') INTERSECT ({})))as anzahl_F
-       FROM i2b2metadata.icd10_icd9 join i2b2demodata.observation_fact on observation_fact.concept_cd = c_basecode
-            WHERE c_fullname LIKE '\\i2b2\\Procedures%' AND  patient_num in ({})
+        WHERE concept_cd = c_basecode AND patient_num in
+                    ((SELECT patient_num from i2b2demodata.patient_dimension WHERE sex_cd='F')
+       INTERSECT ({})))as anzahl_F
+        FROM i2b2metadata.i2b2
+            join i2b2demodata.observation_fact on observation_fact.concept_cd = c_basecode
+        WHERE c_fullname LIKE '\\i2b2\\Procedures%' and
+              patient_num in ({})
                             group by c_name,c_basecode
                             order by anzahl desc limit 10;""".format(pattern, pattern, pattern)
     return sql_query
