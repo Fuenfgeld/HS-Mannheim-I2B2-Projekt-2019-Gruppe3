@@ -19,7 +19,7 @@ class TreeNode:
 
     def get_dict_form(self, children=None):
         if self.code_name is not None:
-            name = str(self.code_name) + "|" + str(self.name)
+            name = str(self.code_name) + " | " + str(self.name)
         else:
             name = str(self.name)
         if len(self.children) <= 0:
