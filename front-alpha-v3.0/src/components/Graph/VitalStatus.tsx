@@ -59,7 +59,7 @@ class VitalStatus extends React.Component<vitProps,vitState> {
       
       const width = 400;
       const height = 400;
-      const padding = { top: 80, bottom: 100, left: 50, right: 50 };
+      const padding = { top: 80, bottom: 0, left: 50, right: 50 };
         return (
          <div>
            <VictoryChart height={height} width={width}

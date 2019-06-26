@@ -21,7 +21,7 @@ html{
 }
 
 .SecondaryDiaGraph{
-    border-width: 5px;
+  border-width: 5px;
   border-color:black;
   border-style:solid;
 }
@@ -34,14 +34,13 @@ html{
   padding-top:5px;
   background-color: #7b7b7b;
   width:32%;
-  height:350%;
+  height: 380%;
   float:left;
 }
 
 #resultGeneralInfo1{
-    margin-left:10px;
-
-  background-color: #F9F9F9;
+  margin-left:10px;
+  background-color: #f9f9f9;
   padding-top:5px;
   padding-bottom:2px;
   border-color: #7b7b7b;
@@ -58,70 +57,61 @@ html{
   height:80%;
 }
 #rsi1{
-      margin-left:5px;
-
+  margin-left:5px;
   padding-bottom:10px;
   margin-bottom: 10px;
-    text-align: center;
+  text-align: center;
   width:95%;
-  height: 27%;
+  height: 23%;
   background-color: #f1f1f1;
-    border-color: #7b7b7b;
-    border-style: solid;
+  border-color: #7b7b7b;
+  border-style: solid;
 }
 
 #rgi1{
   margin-left:13px;
   margin-bottom: 10px;
-    text-align: center;
+  text-align: center;
   width:95%;
-  height: 35%;
+  height: 25%;
   background-color: #f1f1f1;
-    border-color: #7b7b7b;
-    border-style: solid;
+  border-color: #7b7b7b;
+  border-style: solid;
 }
 
 #rgi2{
-    padding-bottom: 8px;
-    margin-left:13px;
-
-    margin-bottom: 13px;
-
-    text-align: center;
-    width:95%;
-    height: 33%;
-    background-color: #f1f1f1;
-    border-color: #7b7b7b;
-    border-style: solid;
+  padding-bottom: 3px;
+  margin-left:13px;
+  margin-bottom: 13px;
+  text-align: center;
+  width:95%;
+  height: 33%;
+  background-color: #f1f1f1;
+  border-color: #7b7b7b;
+  border-style: solid;
 }
 
 #rgi3{
-    padding-bottom: 8px;
-
-    margin-left:13px;
-
-    margin-bottom: 13px;
-
-    text-align: center;
-   width:95%;
-    height: 33%;
+  padding-bottom: 3px;
+  margin-left:13px;
+  margin-bottom: 13px;
+  text-align: center;
+  width:95%;
+  height: 33%;
   background-color: #f1f1f1;
-    border-color: #7b7b7b;
-    border-style: solid;
+  border-color: #7b7b7b;
+  border-style: solid;
 }
 #rgi4{
-    padding-bottom: 3px;
-
-    margin-left:13px;
-
-    margin-bottom: 13px;
-
-    text-align: center;
-   width:95%;
-    height: 32%;
+  padding-bottom: 3px;
+  margin-left:13px;
+  margin-bottom: 13px;
+  text-align: center;
+  width:95%;
+  height: 33%;
   background-color: #f1f1f1;
-    border-color: #7b7b7b;
-    border-style: solid;
+  border-color: #7b7b7b;
+  border-style: solid;
 }
 
 
@@ -140,12 +130,12 @@ html{
   border-width: 3px;
   border-style: solid;
   width:23%;
-  height:200%;
+  height:248%;
   float:left;
   background-color: #7b7b7b;
 }
 #navhelp{
-    padding-top: 10px;
+  padding-top: 10px;
   padding-right:10px;
   font-family: Arial;
   font-size:16px;
@@ -174,10 +164,10 @@ html{
 }
 
 #Navigation {
-    background-color: #66717E;
-    overflow: hidden;
-    height:5%;
-    color: white;
+  background-color: #66717E;
+  overflow: hidden;
+  height:5%;
+  color: white;
 }
 
 #DiagnoseName{
@@ -356,15 +346,15 @@ padding:10px;
 }
 
 #AlterGraph{
-position: relative;
-    width: 90%;
-    height :380px;
-    background-color: #F9F9F9;
-    display: inline-block;
-    text-align: center;
-    padding: 14px;
-    text-decoration: none;
-    border-color: white ;
+  position: relative;
+  width: 90%;
+  height :380px;
+  background-color: #F9F9F9;
+  display: inline-block;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  border-color: white ;
     border-style: solid;
     overflow: hidden;
     z-index: 0;
@@ -395,7 +385,7 @@ position: relative;
   float:left;
   position: relative;
   width: 90%;
-  height:30%;
+  height:15%;
   display: inline-block;
   text-align: center;
   text-decoration: none;
