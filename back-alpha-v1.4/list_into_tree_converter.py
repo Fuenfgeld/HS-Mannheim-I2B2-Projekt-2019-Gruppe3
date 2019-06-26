@@ -2,15 +2,8 @@ from tree_node import TreeNode
 
 
 def list_into_tree_node(data_list):
-    stack = list()
-    parent = TreeNode(data_list.pop(0))
-    stack.append(parent)
-    while data_list:
-        parent = stack.pop()
-        child = TreeNode(data_list.pop(0))
-        look_for_position(stack, parent, child)
-        stack.append(child)
-
+    if data_list is None:
+        return None
     for i in range(1, len(stack)):
         add_to_grandparent(stack)
     if stack:

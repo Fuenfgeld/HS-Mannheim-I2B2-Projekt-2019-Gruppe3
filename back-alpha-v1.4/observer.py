@@ -1,3 +1,5 @@
+from threading import Thread
+
 class Observer:
 
     def __init__(self):
@@ -10,5 +12,12 @@ class Observer:
         self.subscribers.discard(component)
 
     def dispatch(self, change):
+        t_list = list()
         for subscriber in self.subscribers:
-            subscriber.update(change)
+            t = Thread(target=subscriber.update, args=(change,))
+            t_list.append(t)
+            t.start()
+
+        for t in t_list:
+            t.join()
+
