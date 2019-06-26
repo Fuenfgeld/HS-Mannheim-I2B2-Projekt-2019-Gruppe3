@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as React from "react";
 import { Utils } from "../../utils/Utils";
 
 import * as styled from "styled-components";
@@ -6,10 +7,6 @@ import * as styled from "styled-components";
 import { IBreadcrumbProps, IBreadcrumbItem } from "./IBreadcrumbProps";
 
 class Breadcrumb extends React.Component<IBreadcrumbProps, {}> {
-
-    componentDidUpdate(){
-        console.log("Breadupdate");
-    }
 
     public render() {
         return (
