@@ -13,8 +13,6 @@ class Observer:
         self.subscribers.discard(component)
 
     def dispatch(self, change):
-        import time
-        t0 = time.time()
         t_list = list()
         for subscriber in self.subscribers:
             t = Thread(target=subscriber.update, args=(change,))
@@ -24,6 +22,3 @@ class Observer:
         for t in t_list:
             t.join()
 
-        t1 = time.time()
-        total = t1 - t0
-        print("baum gebaut in " + str(total))

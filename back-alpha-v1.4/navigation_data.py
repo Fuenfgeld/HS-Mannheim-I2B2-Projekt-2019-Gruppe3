@@ -3,7 +3,6 @@ from list_into_tree_converter import list_into_tree_node
 from sql_templates import tree_root, tree_first_hierachielvl, tree_patient_count_first_hierachielvl, \
     tree_patient_all_over_0
 from thread_with_return import ThreadWithReturnValue
-import time
 
 
 class NavigationData:
@@ -60,14 +59,3 @@ class NavigationData:
 
     def save_as_json(self, path=None):
         self.navigation_tree.save(path)
-
-
-if __name__ == '__main__':
-    test = NavigationData("icd10_icd9")
-    # print(tets.navigation_tree.get_dict())
-    db = DBConnector()
-    c_dimcode = r'\Diagnoses\(M00-M99) Dise~6mvn\(M00-M25) Arth~kgqv\%'
-    selection = ['concept_cd', 'concept_dimension', 'concept_path', 'LIKE', c_dimcode]
-    # tets.change_tree(selection)
-    # print("sec Tree")
-    test.save_as_json("data/data_icd10_icd9")
