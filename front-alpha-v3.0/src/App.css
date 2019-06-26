@@ -155,7 +155,7 @@ html{
 
 #resultpage{
   height:100%;
-  width:100%;
+  width:99.7%;
 }
 
 #resultedit{
@@ -322,7 +322,7 @@ padding:10px;
     overflow: auto;
     position: relative;
     white-space: nowrap;
-  height: 86%;
+  height: 84%;
 }
 
 #GeschlechtGraph{
@@ -365,7 +365,7 @@ padding:10px;
   float:left;
   position: relative;
   width: 90%;
-  height :380px;
+  height :75%;
   background-color: #F9F9F9;
   display: inline-block;
   text-align: center;
